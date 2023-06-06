@@ -5,7 +5,7 @@ import SideBackground from "@/assets/sidebackground.png"
 import InputAuth from "@/components/InputAuth"
 import Link from "next/link"
 import { Formik } from "formik"
-import { AuthSchema } from "@/utils/validation"
+import { LoginSchema } from "@/utils/validation"
 
 const LoginPage = () => {
     return (
@@ -28,7 +28,7 @@ const LoginPage = () => {
                                     setSubmitting(false);
                                 }, 500);
                             }}
-                            validationSchema={AuthSchema}
+                            validationSchema={LoginSchema}
                         >
                             {props => {
                                 const {

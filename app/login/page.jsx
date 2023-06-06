@@ -16,7 +16,7 @@ const LoginPage = () => {
                         <Image src={SideBackground} alt="sidebackground" className="object-cover w-full h-screen" />
                     </div>
                     <div className="flex flex-col items-center justify-center w-full h-screen px-4 md:px-32 md:w-1/2">
-                        <h1 className="w-full pb-6 text-2xl font-bold text-start">Daftar</h1>
+                        <h1 className="w-full pb-6 text-2xl font-bold text-start">Masuk</h1>
                         <Formik
                             initialValues={{
                                 email: "",

@@ -1,17 +1,25 @@
 "use client"
 
+import Link from "next/link";
 import { useState } from "react"
 import { FiEye, FiEyeOff } from "react-icons/fi"
+import { usePathname } from 'next/navigation';
 
 const InputAuth = ({ children, type, placeholder, name, value, handleChange, handleBlur, touched, errors }) => {
+    const pathName = usePathname();
     const [show, setShow] = useState(false);
-
     const handelShow = () => {
         setShow(!show)
     }
     return (
         <div className="relative">
-            <label htmlFor={name} className="text-xs">{children}</label>
+            <div className="flex justify-between">
+                <label htmlFor={name} className="text-xs">{children}</label>
+                {pathName !== "/login" ? null :
+                    type !== "password" ? null :
+                        <Link href="/reset" className="text-xs text-bnr-primary">Lupa kata sandi</Link>
+                }
+            </div>
             <input
                 type={show ? "password" : "text"}
                 name={name}

@@ -1,0 +1,83 @@
+import Image from 'next/image';
+
+
+const FilterCard = () => {
+  return (
+    <>
+<div className="card-filter w-[268px] h-[248px] rounded-2xl mt-8 shadow-lg border-2 bg-white">
+
+                <div className="filter-body mx-6 my-6">
+
+                  <div className="filter-heading mb-6">
+                    <h1 className="text-base font-medium leading-6">Filter</h1>
+                  </div>
+
+                  <div className="filter-type">
+                    <div className="transit flex h-[40px] w-[220px] border-b-[1px] border-b-[#D0D0D0] mb-6 justify-between">
+                      <div className=" flex items-center ">
+                        <Image
+                          className="items-center mr-2"
+                          src="/fi_box.svg"
+                          width={24}
+                          height={24}
+                          alt=""
+                        />
+                        <h2 className="font-normal text-base leading-6">Transit</h2>
+                      </div>
+
+                      <Image
+                        className="items-center ml-4"
+                        src="/arrow_right.svg"
+                        width={8}
+                        height={12}
+                        alt=""
+                      />
+                    </div>
+                    <div className="fasilitas flex h-[40px] w-[220px] border-b-[1px] border-b-[#D0D0D0] mb-6 justify-between">
+                      <div className=" flex items-center">
+                        <Image
+                          className="items-center mr-2"
+                          src="/fi_heart.svg"
+                          width={24}
+                          height={24}
+                          alt=""
+                        />
+                        <h2 className="font-normal text-base leading-6">Fasilitas</h2>
+                      </div>
+                      <Image
+                        className="items-center"
+                        src="/arrow_right.svg"
+                        width={8}
+                        height={12}
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="harga h-[40px] w-[220px] flex justify-between">
+                      <div className=" flex items-center">
+                        <Image
+                          className="items-center mr-2"
+                          src="/fi_dollar-sign.svg"
+                          width={24}
+                          height={24}
+                          alt=""
+                        />
+                        <h2 className="font-normal text-base leading-6">Harga</h2>
+                      </div>
+                      <Image
+                        className="items-center"
+                        src="/arrow_right.svg"
+                        width={8}
+                        height={12}
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+    </>
+  );
+};
+
+export default FilterCard

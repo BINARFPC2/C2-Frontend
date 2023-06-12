@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image';
 
+import TiketHabis from "@/assets/ticket-habis.svg";
+
 
 const TicketHabis = () => {
     return (
@@ -9,7 +11,7 @@ const TicketHabis = () => {
               <div className="flex justify-center items-center">
                 <Image
                 className="mt-24"
-                src="/ticket-habis.svg"
+                src={TiketHabis}
                 width={238}
                 height={154}
                 alt=""

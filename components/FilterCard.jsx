@@ -1,5 +1,12 @@
 import Image from 'next/image';
 
+import Box from "@/assets/fi_box.svg";
+import ArrowRight from "@/assets/arrow_right.svg";
+import Heart from "@/assets/fi_heart.svg";
+import Dollar from "@/assets/fi_dollar-sign.svg";
+
+
+
 
 const FilterCard = () => {
   return (
@@ -17,7 +24,7 @@ const FilterCard = () => {
                       <div className=" flex items-center ">
                         <Image
                           className="items-center mr-2"
-                          src="/fi_box.svg"
+                          src={Box}
                           width={24}
                           height={24}
                           alt=""
@@ -27,7 +34,7 @@ const FilterCard = () => {
 
                       <Image
                         className="items-center ml-4"
-                        src="/arrow_right.svg"
+                        src={ArrowRight}
                         width={8}
                         height={12}
                         alt=""
@@ -37,7 +44,7 @@ const FilterCard = () => {
                       <div className=" flex items-center">
                         <Image
                           className="items-center mr-2"
-                          src="/fi_heart.svg"
+                          src={Heart}
                           width={24}
                           height={24}
                           alt=""
@@ -45,8 +52,8 @@ const FilterCard = () => {
                         <h2 className="font-normal text-base leading-6">Fasilitas</h2>
                       </div>
                       <Image
-                        className="items-center"
-                        src="/arrow_right.svg"
+                        className="items-center ml-4"
+                        src={ArrowRight}
                         width={8}
                         height={12}
                         alt=""
@@ -57,7 +64,7 @@ const FilterCard = () => {
                       <div className=" flex items-center">
                         <Image
                           className="items-center mr-2"
-                          src="/fi_dollar-sign.svg"
+                          src={Dollar}
                           width={24}
                           height={24}
                           alt=""
@@ -65,8 +72,8 @@ const FilterCard = () => {
                         <h2 className="font-normal text-base leading-6">Harga</h2>
                       </div>
                       <Image
-                        className="items-center"
-                        src="/arrow_right.svg"
+                        className="items-center ml-4"
+                        src={ArrowRight}
                         width={8}
                         height={12}
                         alt=""

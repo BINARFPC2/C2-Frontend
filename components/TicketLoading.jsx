@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Loading from "@/assets/Loading.svg";
+
 const TicketLoading = () => {
   return (
     <div className="ticket-loading justify-center w-full">
@@ -6,7 +8,7 @@ const TicketLoading = () => {
               <div className="flex justify-center items-center">
                 <Image
                 className="mt-8"
-                src="/Loading.svg"
+                src={Loading}
                 width={238}
                 height={100}
                 alt=""

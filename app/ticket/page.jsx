@@ -11,6 +11,8 @@ import TicketHabis from '@/components/TicketHabis';
 import FilterButton from '@/components/FilterButton';
 import FilterCard from '@/components/FilterCard';
 
+import BackArrow from "@/assets/fi_arrow.svg";
+
 const TicketPage = () => {
   
   return (
@@ -27,9 +29,10 @@ const TicketPage = () => {
 
 
             <div className="w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium text-base leading-6 gap-1">
+             
               <a href="#"><Image
                 className="ml-3 mr-5"
-                src="/fi_arrow.svg"
+                src={BackArrow}
                 width={24}
                 height={24}
                 alt=""
@@ -99,10 +102,7 @@ const TicketPage = () => {
               <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">DD/MM/YYYY</div>
             </button>
 
-            
-
-            
-
+      
             
 
           </div>
@@ -111,6 +111,7 @@ const TicketPage = () => {
 
         <div className="ticket-result">
         {/*<TicketHabis/>*/}
+
 
           <div className="filter-section">
             <FilterButton/>
@@ -125,8 +126,10 @@ const TicketPage = () => {
             
             <div className="search-result w-3/3 mt-8 justify-center w-full">
 
+              <TicketFilter/>
               <TicketDetail/>
-
+              <TicketCard/>
+              
         
             </div>
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
+import ArrowUpDown from "@/assets/arrow_updown.svg";
+
 const FilterButton = () => {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -13,11 +15,12 @@ const FilterButton = () => {
                 <div className="flex mx-auto">
                   <Image
                     className="items-center"
-                    src="/arrow_updown.svg"
+                    src={ArrowUpDown}
                     width={20}
                     height={20}
                     alt=""
                   />
+
                   <h2>Termurah</h2>
                 </div>
 

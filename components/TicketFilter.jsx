@@ -2,6 +2,12 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 
+import ArrowUpDown from "@/assets/arrow_updown.svg";
+import ButtonClose from "@/assets/button-close.svg";
+import RoundCheck from "@/assets/round-check.svg";
+
+
+
 const TicketFilter = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState('');
@@ -40,11 +46,17 @@ const TicketFilter = () => {
     <>
       <div className="filter-drop flex justify-end ">
         <button
-          className="h-8 mt-8 flex gap-2.5 items-center justify-self-center rounded-2xl w-30 font-medium text-xs leading-5 text-[#7126B5] border-solid border-2 border-[#A06ECE]"
+          className="h-8 mt-8 mb-6 flex gap-2.5 items-center justify-self-center rounded-2xl w-30 font-medium text-xs leading-5 text-[#7126B5] border-solid border-2 border-[#A06ECE]"
           onClick={() => setShowModal(true)}
         >
           <div className="flex mx-2 my-2">
-            <Image className="items-center" src="/arrow_updown.svg" width={20} height={20} alt="" />
+            <Image 
+             className="items-center" 
+             src={ArrowUpDown} 
+             width={20} 
+             height={20} 
+             alt="" 
+             />
             <span>{selectedOptions}</span>
           </div>
         </button>
@@ -56,7 +68,13 @@ const TicketFilter = () => {
             <div className="relative kontent mx-0">
               <div className="close-button h-[44px] flex justify-end">
                 <button type="button" onClick={() => setShowModal(false)}>
-                  <Image className="mr-4 mt-2" src="/button-close.svg" width={16} height={16} alt="" />
+                  <Image 
+                   className="mr-4 mt-2" 
+                   src={ButtonClose} 
+                   width={16} 
+                   height={16} 
+                   alt="" 
+                   />
                 </button>
               </div>
 
@@ -87,7 +105,13 @@ const TicketFilter = () => {
                     </div>
                     <span className="checkmark justify-self-end">
                       {option.isChecked && (
-                        <Image className="mr-2" src="/round-check.svg" width={20} height={20} alt="" />
+                        <Image 
+                         className="mr-2" 
+                         src={RoundCheck} 
+                         width={20} 
+                         height={20} 
+                         alt="" 
+                         />
                       )}
                     </span>
                   </label>

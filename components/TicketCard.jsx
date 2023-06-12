@@ -1,4 +1,14 @@
 import Image from 'next/image';
+
+import LogoMaskapai from "@/assets/logo-maskapai.svg";
+import IconDrop from "@/assets/icon-drop.svg";
+import LongArrow from "@/assets/icon_long-arrow.svg";
+import IconTime from "@/assets/icon-time.svg";
+
+
+
+
+
 const TicketCard = () => {
   return (
     <div className="ticket-seacrh flex justify-center w-full">
@@ -11,7 +21,7 @@ const TicketCard = () => {
           <div className="flex items-center">
           <Image
             className="items-center mr-2"
-            src="/logo-maskapai.svg"
+            src={LogoMaskapai}
             width={24}
             height={24}
             alt=""
@@ -23,7 +33,7 @@ const TicketCard = () => {
 
           <Image
             className="items-center"
-            src="/icon-drop.svg"
+            src={IconDrop}
             width={24}
             height={24}
             alt=""
@@ -41,7 +51,7 @@ const TicketCard = () => {
             <div className="font-medium text-xs leading-5 text-[#8A8A8A]">4h 0m</div>
             <div><Image
             className="items-center"
-            src="/icon_long-arrow.svg"
+            src={LongArrow}
             width={232}
             height={1}
             alt=""
@@ -57,7 +67,7 @@ const TicketCard = () => {
           <div className="w-5 my-auto">
             <Image
             className="items-center"
-            src="/icon-time.svg"
+            src={IconTime}
             width={18}
             height={20}
             alt=""

@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import NotFound from "@/assets/empty_img.svg";
+
 const TicketNotFound = () => {
   return (
     <div className="ticket-empty">
@@ -6,7 +8,7 @@ const TicketNotFound = () => {
     <div className="flex justify-center pb-6">
       <Image
                 className="items-center mt-8"
-                src="/empty_img.svg"
+                src={NotFound}
                 width={238}
                 height={100}
                 alt=""

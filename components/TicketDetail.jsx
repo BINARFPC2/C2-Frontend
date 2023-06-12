@@ -2,6 +2,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
+import LogoMaskapai from "@/assets/logo-maskapai.svg";
+import IconDrop from "@/assets/icon-drop.svg";
+import LongArrow from "@/assets/icon_long-arrow.svg";
+import IconTime from "@/assets/icon-time.svg";
+
 const TicketDetail = () => {
   
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -23,7 +28,7 @@ const TicketDetail = () => {
           <div className="flex items-center">
           <Image
             className="items-center mr-2"
-            src="/logo-maskapai.svg"
+            src={LogoMaskapai}
             width={24}
             height={24}
             alt=""
@@ -36,7 +41,7 @@ const TicketDetail = () => {
           <button type="button" onClick={toggleCollapse}>
           <Image
             className="items-center cursor-pointer"
-            src="/icon-drop.svg"
+            src={IconDrop}
             width={24}
             height={24}
             alt=""
@@ -57,7 +62,7 @@ const TicketDetail = () => {
             <div className="font-medium text-xs leading-5 text-[#8A8A8A]">4h 0m</div>
             <div><Image
             className="items-center"
-            src="/icon_long-arrow.svg"
+            src={LongArrow}
             width={232}
             height={1}
             alt=""
@@ -73,7 +78,7 @@ const TicketDetail = () => {
           <div className="w-5 my-auto cursor-pointer" onClick={toggleCollapse}>
             <Image
             className="items-center"
-            src="/icon-time.svg"
+            src={IconTime}
             width={18}
             height={20}
             alt=""
@@ -115,7 +120,7 @@ const TicketDetail = () => {
           <div className="logo my-auto">
           <Image
             className="items-center mr-2"
-            src="/logo-maskapai.svg"
+            src={LogoMaskapai}
             width={24}
             height={24}
             alt=""

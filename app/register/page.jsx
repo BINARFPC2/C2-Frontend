@@ -3,11 +3,20 @@
 import Image from "next/image"
 import SideBackground from "@/assets/sidebackground.png"
 import InputAuth from "@/components/InputAuth"
-import { Formik } from "formik"
+import { Form, Formik } from "formik"
 import { AuthSchema } from "@/utils/validation"
 import Link from "next/link"
+import { useDispatch } from "react-redux"
+import { asyncRegister } from "@/store/auth/slice"
 
 const RegisterPage = () => {
+    const dispatch = useDispatch()
+
+    const handleRegister = (formValue) => {
+        dispatch(asyncRegister(formValue))
+        console.log(formValue);
+    }
+
     return (
         <main>
             <section>
@@ -21,14 +30,12 @@ const RegisterPage = () => {
                             initialValues={{
                                 name: "",
                                 email: "",
-                                phoneNumber: "",
+                                phone: "",
                                 password: ""
                             }}
-                            onSubmit={(values, { setSubmitting }) => {
-                                setTimeout(() => {
-                                    console.log("Logging in", values);
-                                    setSubmitting(false);
-                                }, 500);
+                            onSubmit={(values, { resetForm }) => {
+                                handleRegister(values)
+                                resetForm()
                             }}
                             validationSchema={AuthSchema}
                         >
@@ -37,13 +44,11 @@ const RegisterPage = () => {
                                     values,
                                     touched,
                                     errors,
-                                    isSubmitting,
                                     handleChange,
                                     handleBlur,
-                                    handleSubmit
                                 } = props;
                                 return (
-                                    <form onSubmit={handleSubmit} className="flex flex-col w-full space-y-4">
+                                    <Form className="flex flex-col w-full space-y-4">
                                         <InputAuth
                                             name="name"
                                             type="text"
@@ -69,14 +74,14 @@ const RegisterPage = () => {
                                             Email
                                         </InputAuth>
                                         <InputAuth
-                                            name="phoneNumber"
+                                            name="phone"
                                             type="text"
                                             placeholder="+62"
-                                            value={values.phoneNumber}
+                                            value={values.phone}
                                             handleChange={handleChange}
                                             handleBlur={handleBlur}
-                                            touched={touched.phoneNumber}
-                                            errors={errors.phoneNumber}
+                                            touched={touched.phone}
+                                            errors={errors.phone}
                                         >
                                             Nomor Telepon
                                         </InputAuth>
@@ -92,8 +97,8 @@ const RegisterPage = () => {
                                         >
                                             Buat Password
                                         </InputAuth>
-                                        <button type="submit" className="px-6 py-3 text-sm text-white rounded-2xl bg-bnr-primary" disabled={isSubmitting}>Daftar</button>
-                                    </form>
+                                        <button type="submit" className="px-6 py-3 text-sm text-white rounded-2xl bg-bnr-primary">Daftar</button>
+                                    </Form>
                                 )
                             }}
                         </Formik>

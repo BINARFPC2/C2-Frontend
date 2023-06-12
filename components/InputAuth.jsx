@@ -1,16 +1,18 @@
-"use client"
-
 import Link from "next/link";
-import { useState } from "react"
-import { FiEye, FiEyeOff } from "react-icons/fi"
+import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { usePathname } from 'next/navigation';
+import { Field } from "formik";
 
 const InputAuth = ({ children, type, placeholder, name, value, handleChange, handleBlur, touched, errors }) => {
     const pathName = usePathname();
-    const [show, setShow] = useState(false);
-    const handelShow = () => {
-        setShow(!show)
-    }
+    const [show, setShow] = useState(type === "password");
+    const handleShow = () => {
+        setShow(!show);
+    };
+
+    const inputType = show ? "text" : type;
+
     return (
         <div className="relative">
             <div className="flex justify-between">
@@ -20,8 +22,8 @@ const InputAuth = ({ children, type, placeholder, name, value, handleChange, han
                         <Link href="/reset" className="text-xs text-bnr-primary">Lupa kata sandi</Link>
                 }
             </div>
-            <input
-                type={show ? "password" : "text"}
+            <Field
+                type={inputType}
                 name={name}
                 id={name}
                 className={
@@ -36,12 +38,12 @@ const InputAuth = ({ children, type, placeholder, name, value, handleChange, han
             />
             {type !== "password" ? null :
                 show ?
-                    <FiEyeOff onClick={handelShow} className="absolute text-2xl text-bnr-secondary right-5 top-1/2" />
+                    <FiEye onClick={handleShow} className="absolute text-2xl text-bnr-secondary right-5 top-1/2" />
                     :
-                    <FiEye onClick={handelShow} className="absolute text-2xl text-bnr-secondary right-5 top-1/2" />
+                    <FiEyeOff onClick={handleShow} className="absolute text-2xl text-bnr-secondary right-5 top-1/2" />
             }
         </div>
-    )
-}
+    );
+};
 
-export default InputAuth
+export default InputAuth;

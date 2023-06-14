@@ -15,7 +15,7 @@ const TicketPage = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto max-w-5xl">
+      <div className="container mx-auto max-w-7xl">
         <div className="ticket-section">
           <div className="text-heading">
             <h1 className="text-xl font-bold leading-8 mt-20">

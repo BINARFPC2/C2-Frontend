@@ -90,16 +90,6 @@ const Modal = ({ name }) => {
                       <InputSeat onClose={closeModal} />
                     ) : null}
                   </div>
-
-                  <div className="mt-4 flex justify-end w-full">
-                    {/* <button
-                      type="button"
-                      className="inline-flex rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2"
-                      onClick={closeModal}
-                    >
-                      Simpan
-                    </button> */}
-                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

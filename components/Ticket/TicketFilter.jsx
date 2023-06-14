@@ -1,24 +1,23 @@
-"use client"
-import Image from 'next/image';
-import React, { useState } from 'react';
+"use client";
+
+import Image from "next/image";
+import React, { useState } from "react";
 
 import ArrowUpDown from "@/assets/arrow_updown.svg";
 import ButtonClose from "@/assets/button-close.svg";
 import RoundCheck from "@/assets/round-check.svg";
 
-
-
 const TicketFilter = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState('');
+  const [selectedOptions, setSelectedOptions] = useState("");
 
   const [options, setOptions] = useState([
-    { id: 1, isChecked: false, filter: 'Harga', label: 'Termurah' },
-    { id: 2, isChecked: false, filter: 'Durasi', label: 'Terpendek' },
-    { id: 3, isChecked: false, filter: 'Keberangkatan', label: 'Paling Awal' },
-    { id: 4, isChecked: false, filter: 'Keberangkatan', label: 'Paling Akhir' },
-    { id: 5, isChecked: false, filter: 'Kedatangan', label: 'Paling Awal' },
-    { id: 6, isChecked: false, filter: 'Kedatangan', label: 'Paling Akhir' },
+    { id: 1, isChecked: false, filter: "Harga", label: "Termurah" },
+    { id: 2, isChecked: false, filter: "Durasi", label: "Terpendek" },
+    { id: 3, isChecked: false, filter: "Keberangkatan", label: "Paling Awal" },
+    { id: 4, isChecked: false, filter: "Keberangkatan", label: "Paling Akhir" },
+    { id: 5, isChecked: false, filter: "Kedatangan", label: "Paling Awal" },
+    { id: 6, isChecked: false, filter: "Kedatangan", label: "Paling Akhir" },
     // Tambahkan elemen lain sesuai kebutuhan
   ]);
 
@@ -38,9 +37,11 @@ const TicketFilter = () => {
 
   const handleSelectOptions = () => {
     const selected = options.filter((option) => option.isChecked);
-    setSelectedOptions(selected.map((option) => option.label).join(', '));
+    setSelectedOptions(selected.map((option) => option.label).join(", "));
     setShowModal(false);
   };
+
+  console.log("selected options", selectedOptions);
 
   return (
     <>
@@ -50,13 +51,13 @@ const TicketFilter = () => {
           onClick={() => setShowModal(true)}
         >
           <div className="flex mx-2 my-2">
-            <Image 
-             className="items-center" 
-             src={ArrowUpDown} 
-             width={20} 
-             height={20} 
-             alt="" 
-             />
+            <Image
+              className="items-center"
+              src={ArrowUpDown}
+              width={20}
+              height={20}
+              alt=""
+            />
             <span>{selectedOptions}</span>
           </div>
         </button>
@@ -68,13 +69,13 @@ const TicketFilter = () => {
             <div className="relative kontent mx-0">
               <div className="close-button h-[44px] flex justify-end">
                 <button type="button" onClick={() => setShowModal(false)}>
-                  <Image 
-                   className="mr-4 mt-2" 
-                   src={ButtonClose} 
-                   width={16} 
-                   height={16} 
-                   alt="" 
-                   />
+                  <Image
+                    className="mr-4 mt-2"
+                    src={ButtonClose}
+                    width={16}
+                    height={16}
+                    alt=""
+                  />
                 </button>
               </div>
 
@@ -82,19 +83,29 @@ const TicketFilter = () => {
                 <div
                   key={option.id}
                   className={`option-2 pl-4 py-[2px] h-[48px] border-y-[1px] border-y-[#D0D0D0] font-medium text-sm leading-5 flex justify-between cursor-pointer select-none ${
-                    option.isChecked ? 'bg-[#7126B5]' : 'bg-transparent'
+                    option.isChecked ? "bg-[#7126B5]" : "bg-transparent"
                   }`}
                 >
                   <label
                     className={`container h-[40px] py-2 cursor-pointer select-none text-sm flex justify-between ${
-                      option.isChecked ? 'text-white font-bold' : ''
+                      option.isChecked ? "text-white font-bold" : ""
                     }`}
                   >
                     <div className="flex justify-between">
-                      <span className={`font-bold text-sm leading-5 ${option.isChecked ? 'text-white font-bold' : ''}`}>
+                      <span
+                        className={`font-bold text-sm leading-5 ${
+                          option.isChecked ? "text-white font-bold" : ""
+                        }`}
+                      >
                         {option.filter}
                       </span>
-                      <span className={`mx-2 ${option.isChecked ? 'text-white font-bold' : ''}`}>-</span>
+                      <span
+                        className={`mx-2 ${
+                          option.isChecked ? "text-white font-bold" : ""
+                        }`}
+                      >
+                        -
+                      </span>
                       {option.label}
                       <input
                         type="checkbox"
@@ -105,13 +116,13 @@ const TicketFilter = () => {
                     </div>
                     <span className="checkmark justify-self-end">
                       {option.isChecked && (
-                        <Image 
-                         className="mr-2" 
-                         src={RoundCheck} 
-                         width={20} 
-                         height={20} 
-                         alt="" 
-                         />
+                        <Image
+                          className="mr-2"
+                          src={RoundCheck}
+                          width={20}
+                          height={20}
+                          alt=""
+                        />
                       )}
                     </span>
                   </label>

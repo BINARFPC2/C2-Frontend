@@ -17,17 +17,36 @@ const InputSeat = ({ onClose }) => {
   const dispatch = useDispatch();
   const [selectedPackages, setSelectedPackeges] = useState([]);
 
-  const handleCheckboxChange = (packege) => {
-    const updatedSelectedPackeges = selectedPackages.includes(packege)
-      ? selectedPackages.filter((p) => p !== packege)
-      : [...selectedPackages, packege];
-    setSelectedPackeges(updatedSelectedPackeges);
+  const handleCheckboxChange = (selectedPackage) => {
+    if (
+      selectedPackages.length === 1 &&
+      selectedPackages.includes(selectedPackage)
+    ) {
+      return;
+    }
+
+    const isPackageSelected = selectedPackages.some(
+      (p) => p.id === selectedPackage.id
+    );
+
+    let updatedSelectedPackages;
+
+    if (isPackageSelected) {
+      updatedSelectedPackages = selectedPackages.filter(
+        (p) => p.id !== selectedPackage.id
+      );
+    } else {
+      updatedSelectedPackages = [...selectedPackages, selectedPackage];
+    }
+
+    setSelectedPackeges(updatedSelectedPackages);
   };
 
   useEffect(() => {
     dispatch(addInputSeat(selectedPackages));
   }, [dispatch, selectedPackages]);
 
+  console.log(selectedPackages);
   return (
     <div className="w-full px-5 top-16">
       <div className="space-y-2">
@@ -39,10 +58,13 @@ const InputSeat = ({ onClose }) => {
           >
             <input
               type="checkbox"
-              hidden
               checked={selectedPackages.includes(packege)}
               className="text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               onChange={() => {}}
+              disabled={
+                selectedPackages.length > 1 &&
+                selectedPackages.includes(packege)
+              }
             />
             <div
               className={

@@ -22,7 +22,10 @@ import IconSearch from "@/assets/icon-search.svg";
 
 
 const HistoryPage = () => {
-
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <>
       <NavbarLogin />
@@ -49,16 +52,15 @@ const HistoryPage = () => {
 
             <div className="flex justify-between gap-x-4">
               <div className="items-center my-auto">
-              <button className="flex items-center rounded-2xl w-[90px] font-normal text-base leading-6 border-2 border-[#A06ECE]">
+              <button className="flex items-center rounded-2xl w-[90px] font-normal text-base leading-6 border-2 border-[#A06ECE]" onClick={() => setShowModal(true)}>
                 <div className="flex h-8 mx-auto ">
-                  <Image
+                    <Image
                     className="items-center mr-2.5"
                     src={IconFilter}
                     width={17}
                     height={17}
                     alt=""
                   />
-
                   <span className="self-center" >Filter</span>
                 </div>
               </button>
@@ -81,23 +83,25 @@ const HistoryPage = () => {
 
         </div>
 
+        {showModal && <ModalSearch showModal={showModal} handleCloseModal={handleCloseModal}/>}
+
 
         <div className="main flex flex-col sm:flex-row mx-auto">
 
-          <ModalSearch/>
+          
 
-          {/*<div className="section-pemesanan w-full sm:w-[518px] mx-auto">
+          <div className="section-pemesanan w-full sm:w-[518px] mx-auto">
             
             <RiwayatBulan/>
 
-          </div>*/}
+          </div>
 
 
-          {/*<div className="section-detail w-full sm:w-[370px] mt-7 mx-auto">
+          <div className="section-detail w-full sm:w-[370px] mt-7 mx-auto">
         
             <DetailPemesanan/>
           
-          </div>*/}
+          </div>
 
 
 

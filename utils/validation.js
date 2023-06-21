@@ -20,6 +20,9 @@ export const ResetPasswordSchema = Yup.object().shape({
     password: Yup.string()
         .min(8, "Password must be 8 characters at minimum")
         .required("Password is required"),
-    passwordConfirmation: Yup.string()
+    confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
+});
+export const ForgotSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email address format").required("Email is required"),
 });

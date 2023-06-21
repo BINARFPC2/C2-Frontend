@@ -30,7 +30,7 @@ const InputAuth = ({
           {children}
         </label>
         {pathName !== "/login" ? null : type !== "password" ? null : (
-          <Link href="/reset" className="text-xs text-bnr-primary">
+          <Link href="/forgot-password" className="text-xs text-bnr-primary">
             Lupa kata sandi
           </Link>
         )}

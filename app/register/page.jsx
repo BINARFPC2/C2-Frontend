@@ -6,19 +6,69 @@ import InputAuth from "@/components/InputAuth"
 import { Form, Formik } from "formik"
 import { AuthSchema } from "@/utils/validation"
 import Link from "next/link"
-import { useDispatch } from "react-redux"
-import { asyncRegister } from "@/store/auth/slice"
+import { useDispatch, useSelector } from "react-redux"
+import { asyncRegister, auth } from "@/store/auth/slice"
+import { useEffect } from "react"
+import { ToastContainer, toast } from "react-toastify"
+import { useRouter } from "next/navigation";
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterPage = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const router = useRouter()
+    const users = useSelector((state) => state.auth);
+    console.log(users.registered);
 
     const handleRegister = (formValue) => {
         dispatch(asyncRegister(formValue))
         console.log(formValue);
     }
 
+    useEffect(() => {
+        if (users.registered === true) {
+            toast.success("Berhasil Login", {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setTimeout(() => {
+                router.push("/login")
+            }, 1000);
+        } else if (users.registered === false) {
+            toast.error(`${users.message}`, {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }, [router, users, toast])
+
     return (
         <main>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+            {/* Same as */}
+            <ToastContainer />
             <section>
                 <div className="flex h-full max-w-full">
                     <div className="hidden w-1/2 h-full md:block">

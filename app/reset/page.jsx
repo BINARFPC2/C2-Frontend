@@ -3,10 +3,24 @@
 import Image from "next/image"
 import SideBackground from "@/assets/sidebackground.png"
 import InputAuth from "@/components/InputAuth"
-import { Formik } from "formik"
+import { Form, Formik } from "formik"
 import { ResetPasswordSchema } from "@/utils/validation"
+import { useSearchParams } from "next/navigation"
+import { asyncResetPassword } from "@/store/auth/slice"
+import { useDispatch } from "react-redux"
 
 const ResetPage = () => {
+    const dispatch = useDispatch()
+    const searchParams = useSearchParams();
+    const tes = searchParams.get("token")
+    console.log("t", tes);
+    // if (searchParams.has("token")) {
+    const handleReset = (values) => {
+        // console.log("sadfjsfhksdf", token);
+        dispatch(asyncResetPassword(values));
+        console.log(values);
+    }
+    // }
     return (
         <main>
             <section>
@@ -19,13 +33,12 @@ const ResetPage = () => {
                         <Formik
                             initialValues={{
                                 password: "",
-                                passwordConfirmation: ""
+                                confirmPassword: ""
                             }}
-                            onSubmit={(values, { setSubmitting }) => {
-                                setTimeout(() => {
-                                    console.log("Logging in", values);
-                                    setSubmitting(false);
-                                }, 500);
+                            onSubmit={(values, {
+                                resetForm }) => {
+                                handleReset(values)
+                                resetForm()
                             }}
                             validationSchema={ResetPasswordSchema}
                         >
@@ -40,7 +53,7 @@ const ResetPage = () => {
                                     handleSubmit
                                 } = props;
                                 return (
-                                    <form onSubmit={handleSubmit} className="flex flex-col w-full space-y-4">
+                                    <Form className="flex flex-col w-full space-y-4">
                                         <InputAuth
                                             name="password"
                                             type="password"
@@ -54,10 +67,10 @@ const ResetPage = () => {
                                             Masukkan Password Baru
                                         </InputAuth>
                                         <InputAuth
-                                            name="passwordConfirmation"
+                                            name="confirmPassword"
                                             type="password"
                                             placeholder="Ulangi Password"
-                                            value={values.passwordConfirmation}
+                                            value={values.confirmPassword}
                                             handleChange={handleChange}
                                             handleBlur={handleBlur}
                                             touched={touched.passwordConfirmation}
@@ -66,7 +79,7 @@ const ResetPage = () => {
                                             Ulangi Password Baru
                                         </InputAuth>
                                         <button type="submit" className="px-6 py-3 text-sm text-white rounded-2xl bg-bnr-primary" disabled={isSubmitting}>Simpan</button>
-                                    </form>
+                                    </Form>
                                 )
                             }}
                         </Formik>

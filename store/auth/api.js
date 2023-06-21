@@ -1,5 +1,10 @@
+import { getToken } from "@/utils/helper";
+// import { useSearchParams } from "next/navigation";
 
 const BASE_URL = "https://c2-backend.up.railway.app/api/v1/";
+const token = getToken();
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
 
 const AuthAPI = {
     register: async ({ name, email, password, phone }) => {
@@ -29,6 +34,44 @@ const AuthAPI = {
             })
         })
         return await response.json();
+    },
+    forgotPassword: async ({ email }) => {
+        const response = await fetch(BASE_URL + "forget-password", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email
+            })
+        })
+        return await response.json()
+    },
+    resetPassword: async ({ password, confirmPassword }) => {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const resetToken = urlParams.get('token');
+
+        const response = await fetch(BASE_URL + "reset-password", {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${resetToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                password,
+                confirmPassword
+            })
+        })
+        return await response.json()
+    },
+    whoAmI: async () => {
+        const response = await fetch(BASE_URL + "whoami", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        return await response.json()
     }
 }
 

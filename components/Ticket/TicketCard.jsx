@@ -8,6 +8,7 @@ import LongArrow from "@/assets/icon_long-arrow.svg";
 import IconTime from "@/assets/icon-time.svg";
 import { useState } from "react";
 import { getCode, getMoneyFormat } from "@/utils/helper";
+import Link from "next/link";
 
 const TicketCard = ({ data }) => {
   // console.log("dataa ticket", data.data);
@@ -16,6 +17,8 @@ const TicketCard = ({ data }) => {
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  console.log("data tesdadasdas", data);
   return (
     <>
       {data?.data?.map((item) => (
@@ -111,9 +114,11 @@ const TicketCard = ({ data }) => {
                       IDR {getMoneyFormat(item.price)}
                     </div>
                     <div className="flex justify-end">
-                      <button className="w-[100px] h-[32px] bg-[#4B1979] hover:bg-[#5d2f86] rounded-xl text-white font-medium text-base leading-6">
-                        Pilih
-                      </button>
+                      <Link href={`/ticket/${item.id}`}>
+                        <button className="w-[100px] h-[32px] bg-[#4B1979] hover:bg-[#5d2f86] rounded-xl text-white font-medium text-base leading-6">
+                          Pilih
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

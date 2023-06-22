@@ -4,12 +4,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import InputPassangers from "../FormTicket/InputPassangers";
-import InputSeat from "../FormTicket/InputSeat";
+import InputPassangers from "../Beranda/InputPassangers";
+import InputSeat from "../Beranda/InputSeat";
+import InputKota from "../Beranda/InputKota";
 
 const Modal = ({ name }) => {
   const dataModal = useSelector((state) => state.modal);
   const [seatInput, setSeatInput] = useState(null);
+
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -33,6 +35,10 @@ const Modal = ({ name }) => {
     }
   }, [dataModal.seatData]);
 
+  const handleCityFromChange = (cityFrom) => {
+    // Menghandle perubahan nilai kota dari InputKota
+    // Lakukan sesuatu dengan nilai kota yang diterima di sini
+  };
   return (
     <>
       <div className="flex items-center justify-center">
@@ -42,8 +48,10 @@ const Modal = ({ name }) => {
             name === "inputSeats"
               ? seatInput
               : name === "inputPassengers"
-              ? passengerData
-              : null
+                ? passengerData
+                : name === "inputKota"
+                  ? ""
+                  : null
           }
           onClick={openModal}
           className="border-b-2 bg-white border-b-bnr-secondary outline-none py-3 w-full"
@@ -75,10 +83,10 @@ const Modal = ({ name }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl transition-all">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-end rounded-md border border-transparent px-4 py-2 text-sm font-medium text-blue-900"
+                    className="inline-flex w-full justify-end rounded-md border border-transparent px-4 text-sm font-medium text-blue-900"
                     onClick={closeModal}
                   >
                     <FiX className="text-2xl" />
@@ -88,6 +96,8 @@ const Modal = ({ name }) => {
                       <InputPassangers onClose={closeModal} />
                     ) : name === "inputSeats" ? (
                       <InputSeat onClose={closeModal} />
+                    ) : name === "inputKota" ? (
+                      <InputKota onChange={handleCityFromChange} onClose={closeModal} />
                     ) : null}
                   </div>
                 </Dialog.Panel>

@@ -4,7 +4,7 @@ import { getMoneyFormat } from "@/utils/helper";
 
 const CardFavorite = ({ from, to, airline, availableDate, price }) => {
     return (
-        <div className="max-w-md p-3 bg-white border border-gray-200 rounded-md shadow">
+        <div className="w-[167px] h-[194px] p-3 bg-white border border-gray-200 rounded-md shadow">
             <Image className="w-full rounded-t-lg" src={FavoriteImage} alt="cardFavorite" />
             <div className="pt-2 space-y-1">
                 <h5 className="text-xs font-bold tracking-tight text-gray-900">{from} {"->"} {to}</h5>

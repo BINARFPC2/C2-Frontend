@@ -113,39 +113,35 @@ const FormTicket = () => {
   //     });
   // };
 
-  const [cityFrom, setCityFrom] = useState("");
-  const [cityTo, setCityTo] = useState("");
+  // const [cityFrom, setCityFrom] = useState("");
+  // const [cityTo, setCityTo] = useState("");
 
-  const handleChangeFrom = (event) => {
-    setCityFrom(event.target.value);
-  };
-
-
-  const handleSwap = () => {
-    const tempValue = cityFrom;
-    setCityFrom(cityTo);
-    setCityTo(tempValue);
-  };
+  // const handleChangeFrom = (event) => {
+  //   setCityFrom(event.target.value);
+  // };
 
 
+  // const handleSwap = () => {
+  //   const tempValue = cityFrom;
+  //   setCityFrom(cityTo);
+  //   setCityTo(tempValue);
+  // };
 
-  const handleChangeTo = (e) => {
-    setCityTo(e.target.value);
-  };
+
+
+  // const handleChangeTo = (e) => {
+  //   setCityTo(e.target.value);
+  // };
 
 
   return (
     <>
-
-
-
       <div className="flex items-center justify-center md:w-full h-1/2 select-none mx-2">
-        <form>
+        <form onSubmit={handleSearch}>
           <div className="md:w-[968px] h-full p-6 bg-white shadow-xl border-2 rounded-tl-xl rounded-tr-xl ">
             <h1 className="font-bold text-xl leading-7">
               Pilih Jadwal Penerbangan special di <span className="text-[#7126B5]">TiketGo!</span>
             </h1>
-
             <div className="flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
               <div className="from flex justify-between w-full">
                 <div className="mr-2 flex w-full">
@@ -155,19 +151,16 @@ const FormTicket = () => {
                     placeholder="From"
                     className="w-full ml-4 py-3 border-b-2 outline-none border-b-bnr-secondary"
                     name="city_from"
-                    value={cityFrom}
-                    onChange={handleChangeFrom}
                   />
                   {/*<Modal name={"inputKota"}/>*/}
                 </div>
 
-                <div className="btn-swap relative inline-flex items-center cursor-pointer" onClick={handleSwap}>
+                <div className="btn-swap relative inline-flex items-center cursor-pointer">
                   <div className="p-2 text-white bg-black rounded-xl my-2 cursor-pointer">
                     <FiRepeat />
                   </div>
                 </div>
               </div>
-
               <div className="to flex w-full">
                 <Image src={To} alt="fromsvg" />
                 <input
@@ -175,8 +168,7 @@ const FormTicket = () => {
                   placeholder="To"
                   className="w-full ml-9 py-3 border-b-2 outline-none border-b-bnr-secondary"
                   name="city_to"
-                  value={cityTo}
-                  onChange={handleChangeTo}
+                  onChange={handleChange}
                 />
                 {/*<Modal name={"inputKota"} />*/}
               </div>
@@ -192,6 +184,7 @@ const FormTicket = () => {
                     placeholder="Input Tanggal"
                     className="sm:w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                     name="dateDeparture"
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -202,6 +195,7 @@ const FormTicket = () => {
                     placeholder="To"
                     className="sm:w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                     name="dateReturn"
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -217,23 +211,25 @@ const FormTicket = () => {
                 <Image src={ToTwo} className="mr-2 mt-6" alt="fromsvg" />
                 <div className="passengers ml-6">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
-                  {/*<input
-                      type="number"
-                      placeholder="To"
-                      className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
-                      name="passengers"
-                    />*/}
-                  <Modal name={"inputPassengers"} />
+                  <input
+                    type="number"
+                    placeholder="To"
+                    className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                    name="passengers"
+                    onChange={handleChange}
+                  />
+                  {/* <Modal name={"inputPassengers"} /> */}
                 </div>
                 <div className="seat-class ml-4">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
-                  {/*<input
-                      type="text"
-                      placeholder="To"
-                      className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
-                      name="type_seat"
-                    />*/}
-                  <Modal name={"inputSeats"} />
+                  <input
+                    type="text"
+                    placeholder="To"
+                    className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                    name="type_seat"
+                    onChange={handleChange}
+                  />
+                  {/* <Modal name={"inputSeats"} /> */}
                 </div>
               </div>
             </div>
@@ -243,12 +239,6 @@ const FormTicket = () => {
           </button>
         </form>
       </div>
-
-
-
-
-
-
     </>
   );
 };

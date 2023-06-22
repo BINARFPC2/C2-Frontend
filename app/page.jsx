@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="h-screen md:max-w-full">
         <div className="relative flex items-center justify-center sm:h-1/2">
@@ -30,7 +30,6 @@ export default function Home() {
             <div className="hidden w-1/2 bg-[#B792D9] md:block"></div>
             <div className="hidden w-1/2 bg-[#E2D4F0] md:block"></div>
           </div>
-
           <div className="hidden absolute w-[80%] min-h-56 justify-end md:block ">
             <Image
               src={HeroImage}
@@ -38,8 +37,6 @@ export default function Home() {
               className="z-0 w-full h-full" />
           </div>
         </div>
-
-
         <div className="relative z-30 flex justify-center sm:-mt-28  mb-10">
           <FormTicket />
         </div>

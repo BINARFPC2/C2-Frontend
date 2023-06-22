@@ -26,6 +26,7 @@ const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
     throw error;
   }
 }
+
 const TicketPage = () => {
   const [value, setValue] = useState()
   const [loading, setLoading] = useState(false)
@@ -82,13 +83,111 @@ const TicketPage = () => {
               <span>-</span>
               <span>Kelas Pesawat</span>
             </div>
-            <div className="button-search">
-              <a href="#">
-                {" "}
-                <button className="w-[220px] bg-[#73CA5C] hover:bg-[#67b552] h-[50px] rounded-xl text-white text-base font-bold leading-8">
-                  Ubah Pencarian
-                </button>{" "}
-              </a>
+
+            <div className="flex gap-4 mt-4 search">
+              <div className="w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium text-base leading-6 gap-1">
+                <a href="#">
+                  <Image
+                    className="ml-3 mr-5"
+                    src={BackArrow}
+                    width={24}
+                    height={24}
+                    alt="" />
+                </a>
+
+                <span>JKT</span>
+                <span>&gt;</span>
+                <span>MLB</span>
+                <span>-</span>
+                <span>Jumlah Penumpang</span>
+                <span>-</span>
+                <span>Kelas Pesawat</span>
+              </div>
+              <div className="button-search">
+                <a href="#">
+                  {" "}
+                  <button className="w-[220px] bg-[#73CA5C] hover:bg-[#67b552] h-[50px] rounded-xl text-white text-base font-bold leading-8">
+                    Ubah Pencarian
+                  </button>{" "}
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-3.5 h-[96px] flex justify-between border-b-2 border-b-[#D0D0D0] content-center self-center my-auto pb-4">
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
+
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
+
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
+
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
+
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
+
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
+
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
             </div>
           </div>
 
@@ -102,114 +201,117 @@ const TicketPage = () => {
               </div>
             </button>
 
-            <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+            <div className="filter-section">
+              <FilterButton />
 
-            <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-              <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                Hari
-              </div>
-              <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                DD/MM/YYYY
-              </div>
-            </button>
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
 
-            <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
 
-            <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-              <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                Hari
-              </div>
-              <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                DD/MM/YYYY
-              </div>
-            </button>
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
 
-            <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
 
-            <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-              <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                Hari
-              </div>
-              <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                DD/MM/YYYY
-              </div>
-            </button>
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
 
-            <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
 
-            <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-              <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                Hari
-              </div>
-              <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                DD/MM/YYYY
-              </div>
-            </button>
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
 
-            <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
 
-            <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-              <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                Hari
-              </div>
-              <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                DD/MM/YYYY
-              </div>
-            </button>
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
 
-            <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
 
-            <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-              <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                Hari
-              </div>
-              <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                DD/MM/YYYY
-              </div>
-            </button>
-          </div>
-        </div>
+              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
+                  Hari
+                </div>
+                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                  DD/MM/YYYY
+                </div>
+              </button>
+            </div >
+          </div >
 
-        <div className="ticket-result">
-          {/*<TicketHabis/>*/}
+          <div className="ticket-result">
+            {/*<TicketHabis/>*/}
 
-          <div className="filter-section">
-            <FilterButton />
+            <div className="filter-section">
+              <FilterButton />
 
-            <div className="flex filter-result">
-              <div className="w-1/3 filter-menu">
-                <FilterCard />
-              </div>
+              <div className="flex filter-result">
+                <div className="w-1/3 filter-menu">
+                  <FilterCard />
+                </div>
 
-              <div className="justify-center w-full mt-8 search-result w-3/3">
-                <TicketFilter />
-                {loading ? (
-                  <>
-                    {value?.status !== "Error" ? <TicketCard data={value} /> :
-                      <div className="flex flex-col justify-center items-center">
-                        <Image
-                          width={300}
-                          height={300}
-                          src={NoTicket}
-                          alt="sd" />
-                        <div className="text-center pt-10">
-                          <p>Maaf, Tiket Terjual Habis</p>
-                          <p className="text-bnr-primary">Coba cari perjalanan lainnya!</p>
+                <div className="justify-center w-full mt-8 search-result w-3/3">
+                  <TicketFilter />
+                  {loading ? (
+                    <>
+                      {value?.status !== "Error" ? <TicketCard data={value} /> :
+                        <div className="flex flex-col justify-center items-center">
+                          <Image
+                            width={300}
+                            height={300}
+                            src={NoTicket}
+                            alt="sd" />
+                          <div className="text-center pt-10">
+                            <p>Maaf, Tiket Terjual Habis</p>
+                            <p className="text-bnr-primary">Coba cari perjalanan lainnya!</p>
+                          </div>
                         </div>
-                      </div>
-                    }
-                  </>
-                ) :
-                  <div className="animate-pulse transition-all ease-in">
-                    <Image src={Loading} alt="loading" />
-                  </div>
-                }
+                      }
+                    </>
+                  ) :
+                    <div className="animate-pulse transition-all ease-in">
+                      <Image src={Loading} alt="loading" />
+                    </div>
+                  }
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div></>
-  );
-};
+      </div>
+    </>
+  )
+}
 
 export default TicketPage;

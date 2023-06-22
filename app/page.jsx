@@ -50,7 +50,7 @@ export default function Home() {
         </div>
         <div className="w-full pb-10 px-72">
           <h3 className="py-5 font-bold">Destinasi Favorit</h3>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             {Favorites.map((favorite) => (
               <CardFavorite
                 key={favorite.id}

@@ -65,19 +65,19 @@ const Navbar = () => {
   // console.log(userData);
   // console.log(""userSelect)
   return (
-    <div className="relative h-full max-w-full">
-      <div className="flex items-center justify-between w-full h-20 px-32 bg-white drop-shadow-md">
+    <div className="relative h-full md:max-w-full">
+      <div className="flex items-center justify-between w-full h-20 sm:px-32 bg-white drop-shadow-md">
         <Image
           src={Logo}
           width={78}
           height={33}
           alt="Picture of the author"
         />
-        <div className="w-full ml-8">
+        <div className="md:w-full md:ml-8">
           <label className="relative block">
             <span className="sr-only">Search</span>
             <input
-              className="h-10 align-middle placeholder:text-[#8A8A8A] block bg-[#EEEEEE] w-full border rounded-xl py-2 pl-4 pr-4 shadow-sm focus:outline-none focus:border-[#7126B5] focus:ring-[#7126B5] focus:ring-1 sm:text-sm"
+              className="h-10 align-middle placeholder:text-[#8A8A8A] block bg-[#EEEEEE] sm:w-full border rounded-xl py-2 pl-4 pr-4 shadow-sm focus:outline-none focus:border-[#7126B5] focus:ring-[#7126B5] focus:ring-1 sm:text-sm"
               placeholder="Cari disini ..."
               type="text"
               name="search"
@@ -105,9 +105,9 @@ const Navbar = () => {
 
           </div>
         ) : (
-          <div className="flex ml-96">
+          <div className="flex sm:ml-96">
             <Link href="/login">
-              <button className="w-full h-full rounded-xl text-[#FFFFFF] bg-[#7126B5]">
+              <button className="md:w-full h-full rounded-xl text-[#FFFFFF] bg-[#7126B5]">
                 <div className="inline-flex items-center px-4 py-3">
                   <FiLogIn className="mr-2" />
                   Masuk

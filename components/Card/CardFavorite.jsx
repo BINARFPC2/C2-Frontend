@@ -2,7 +2,14 @@ import Image from "next/image";
 import FavoriteImage from "@/assets/images/favorite-card.png"
 import { getMoneyFormat } from "@/utils/helper";
 
-const CardFavorite = ({ from, to, airline, availableDate, price }) => {
+const getFavorite = async () => {
+    const response = await fetch("https://c2-backend.up.railway.app/api/v1/destfavorite")
+    return await response.json()
+}
+
+const CardFavorite = async ({ from, to, airline, availableDate, price }) => {
+    const favorites = await getFavorite()
+    console.log("favorite", favorites);
     return (
         <div className="w-[167px] h-[194px] p-3 bg-white border border-gray-200 rounded-md shadow">
             <Image className="w-full rounded-t-lg" src={FavoriteImage} alt="cardFavorite" />

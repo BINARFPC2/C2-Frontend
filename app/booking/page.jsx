@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import React from "react";
-import BreadCrumb from "./common/BreadCrumb";
+import BreadCrumb from "../ticket/[id]/common/BreadCrumb";
 import Maskapai from "@/assets/logo-maskapai.svg";
 import Image from "next/image";
 

@@ -16,10 +16,9 @@ const TicketDetail = () => {
 
   return (
     <>
-      <div className="ticket-seacrh flex justify-center w-full">
-        <div className="flex justify-center pb-4">
-          <div className="main border-[1px] rounded-lg border-[#D0D0D0] shadow bg-white select-none">
-            <div className="w-[657px] h-[127px] border-b-2 border-b-[#D0D0D0] mx-auto">
+      <div className="ticket-seacrh w-full pb-4 inline-block">
+          <div className="main border-2 rounded-lg border-[#D0D0D0] shadow bg-white select-none hover:border-[#7126B5] mx-2">
+            <div className="w-full md:[657px] h-[127px] mx-2">
               <div
                 className="flex mx-4 my-2.5 justify-between cursor-pointer"
                 onClick={toggleCollapse}
@@ -115,10 +114,11 @@ const TicketDetail = () => {
                 </div>
               </div>
             </div>
+
             {!isCollapsed && (
               <div className="ticket-detail mx-4 my-5">
-                <div className="detail-headings pb-1">
-                  <h1 className="font-bold text-sm leading-5 text-[#4B1979]">
+                <div className="detail-headings pb-1 border-t-2">
+                  <h1 className="font-bold text-sm leading-5 text-[#4B1979] mt-2">
                     Detail Penerbangan
                   </h1>
                 </div>
@@ -197,7 +197,6 @@ const TicketDetail = () => {
             )}
           </div>
         </div>
-      </div>
     </>
   );
 };

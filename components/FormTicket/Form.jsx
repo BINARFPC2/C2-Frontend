@@ -16,6 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addSearchFlight } from "@/store/auth/slice";
 
+import CobaSeat from "../Beranda/CobaSeat"
+import CobaInput from "../Beranda/CobaInput"
+
 
 
 const FormTicket = () => {
@@ -149,6 +152,33 @@ const [showReturn, setShowReturn] = useState(false);
   };
 
 
+
+
+  const [typeSeat, setTypeSeat] = useState("");
+  const [showSeat, setShowSeat] = useState(false);
+
+  const handleInputChange = (event) => {
+    setTypeSeat(event.target.value);
+  };
+
+  const handleSeat = () => {
+    setShowSeat(true);
+  };
+
+
+
+  const [typeOrang, setTypeOrang] = useState("");
+  const [showOrang, setShowOrang] = useState(false);
+
+  const handleInputOrang = (event) => {
+    setTypeOrang(event.target.value);
+  };
+
+  const handleOrang = () => {
+    setShowOrang(true);
+  };
+
+
   return (
     <>
       <div className="form-section relative z-30 flex justify-center">
@@ -197,7 +227,6 @@ const [showReturn, setShowReturn] = useState(false);
             </div>
 
               <div className="flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
-
               <div className="pilih-tanggal flex w-full">
                 <Image src={DateSvg} className="mr-2 mt-6" alt="fromsvg" />
 
@@ -223,12 +252,16 @@ const [showReturn, setShowReturn] = useState(false);
                 </div>
                 )}
 
+                <div className="button flex justify-self-end">
                 <div className="btn-slider" onClick={handleClick}>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" value="" className="sr-only peer" />
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-bnr-primary"></div>
                   </label>
                 </div>
+                  
+                </div>
+                
               </div>
 
               <div className="penumpang flex w-full items-center">
@@ -244,17 +277,36 @@ const [showReturn, setShowReturn] = useState(false);
                       onChange=""
                     />
                   {/*<Modal name={"inputPassengers"}/>*/}
+
+                    {/*<div>
+                    <input
+                      type="text"
+                      placeholder="Seat"
+                      className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                      name="type_seat"
+                      value={typeOrang}
+                      onChange={handleInputOrang}
+                      onClick={handleOrang}
+                    />
+                    {showOrang && <CobaInput />}
+                  </div>*/}
                   
                 </div>
                 <div className="seat-class ml-4">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
-                  <input
+                  <div>
+                    <input
                       type="text"
-                      placeholder="To"
+                      placeholder="Seat"
                       className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                       name="type_seat"
+                      value={typeSeat}
+                      onChange={handleInputChange}
+                      onClick={handleSeat}
                     />
-                  {/*<Modal name={"inputSeats"} />*/}
+                    {/*{showSeat && <CobaSeat />}*/}
+                  </div>
+
                 </div>
               </div>
             </div>

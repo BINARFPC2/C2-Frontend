@@ -36,6 +36,8 @@ export default function Home() {
               className="z-0 w-full h-full" />
           </div>
         </div>
+
+
         <div className="relative z-30 flex justify-center sm:-mt-28  mb-10">
           <FormTicket />
         </div>

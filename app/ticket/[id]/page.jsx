@@ -4,6 +4,7 @@ import BreadCrumb from "./common/BreadCrumb";
 import Maskapai from "@/assets/logo-maskapai.svg";
 import Image from "next/image";
 import { getMoneyFormat } from "@/utils/helper";
+// import { useSelector } from "react-redux";
 
 async function getTicketId(id) {
     const res = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets/${id}`)
@@ -11,7 +12,7 @@ async function getTicketId(id) {
 }
 
 const CheckoutPage = async ({ params: { id } }) => {
-    const data = await getTicketId(id)
+    const data = await getTicketId(id);
     return (
         <>
             <div className="max-w-full h-full">

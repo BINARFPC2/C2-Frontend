@@ -7,8 +7,17 @@ import ArrowUpDown from "@/assets/arrow_updown.svg";
 import ButtonClose from "@/assets/button-close.svg";
 import RoundCheck from "@/assets/round-check.svg";
 
+import IconFilter from "@/assets/icon-filter.svg";
+import Box from "@/assets/fi_box.svg";
+import ArrowRight from "@/assets/arrow_right.svg";
+import Heart from "@/assets/fi_heart.svg";
+import Dollar from "@/assets/fi_dollar-sign.svg";
+
+
 const TicketFilter = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+
   const [selectedOptions, setSelectedOptions] = useState("");
 
   const [options, setOptions] = useState([
@@ -22,32 +31,138 @@ const TicketFilter = () => {
   ]);
 
   const handleCheckboxChange = (id) => {
-    setOptions((prevOptions) => {
-      return prevOptions.map((option) => {
-        if (option.id === id) {
-          return {
-            ...option,
-            isChecked: !option.isChecked,
-          };
-        }
-        return option;
-      });
+  setOptions((prevOptions) => {
+    return prevOptions.map((option) => {
+      if (option.id === id) {
+        return {
+          ...option,
+          isChecked: true, 
+        };
+      } else {
+        return {
+          ...option,
+          isChecked: false,
+        };
+      }
     });
-  };
+  });
+};
 
   const handleSelectOptions = () => {
-    const selected = options.filter((option) => option.isChecked);
-    setSelectedOptions(selected.map((option) => option.label).join(", "));
-    setShowModal(false);
-  };
+  const selectedOption = options.find((option) => option.isChecked);
+  setSelectedOptions(selectedOption ? selectedOption.label : "");
+  setShowModal(false);
+};
 
   console.log("selected options", selectedOptions);
 
   return (
     <>
-      <div className="filter-drop flex justify-end ">
-        <button
-          className="h-8 mt-8 mb-6 flex gap-2.5 items-center justify-self-center rounded-2xl w-30 font-medium text-xs leading-5 text-[#7126B5] border-solid border-2 border-[#A06ECE]"
+      
+      <div className="filter-drop flex justify-between xl:justify-end mb-4 mx-2 mt-4">
+        <div className="xl:hidden xl:block">
+        <div className="items-center my-auto" onClick={() => setShowFilter(true)}>
+              <button className="flex items-center rounded-2xl w-[90px] font-normal text-base leading-6 border-2 border-[#A06ECE]">
+                <div className="flex h-8 mx-auto ">
+                    <Image
+                    className="items-center mr-2.5"
+                    src={IconFilter}
+                    width={17}
+                    height={17}
+                    alt=""
+                  />
+                  <span className="self-center" >Filter</span>
+                </div>
+              </button>
+            </div>
+
+
+              {showFilter && (
+             <div className="card-filter w-[268px] h-[180px] rounded-2xl mt-2 shadow-lg border-2 bg-white z-50 inset-x-0 absolute top-auto mt-2">
+              <div className="close-button h-[30px] flex justify-end">
+                <button type="button" onClick={() => setShowFilter(false)}>
+                  <Image
+                    className="mr-4 mt-4 mb-2"
+                    src={ButtonClose}
+                    width={16}
+                    height={16}
+                    alt=""
+                  />
+                </button>
+              </div>
+        <div className="filter-body mx-6">
+          <div className="filter-type">
+            <div className="transit flex h-[40px] w-[220px] border-b-[1px] border-b-[#D0D0D0] mb-2 justify-between">
+              <div className=" flex items-center ">
+                <Image
+                  className="items-center mr-2"
+                  src={Box}
+                  width={24}
+                  height={24}
+                  alt=""
+                />
+                <h2 className="font-normal text-base leading-6">Transit</h2>
+              </div>
+
+              <Image
+                className="items-center ml-4"
+                src={ArrowRight}
+                width={8}
+                height={12}
+                alt=""
+              />
+            </div>
+            <div className="fasilitas flex h-[40px] w-[220px] border-b-[1px] border-b-[#D0D0D0] mb-2 justify-between">
+              <div className=" flex items-center">
+                <Image
+                  className="items-center mr-2"
+                  src={Heart}
+                  width={24}
+                  height={24}
+                  alt=""
+                />
+                <h2 className="font-normal text-base leading-6">Fasilitas</h2>
+              </div>
+              <Image
+                className="items-center ml-4"
+                src={ArrowRight}
+                width={8}
+                height={12}
+                alt=""
+              />
+            </div>
+
+            <div className="harga h-[40px] w-[220px] flex justify-between">
+              <div className=" flex items-center">
+                <Image
+                  className="items-center mr-2"
+                  src={Dollar}
+                  width={24}
+                  height={24}
+                  alt=""
+                />
+                <h2 className="font-normal text-base leading-6">Harga</h2>
+              </div>
+              <Image
+                className="items-center ml-4"
+                src={ArrowRight}
+                width={8}
+                height={12}
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      )}
+
+
+      </div>
+
+        <div className="xl:justify-end">
+          <button
+          className="h-8 mb-2 flex gap-2.5 items-center justify-self-center rounded-2xl w-30 font-medium text-xs leading-5 text-[#7126B5] border-solid border-2 border-[#A06ECE]"
           onClick={() => setShowModal(true)}
         >
           <div className="flex mx-2 my-2">
@@ -61,11 +176,14 @@ const TicketFilter = () => {
             <span>{selectedOptions}</span>
           </div>
         </button>
+          
+        </div>
+        
       </div>
 
       {showModal && (
-        <div className="modal-filter flex absolute outline-none focus:outline-none inset-0 z-50  bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
-          <div className="relative justify-center left-[900px] top-96 modal-card bg-white w-[400px] h-[410px] rounded-2xl shadow border-2">
+        <div className="modal-filter flex justify-end outline-none focus:outline-none z-50 inset-x-0 absolute top-auto -mt-4">
+          <div className="modal-card bg-white w-[350px] h-[400px] rounded-2xl shadow border-2">
             <div className="relative kontent mx-0">
               <div className="close-button h-[44px] flex justify-end">
                 <button type="button" onClick={() => setShowModal(false)}>
@@ -131,7 +249,7 @@ const TicketFilter = () => {
 
               <div className="submit-button flex justify-end mr-4">
                 <button
-                  className="my-3 w-[150px] h-[48px] bg-[#4B1979] rounded-xl text-white font-medium text-base leading-6"
+                  className="my-3 w-[100px] h-[40px] bg-[#4B1979] rounded-xl text-white font-medium text-base leading-6"
                   type="button"
                   onClick={handleSelectOptions}
                 >

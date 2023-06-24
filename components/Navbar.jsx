@@ -51,7 +51,7 @@ const Navbar = () => {
       fetch()
       // dispatch(asyncWhoAmI())
     }
-  }, [token])
+  }, [fetch, token])
   const [open, setOpen] = useState(false)
 
   const handlerOpen = () => {
@@ -66,14 +66,15 @@ const Navbar = () => {
   // console.log(""userSelect)
   return (
     <div className="relative h-full md:max-w-full">
-      <div className="flex items-center justify-between w-full h-20 sm:px-32 bg-white drop-shadow-md">
+      <div className="flex items-center justify-between md:w-full h-20 bg-white drop-shadow-md">
         <Image
           src={Logo}
+          className="ml-4"
           width={78}
           height={33}
           alt="Picture of the author"
         />
-        <div className="md:w-full md:ml-8">
+        <div className="sm:w-[300px] mx-2">
           <label className="relative block">
             <span className="sr-only">Search</span>
             <input
@@ -105,7 +106,7 @@ const Navbar = () => {
 
           </div>
         ) : (
-          <div className="flex sm:ml-96">
+          <div className="flex mr-4">
             <Link href="/login">
               <button className="md:w-full h-full rounded-xl text-[#FFFFFF] bg-[#7126B5]">
                 <div className="inline-flex items-center px-4 py-3">

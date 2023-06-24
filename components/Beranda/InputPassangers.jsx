@@ -35,7 +35,7 @@ const Counter = ({ count, decrease, increase }) => {
   );
 };
 
-const InputPassangers = ({ onClose, handleChange }) => {
+const InputPassangers = ({ onClose }) => {
   const [dewasaCount, setDewasaCount] = useState(0);
   const [bayiCount, setBayiCount] = useState(0);
   const [anakCount, setAnakCount] = useState(0);

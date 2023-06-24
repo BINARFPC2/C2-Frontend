@@ -23,25 +23,19 @@ import Loading from "@/assets/images/loading.png"
 import Draggable from 'react-draggable';
 import TicketCard from "@/components/Ticket/TicketCard";
 
-
-
-
-// const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
-//   console.log("datedepartureee", dateDeparture);
-//   try {
-//     const response = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets?dateDeparture=${dateDeparture}&city_from=${city_from}&type_seat=${type_seat}&city_to=${city_to}`);
-//     if (!response.ok) {
-//       throw new Error('Error fetching ticket data');
-//     }
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error('An error occurred:', error);
-//     throw error;
-//   }
-// }
+const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
+  try {
+    const response = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets?dateDeparture=${dateDeparture}&city_from=${city_from}&type_seat=${type_seat}&city_to=${city_to}`);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('An error occurred:', error);
+    throw error;
+  }
+}
 const TicketPage = () => {
-  //   const [value, setValue] = useState()
+  const [value, setValue] = useState()
   const [loading, setLoading] = useState(false)
 
   // const {
@@ -55,6 +49,9 @@ const TicketPage = () => {
 
   // console.log("dateeeselector", dateDeparture);
   // console.log("dateeeselector", city_from);
+  const valueModal = useSelector((state) => state.modal)
+
+  console.log("value modal", valueModal);
   const searchFlight = useSearchParams();
   const dateDeparture = searchFlight.get("dateDeparture");
   const city_from = searchFlight.get("city_from");
@@ -65,7 +62,11 @@ const TicketPage = () => {
     setValue(data)
   }
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+    }, 2000);
     fetchData();
+    setLoading(false)
   }, [])
   console.log(value);
 
@@ -167,10 +168,6 @@ const TicketPage = () => {
           </div>
 
         </div>
-
-        <div className="mt-3.5 h-[96px] flex justify-between border-b-2 border-b-[#D0D0D0] content-center self-center my-auto pb-4">
-        </div >
-
         <div className="ticket-result">
           {/*<TicketHabis/>*/}
 

@@ -51,7 +51,7 @@ const Navbar = () => {
       fetch()
       // dispatch(asyncWhoAmI())
     }
-  }, [token])
+  }, [fetch, token])
   const [open, setOpen] = useState(false)
 
   const handlerOpen = () => {

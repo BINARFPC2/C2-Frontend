@@ -54,7 +54,7 @@ const Modal = ({ name, handleChange }) => {
                   : null
           }
           onClick={openModal}
-          className="border-b-2 bg-white border-b-bnr-secondary outline-none py-3 w-full"
+          className="border-b-2 bg-red-300 border-b-bnr-secondary outline-none py-3 w-full"
         />
       </div>
 

@@ -15,12 +15,16 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addSearchFlight } from "@/store/auth/slice";
+import { handleClientScriptLoad } from "next/script";
 
 
 
 const FormTicket = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const valueModal = useSelector((state) => state.modal)
+
+  console.log(valueModal);
 
   const [values, setValues] = useState(null);
   const pathname = usePathname("/ticket");
@@ -39,11 +43,6 @@ const FormTicket = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(addSearchFlight({
-      city_from: values.city_from,
-      city_to: values.city_to,
-      dateDeparture: values.dateDeparture,
-      dateReturn: values.dateReturn,
-      type_seat: values.type_seat,
       total_passenger: values.passengers
     }))
     // getTicketData(values)
@@ -162,7 +161,7 @@ const FormTicket = () => {
     setShowSeat(true);
   };
 
-
+  console.log();
 
   const [typeOrang, setTypeOrang] = useState("");
   const [showOrang, setShowOrang] = useState(false);
@@ -180,7 +179,7 @@ const FormTicket = () => {
     <>
       <div className="form-section relative z-30 flex justify-center">
         <div className="main border-2 rounded-xl shadow-xl bg-white select-none mx-2">
-          <form>
+          <form onSubmit={handleSearch}>
             <div className="w-full md:w-[968px] mx-2">
               <div className="content p-4">
                 <h1 className="font-bold text-xl leading-7">
@@ -196,8 +195,8 @@ const FormTicket = () => {
                         placeholder="From"
                         className="w-full ml-4 py-3 border-b-2 outline-none border-b-bnr-secondary"
                         name="city_from"
-                        value={cityFrom}
-                        onChange={handleChangeFrom}
+                        // value={cityFrom}
+                        onChange={handleChange}
                       />
                       {/*<Modal name={"inputKota"}/>*/}
                     </div>
@@ -216,8 +215,8 @@ const FormTicket = () => {
                       placeholder="To"
                       className="w-full ml-9 py-3 border-b-2 outline-none border-b-bnr-secondary"
                       name="city_to"
-                      value={cityTo}
-                      onChange={handleChangeTo}
+                      // value={cityTo}
+                      onChange={handleChange}
                     />
                     {/*<Modal name={"inputKota"} />*/}
                   </div>
@@ -230,10 +229,11 @@ const FormTicket = () => {
                     <div className="departure w-1/2">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Departure</label>
                       <input
-                        // type="date"
-                        // placeholder="Input Tanggal"
+                        type="date"
+                        placeholder="Input Tanggal"
                         className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                         name="dateDeparture"
+                        onChange={handleChange}
                       />
                     </div>
 
@@ -241,10 +241,11 @@ const FormTicket = () => {
                       <div className="return ml-4 w-1/2">
                         <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
                         <input
-                          // type="date"
-                          // placeholder="To"
+                          type="date"
+                          placeholder="To"
                           className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                           name="dateReturn"
+                          onChange={handleChange}
                         />
                       </div>
                     )}
@@ -265,15 +266,15 @@ const FormTicket = () => {
                     <Image src={ToTwo} className="mr-2 mt-6" alt="fromsvg" />
                     <div className="passengers ml-6">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
-                      <input
+                      {/* <input
                         type="number"
                         placeholder="To"
                         className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                         name="passengers"
                         value=""
                         onChange=""
-                      />
-                      {/*<Modal name={"inputPassengers"}/>*/}
+                      /> */}
+                      <Modal name={"inputPassengers"} />
 
                       {/*<div>
                     <input
@@ -297,11 +298,10 @@ const FormTicket = () => {
                           placeholder="Seat"
                           className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                           name="type_seat"
-                          value={typeSeat}
-                          onChange={handleInputChange}
-                          onClick={handleSeat}
+                          onChange={handleChange}
                         />
                         {/*{showSeat && <CobaSeat />}*/}
+
                       </div>
 
                     </div>

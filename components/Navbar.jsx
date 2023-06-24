@@ -78,7 +78,7 @@ const Navbar = () => {
           <label className="relative block">
             <span className="sr-only">Search</span>
             <input
-              className="h-10 align-middle placeholder:text-[#8A8A8A] block bg-[#EEEEEE] w-full border rounded-xl py-2 pl-4 pr-4 shadow-sm focus:outline-none focus:border-[#7126B5] focus:ring-[#7126B5] focus:ring-1 sm:text-sm"
+              className="h-10 align-middle placeholder:text-[#8A8A8A] block bg-[#EEEEEE] sm:w-full border rounded-xl py-2 pl-4 pr-4 shadow-sm focus:outline-none focus:border-[#7126B5] focus:ring-[#7126B5] focus:ring-1 sm:text-sm"
               placeholder="Cari disini ..."
               type="text"
               name="search"

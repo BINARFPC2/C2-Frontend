@@ -8,7 +8,7 @@ import InputPassangers from "../Beranda/InputPassangers";
 import InputSeat from "../Beranda/InputSeat";
 import InputKota from "../Beranda/InputKota";
 
-const Modal = ({ name }) => {
+const Modal = ({ name, handleChange }) => {
   const dataModal = useSelector((state) => state.modal);
   const [seatInput, setSeatInput] = useState(null);
 
@@ -93,7 +93,7 @@ const Modal = ({ name }) => {
                   </button>
                   <div className="mt-2">
                     {name === "inputPassengers" ? (
-                      <InputPassangers onClose={closeModal} />
+                      <InputPassangers handleChange={handleChange} onClose={closeModal} />
                     ) : name === "inputSeats" ? (
                       <InputSeat onClose={closeModal} />
                     ) : name === "inputKota" ? (

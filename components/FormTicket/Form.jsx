@@ -16,9 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addSearchFlight } from "@/store/auth/slice";
 
-import CobaSeat from "../Beranda/CobaSeat"
-import CobaInput from "../Beranda/CobaInput"
-
 
 
 const FormTicket = () => {
@@ -136,7 +133,7 @@ const FormTicket = () => {
     setCityTo(e.target.value);
   };
 
-const [showReturn, setShowReturn] = useState(false);
+  const [showReturn, setShowReturn] = useState(false);
   const [isDoubleClick, setIsDoubleClick] = useState(false);
 
   const handleClick = () => {
@@ -184,101 +181,101 @@ const [showReturn, setShowReturn] = useState(false);
       <div className="form-section relative z-30 flex justify-center">
         <div className="main border-2 rounded-xl shadow-xl bg-white select-none mx-2">
           <form>
-          <div className="w-full md:w-[968px] mx-2">
-            <div className="content p-4">
-              <h1 className="font-bold text-xl leading-7">
-                Pilih Jadwal Penerbangan special di <span className="text-[#7126B5]">TiketGo!</span>
-              </h1>
+            <div className="w-full md:w-[968px] mx-2">
+              <div className="content p-4">
+                <h1 className="font-bold text-xl leading-7">
+                  Pilih Jadwal Penerbangan special di <span className="text-[#7126B5]">TiketGo!</span>
+                </h1>
 
-              <div className="pilih-kota flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
-              <div className="from flex justify-between w-full">
-                <div className="mr-2 flex w-full">
-                  <Image src={From} alt="fromsvg" />
-                  <input
-                    type="text"
-                    placeholder="From"
-                    className="w-full ml-4 py-3 border-b-2 outline-none border-b-bnr-secondary"
-                    name="city_from"
-                    value={cityFrom}
-                    onChange={handleChangeFrom}
-                  />
-                  {/*<Modal name={"inputKota"}/>*/}
-                </div>
+                <div className="pilih-kota flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
+                  <div className="from flex justify-between w-full">
+                    <div className="mr-2 flex w-full">
+                      <Image src={From} alt="fromsvg" />
+                      <input
+                        type="text"
+                        placeholder="From"
+                        className="w-full ml-4 py-3 border-b-2 outline-none border-b-bnr-secondary"
+                        name="city_from"
+                        value={cityFrom}
+                        onChange={handleChangeFrom}
+                      />
+                      {/*<Modal name={"inputKota"}/>*/}
+                    </div>
 
-                <div className="btn-swap relative inline-flex items-center cursor-pointer" onClick={handleSwap}>
-                  <div className="p-2 text-white bg-black rounded-xl my-2 cursor-pointer">
-                    <FiRepeat />
+                    <div className="btn-swap relative inline-flex items-center cursor-pointer" onClick={handleSwap}>
+                      <div className="p-2 text-white bg-black rounded-xl my-2 cursor-pointer">
+                        <FiRepeat />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="to flex w-full">
+                    <Image src={To} alt="fromsvg" />
+                    <input
+                      type="text"
+                      placeholder="To"
+                      className="w-full ml-9 py-3 border-b-2 outline-none border-b-bnr-secondary"
+                      name="city_to"
+                      value={cityTo}
+                      onChange={handleChangeTo}
+                    />
+                    {/*<Modal name={"inputKota"} />*/}
                   </div>
                 </div>
-              </div>
 
-              <div className="to flex w-full">
-                <Image src={To} alt="fromsvg" />
-                <input
-                  type="text"
-                  placeholder="To"
-                  className="w-full ml-9 py-3 border-b-2 outline-none border-b-bnr-secondary"
-                  name="city_to"
-                  value={cityTo}
-                  onChange={handleChangeTo}
-                />
-                {/*<Modal name={"inputKota"} />*/}
-              </div>
-            </div>
+                <div className="flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
+                  <div className="pilih-tanggal flex w-full">
+                    <Image src={DateSvg} className="mr-2 mt-6" alt="fromsvg" />
 
-              <div className="flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
-              <div className="pilih-tanggal flex w-full">
-                <Image src={DateSvg} className="mr-2 mt-6" alt="fromsvg" />
+                    <div className="departure w-1/2">
+                      <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Departure</label>
+                      <input
+                        // type="date"
+                        // placeholder="Input Tanggal"
+                        className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                        name="dateDeparture"
+                      />
+                    </div>
 
-                <div className="departure w-1/2">
-                  <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Departure</label>
-                  <input
-                    // type="date"
-                    // placeholder="Input Tanggal"
-                    className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
-                    name="dateDeparture"
-                  />
-                </div>
+                    {showReturn && (
+                      <div className="return ml-4 w-1/2">
+                        <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
+                        <input
+                          // type="date"
+                          // placeholder="To"
+                          className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                          name="dateReturn"
+                        />
+                      </div>
+                    )}
 
-                {showReturn && (
-                <div className="return ml-4 w-1/2">
-                  <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
-                  <input
-                    // type="date"
-                    // placeholder="To"
-                    className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
-                    name="dateReturn"
-                  />
-                </div>
-                )}
+                    <div className="button flex justify-self-end">
+                      <div className="btn-slider" onClick={handleClick}>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input type="checkbox" value="" className="sr-only peer" />
+                          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-bnr-primary"></div>
+                        </label>
+                      </div>
 
-                <div className="button flex justify-self-end">
-                <div className="btn-slider" onClick={handleClick}>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" className="sr-only peer" />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-bnr-primary"></div>
-                  </label>
-                </div>
-                  
-                </div>
-                
-              </div>
+                    </div>
 
-              <div className="penumpang flex w-full items-center">
-                <Image src={ToTwo} className="mr-2 mt-6" alt="fromsvg" />
-                <div className="passengers ml-6">
-                  <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
-                  <input
-                      type="number"
-                      placeholder="To"
-                      className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
-                      name="passengers"
-                      value=""
-                      onChange=""
-                    />
-                  {/*<Modal name={"inputPassengers"}/>*/}
+                  </div>
 
-                    {/*<div>
+                  <div className="penumpang flex w-full items-center">
+                    <Image src={ToTwo} className="mr-2 mt-6" alt="fromsvg" />
+                    <div className="passengers ml-6">
+                      <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
+                      <input
+                        type="number"
+                        placeholder="To"
+                        className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                        name="passengers"
+                        value=""
+                        onChange=""
+                      />
+                      {/*<Modal name={"inputPassengers"}/>*/}
+
+                      {/*<div>
                     <input
                       type="text"
                       placeholder="Seat"
@@ -290,32 +287,32 @@ const [showReturn, setShowReturn] = useState(false);
                     />
                     {showOrang && <CobaInput />}
                   </div>*/}
-                  
-                </div>
-                <div className="seat-class ml-4">
-                  <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Seat"
-                      className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
-                      name="type_seat"
-                      value={typeSeat}
-                      onChange={handleInputChange}
-                      onClick={handleSeat}
-                    />
-                    {/*{showSeat && <CobaSeat />}*/}
-                  </div>
 
+                    </div>
+                    <div className="seat-class ml-4">
+                      <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
+                      <div>
+                        <input
+                          type="text"
+                          placeholder="Seat"
+                          className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                          name="type_seat"
+                          value={typeSeat}
+                          onChange={handleInputChange}
+                          onClick={handleSeat}
+                        />
+                        {/*{showSeat && <CobaSeat />}*/}
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
-
-            </div>
-          </div>
-          <button type="submit" className="w-full py-3 font-semibold text-white bg-bnr-primary rounded-bl-xl rounded-br-xl">
-            Cari Penerbangan
-          </button>
+            <button type="submit" className="w-full py-3 font-semibold text-white bg-bnr-primary rounded-bl-xl rounded-br-xl">
+              Cari Penerbangan
+            </button>
           </form>
         </div>
       </div>

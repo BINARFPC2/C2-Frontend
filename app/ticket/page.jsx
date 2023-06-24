@@ -9,27 +9,37 @@ import BackArrow from "@/assets/fi_arrow.svg";
 import Navbar from "@/components/Navbar";
 import TicketFilter from "@/components/Ticket/TicketFilter";
 import TicketDetail from "@/components/Ticket/TicketDetail";
-import TicketCard from "@/components/Ticket/TicketCard";
+// import TicketCard from "@/components/Ticket/TicketCard";
+// import TicketHabis from "@/components/Ticket/TicketHabis";
+// import TicketNotFound from "@/components/Ticket/TicketNotFound";
+// import TicketLoading from "@/components/Ticket/TicketLoading";
+
+
 import { useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
 
-const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
-  console.log("datedepartureee", dateDeparture);
-  try {
-    const response = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets?dateDeparture=${dateDeparture}&city_from=${city_from}&type_seat=${type_seat}&city_to=${city_to}`);
-    if (!response.ok) {
-      throw new Error('Error fetching ticket data');
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('An error occurred:', error);
-    throw error;
-  }
-}
+import Draggable from 'react-draggable';
+
+
+
+
+// const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
+//   console.log("datedepartureee", dateDeparture);
+//   try {
+//     const response = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets?dateDeparture=${dateDeparture}&city_from=${city_from}&type_seat=${type_seat}&city_to=${city_to}`);
+//     if (!response.ok) {
+//       throw new Error('Error fetching ticket data');
+//     }
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error('An error occurred:', error);
+//     throw error;
+//   }
+// }
 const TicketPage = () => {
-  const [value, setValue] = useState()
-  const [loading, setLoading] = useState(false)
+//   const [value, setValue] = useState()
+//   const [loading, setLoading] = useState(false)
 
   // const {
   //   city_from,
@@ -42,50 +52,82 @@ const TicketPage = () => {
 
   // console.log("dateeeselector", dateDeparture);
   // console.log("dateeeselector", city_from);
-  const searchFlight = useSearchParams();
-  const dateDeparture = searchFlight.get("dateDeparture");
-  const city_from = searchFlight.get("city_from");
-  const city_to = searchFlight.get("city_to");
-  const type_seat = searchFlight.get("type_seat")
-  const fetchData = async () => {
-    const data = await getTicketData(dateDeparture, city_from, city_to, type_seat);
-    setValue(data)
-  }
+  // const searchFlight = useSearchParams();
+  // const dateDeparture = searchFlight.get("dateDeparture");
+  // const city_from = searchFlight.get("city_from");
+  // const city_to = searchFlight.get("city_to");
+  // const type_seat = searchFlight.get("type_seat")
+  // const fetchData = async () => {
+  //   const data = await getTicketData(dateDeparture, city_from, city_to, type_seat);
+  //   setValue(data)
+  // }
+  // useEffect(() => {
+  //   fetchData();
+  // }, [])
+  // console.log(value);
+
+  const dateData = [
+    { day: 'Senin', date: '27/08/2023' },
+    { day: 'Selasa', date: '27/08/2023' },
+    { day: 'Rabu', date: '27/08/2023' },
+    { day: 'Kamis', date: '27/08/2023' },
+    { day: 'Jumat', date: '27/08/2023' },
+    { day: 'Sabtu', date: '27/08/2023' },
+    { day: 'Minggu', date: '27/08/2023' },
+  ];
+
+  const [contentWidth, setContentWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [maxDragX, setMaxDragX] = useState(0);
+
   useEffect(() => {
-    fetchData();
-  }, [])
-  console.log(value);
+    const carousel = document.getElementById('carousel');
+    const content = document.getElementById('carousel-content');
+
+    const carouselWidth = carousel.offsetWidth;
+    setContainerWidth(carouselWidth);
+
+    const contentWidth = content.offsetWidth;
+    setContentWidth(contentWidth);
+
+    const maxDragX = contentWidth - carouselWidth;
+    setMaxDragX(maxDragX);
+  }, []);
+
   return (
     <>
-      {loading ? "tes" :
-        <><Navbar /><div className="container mx-auto max-w-7xl">
-          <div className="ticket-section">
+      
+        <><Navbar /><div className="md:mx-36 max-w-7xl">
+          <div className="ticket-section mx-2">
             <div className="text-heading">
-              <h1 className="mt-20 text-xl font-bold leading-8">
+              <h1 className="mt-10 text-xl font-bold leading-8">
                 Pilih Penerbangan
               </h1>
             </div>
 
-            <div className="flex gap-4 mt-4 search">
-              <div className="w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium text-base leading-6 gap-1">
+            <div className="flex flex-col md:flex-row gap-4 mt-4 search">
+              <div className="md:w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium leading-6 gap-1">
                 <a href="#">
                   <Image
-                    className="ml-3 mr-5"
+                    className="ml-3 md:mr-5"
                     src={BackArrow}
                     width={24}
                     height={24}
                     alt="" />
                 </a>
-
-                <span>JKT</span>
-                <span>&gt;</span>
-                <span>MLB</span>
-                <span>-</span>
-                <span>Jumlah Penumpang</span>
-                <span>-</span>
-                <span>Kelas Pesawat</span>
+                
+                <div className="flex gap-1 w-full">
+                  <div className="text-sm md:text-base">JKT</div>
+                  <div className="text-sm md:text-base">&gt;</div>
+                  <div className="text-sm md:text-base">MLB</div>
+                  <div className="text-sm md:text-base">-</div>
+                  <div className="text-sm md:text-base"><span className="text-sm md:text-base">2</span> Penumpang</div>
+                  <div className="text-sm md:text-base">-</div>
+                  <div className="text-sm md:text-base">Premium Economy</div>
+                </div>
+                
               </div>
-              <div className="button-search">
+              <div className="hidden button-search md:block">
                 <a href="#">
                   {" "}
                   <button className="w-[220px] bg-[#73CA5C] hover:bg-[#67b552] h-[50px] rounded-xl text-white text-base font-bold leading-8">
@@ -95,105 +137,61 @@ const TicketPage = () => {
               </div>
             </div>
 
-            <div className="mt-3.5 h-[96px] flex justify-between border-b-2 border-b-[#D0D0D0] content-center self-center my-auto pb-4">
-              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                  Hari
-                </div>
-                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                  DD/MM/YYYY
-                </div>
-              </button>
 
-              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
-
-              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                  Hari
+            <div id="carousel" className="overflow-x-auto overflow-x-hidden mt-3.5 h-[96px] flex justify-between border-b-2 border-b-[#D0D0D0] content-center self-center my-auto pb-4">
+              <Draggable 
+                axis="x"
+                bounds={{ left: -maxDragX, right: 0 }}
+                >
+                <div id="carousel-content" className="flex md:justify-between md:w-full">
+                  {dateData.map((button, index) => (
+                <React.Fragment key={index}>
+                  <button className="w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
+                    <div className="text-sm font-bold leading-5">
+                      {button.day}
+                    </div>
+                    <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
+                      {button.date}
+                    </div>
+                  </button>
+                  {index !== dateData.length - 1 && (
+                    <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
+                  )}
+                </React.Fragment>
+              ))}
                 </div>
-                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                  DD/MM/YYYY
-                </div>
-              </button>
-
-              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
-
-              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                  Hari
-                </div>
-                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                  DD/MM/YYYY
-                </div>
-              </button>
-
-              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
-
-              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                  Hari
-                </div>
-                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                  DD/MM/YYYY
-                </div>
-              </button>
-
-              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
-
-              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                  Hari
-                </div>
-                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                  DD/MM/YYYY
-                </div>
-              </button>
-
-              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
-
-              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                  Hari
-                </div>
-                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                  DD/MM/YYYY
-                </div>
-              </button>
-
-              <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
-
-              <button className=" w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-                <div className="text-sm font-bold leading-5 hover:text-white active:text-white">
-                  Hari
-                </div>
-                <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                  DD/MM/YYYY
-                </div>
-              </button>
+              </Draggable>
             </div>
+
           </div>
 
-          <div className="ticket-result">
-            {/*<TicketHabis/>*/}
+          <div className="ticket-result mx-auto">
+            <TicketFilter />
 
-            <div className="filter-section">
-              <FilterButton />
+            {/*isi Loading, TicketHabis, TicketNotFound*/}
 
-              <div className="flex filter-result">
-                <div className="w-1/3 filter-menu">
+            
+
+              <div className="flex filter-result mx-auto">
+                <div className="hidden w-full sm:w-1/3 md:block mx-auto">
                   <FilterCard />
                 </div>
 
-                <div className="justify-center w-full mt-8 search-result w-3/3">
-                  <TicketFilter />
-                  {/* <TicketDetail /> */}
-                  <TicketCard data={value} />
+                <div className="search-result justify-center mt-2 w-full sm:w-3/3 mx-auto">
+                  
+
+                  
+                   <TicketDetail /> 
+                   <TicketDetail /> 
+
+                  {/*<TicketCard data={value} />*/}
                 </div>
               </div>
-            </div>
+            
+
           </div>
         </div></>
-      }
+      
     </>
   );
 };

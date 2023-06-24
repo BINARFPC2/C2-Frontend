@@ -22,8 +22,7 @@ export default function Home() {
 
   return (
     <>
-      {/* <Navbar /> */}
-
+      <Navbar />
       <div className="h-screen md:max-w-full">
         <div className="relative flex items-center justify-center sm:h-1/2">
           <div className="flex md:w-full h-[150px]">

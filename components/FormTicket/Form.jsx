@@ -151,6 +151,7 @@ const FormTicket = () => {
                     placeholder="From"
                     className="w-full ml-4 py-3 border-b-2 outline-none border-b-bnr-secondary"
                     name="city_from"
+                    onChange={handleChange}
                   />
                   {/*<Modal name={"inputKota"}/>*/}
                 </div>
@@ -211,14 +212,14 @@ const FormTicket = () => {
                 <Image src={ToTwo} className="mr-2 mt-6" alt="fromsvg" />
                 <div className="passengers ml-6">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
-                  <input
+                  {/* <input
                     type="number"
                     placeholder="To"
                     className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                     name="passengers"
                     onChange={handleChange}
-                  />
-                  {/* <Modal name={"inputPassengers"} /> */}
+                  /> */}
+                  <Modal name={"inputPassengers"} handleChange={handleChange} />
                 </div>
                 <div className="seat-class ml-4">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>

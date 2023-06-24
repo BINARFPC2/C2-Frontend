@@ -133,20 +133,34 @@ const FormTicket = () => {
     setCityTo(e.target.value);
   };
 
+const [showReturn, setShowReturn] = useState(false);
+  const [isDoubleClick, setIsDoubleClick] = useState(false);
+
+  const handleClick = () => {
+    if (isDoubleClick) {
+      setShowReturn(!showReturn);
+      setIsDoubleClick(false);
+    } else {
+      setIsDoubleClick(true);
+      setTimeout(() => {
+        setIsDoubleClick(false);
+      }, 300); // 
+    }
+  };
+
 
   return (
     <>
+      <div className="form-section relative z-30 flex justify-center">
+        <div className="main border-2 rounded-xl shadow-xl bg-white select-none mx-2">
+          <form>
+          <div className="w-full md:w-[968px] mx-2">
+            <div className="content p-4">
+              <h1 className="font-bold text-xl leading-7">
+                Pilih Jadwal Penerbangan special di <span className="text-[#7126B5]">TiketGo!</span>
+              </h1>
 
-
-
-      <div className="flex items-center justify-center md:w-full h-1/2 select-none mx-2">
-        <form>
-          <div className="md:w-[968px] h-full p-6 bg-white shadow-xl border-2 rounded-tl-xl rounded-tr-xl ">
-            <h1 className="font-bold text-xl leading-7">
-              Pilih Jadwal Penerbangan special di <span className="text-[#7126B5]">TiketGo!</span>
-            </h1>
-
-            <div className="flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
+              <div className="pilih-kota flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
               <div className="from flex justify-between w-full">
                 <div className="mr-2 flex w-full">
                   <Image src={From} alt="fromsvg" />
@@ -182,30 +196,34 @@ const FormTicket = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
-              <div className="date flex justify-between sm:w-full">
+              <div className="flex flex-col md:flex-row items-center justify-between py-2 w-full gap-2">
+
+              <div className="pilih-tanggal flex w-full">
                 <Image src={DateSvg} className="mr-2 mt-6" alt="fromsvg" />
-                <div className="departure ml-2">
+
+                <div className="departure w-1/2">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Departure</label>
                   <input
-                    type="date"
-                    placeholder="Input Tanggal"
-                    className="sm:w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                    // type="date"
+                    // placeholder="Input Tanggal"
+                    className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                     name="dateDeparture"
                   />
                 </div>
 
-                <div className="return ml-4">
+                {showReturn && (
+                <div className="return ml-4 w-1/2">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
                   <input
-                    type="date"
-                    placeholder="To"
-                    className="sm:w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                    // type="date"
+                    // placeholder="To"
+                    className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                     name="dateReturn"
                   />
                 </div>
+                )}
 
-                <div className="btn-slider">
+                <div className="btn-slider" onClick={handleClick}>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" value="" className="sr-only peer" />
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-bnr-primary"></div>
@@ -217,31 +235,37 @@ const FormTicket = () => {
                 <Image src={ToTwo} className="mr-2 mt-6" alt="fromsvg" />
                 <div className="passengers ml-6">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
-                  {/*<input
+                  <input
                       type="number"
                       placeholder="To"
                       className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                       name="passengers"
-                    />*/}
-                  <Modal name={"inputPassengers"} />
+                      value=""
+                      onChange=""
+                    />
+                  {/*<Modal name={"inputPassengers"}/>*/}
+                  
                 </div>
                 <div className="seat-class ml-4">
                   <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
-                  {/*<input
+                  <input
                       type="text"
                       placeholder="To"
                       className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                       name="type_seat"
-                    />*/}
-                  <Modal name={"inputSeats"} />
+                    />
+                  {/*<Modal name={"inputSeats"} />*/}
                 </div>
               </div>
+            </div>
+
             </div>
           </div>
           <button type="submit" className="w-full py-3 font-semibold text-white bg-bnr-primary rounded-bl-xl rounded-br-xl">
             Cari Penerbangan
           </button>
-        </form>
+          </form>
+        </div>
       </div>
 
 

@@ -13,6 +13,13 @@ export const getToken = () => {
     }
 }
 
+export const getModal = () => {
+    if (typeof window !== "undefined") {
+        const passengerr = JSON.parse(localStorage.getItem("passengerr"))
+        return passengerr;
+    }
+}
+
 export const getCode = (value) => {
     let even = [];
     for (var i = 0; i < value.length; i++) {

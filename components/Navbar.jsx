@@ -22,6 +22,7 @@ const getWhoAmI = async (token) => {
 const Navbar = () => {
   const router = useRouter()
   const [mounted, setMounted] = useState(false);
+  const [open, setOpen] = useState(false)
   const [data, setData] = useState("")
   const userSelect = useSelector((state) => state.auth.data);
   const dispatch = useDispatch();
@@ -31,28 +32,22 @@ const Navbar = () => {
     setData(me)
   }
 
-  console.log("=====> saya", data);
-  // console.log(userSelect)
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(unSetAuthUser());
     router.push("/login")
-    // console.log("tessssssssssssss");
   }
 
   useEffect(() => {
     setMounted(true)
     if (!token) {
-      // dispatch(unSetAuthUser())
       console.log("error");
     }
     if (token) {
       fetch()
       // dispatch(asyncWhoAmI())
     }
-  }, [fetch, token])
-  const [open, setOpen] = useState(false)
+  }, [token])
 
   const handlerOpen = () => {
     setOpen(!open)
@@ -61,12 +56,10 @@ const Navbar = () => {
   useEffect(() => {
     setMounted(true)
   }, [])
-  // const userData = data;
-  // console.log(userData);
-  // console.log(""userSelect)
+
   return (
     <div className="relative h-full md:max-w-full">
-      <div className="flex items-center justify-between md:w-full h-20 bg-white drop-shadow-md">
+      <div className="flex items-center justify-between h-20 bg-white md:px-36 md:w-full drop-shadow-md">
         <Image
           src={Logo}
           className="ml-4"
@@ -74,22 +67,8 @@ const Navbar = () => {
           height={33}
           alt="Picture of the author"
         />
-        <div className="sm:w-[300px] mx-2">
-          <label className="relative block">
-            <span className="sr-only">Search</span>
-            <input
-              className="h-10 align-middle placeholder:text-[#8A8A8A] block bg-[#EEEEEE] sm:w-full border rounded-xl py-2 pl-4 pr-4 shadow-sm focus:outline-none focus:border-[#7126B5] focus:ring-[#7126B5] focus:ring-1 sm:text-sm"
-              placeholder="Cari disini ..."
-              type="text"
-              name="search"
-            />
-            <span className="absolute inset-y-0 right-0 flex items-center pr-4">
-              <FiSearch />
-            </span>
-          </label>
-        </div>
         {mounted && token ? (
-          <div className="flex space-x-5 text-2xl ml-96">
+          <div className="flex mr-5 space-x-5 text-2xl md:ml-96">
             <FiList />
             <FiBell />
             <FiUser onClick={handlerOpen} />

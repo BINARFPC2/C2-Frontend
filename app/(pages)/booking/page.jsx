@@ -7,17 +7,17 @@ import Image from "next/image";
 const BookingPage = () => {
   return (
     <>
-      <div className="max-w-full h-full">
+      <div className="h-full max-w-full">
         <Navbar />
         <section>
-          <div className="w-full h-32 flex items-center bg-white shadow-md px-5 md:px-72">
+          <div className="flex items-center w-full h-32 px-5 bg-white shadow-md md:px-72">
             <BreadCrumb />
           </div>
         </section>
-        <main className="flex flex-col md:flex-row w-full px-5 md:px-80 gap-5 py-3">
-          <section className="max-w-full md:w-1/2 space-y-10">
-            <div className="w-full border border-black px-5 rounded-md">
-              <h1 className="text-xl font-bold py-5">Isi data pemesan </h1>
+        <main className="flex flex-col w-full gap-5 px-5 py-3 md:flex-row md:px-80">
+          <section className="max-w-full space-y-10 md:w-1/2">
+            <div className="w-full px-5 border border-black rounded-md">
+              <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
               <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
                 Data Diri Pemesan
               </div>
@@ -25,7 +25,7 @@ const BookingPage = () => {
                 <div>
                   <label
                     htmlFor="fullName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nama Lengkap
                   </label>
@@ -33,13 +33,13 @@ const BookingPage = () => {
                     type="text"
                     name="fullName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nama Keluarga
                   </label>
@@ -47,13 +47,13 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nomor Telepon
                   </label>
@@ -61,13 +61,13 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Email
                   </label>
@@ -75,13 +75,13 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
               </div>
             </div>
-            <div className="w-full border border-black px-5 rounded-md">
-              <h1 className="text-xl font-bold py-5">Isi data pemesan </h1>
+            <div className="w-full px-5 border border-black rounded-md">
+              <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
               <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
                 Data Diri Pemesan
               </div>
@@ -89,7 +89,7 @@ const BookingPage = () => {
                 <div>
                   <label
                     htmlFor="fullName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nama Lengkap
                   </label>
@@ -97,13 +97,13 @@ const BookingPage = () => {
                     type="text"
                     name="fullName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nama Keluarga
                   </label>
@@ -111,13 +111,13 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nomor Telepon
                   </label>
@@ -125,13 +125,13 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Email
                   </label>
@@ -139,13 +139,13 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
               </div>
             </div>
-            <div className="w-full border border-black px-5 rounded-md">
-              <h1 className="text-xl font-bold py-5">Isi data pemesan </h1>
+            <div className="w-full px-5 border border-black rounded-md">
+              <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
               <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
                 Data Diri Pemesan
               </div>
@@ -153,7 +153,7 @@ const BookingPage = () => {
                 <div>
                   <label
                     htmlFor="fullName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nama Lengkap
                   </label>
@@ -161,13 +161,13 @@ const BookingPage = () => {
                     type="text"
                     name="fullName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nama Keluarga
                   </label>
@@ -175,13 +175,13 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Nomor Telepon
                   </label>
@@ -189,13 +189,13 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="familyName"
-                    className="text-bnr-primary font-bold"
+                    className="font-bold text-bnr-primary"
                   >
                     Email
                   </label>
@@ -203,26 +203,26 @@ const BookingPage = () => {
                     type="text"
                     name="familyName"
                     id=""
-                    className="border border-bnr-secondary rounded w-full h-10"
+                    className="w-full h-10 border rounded border-bnr-secondary"
                   />
                 </div>
               </div>
             </div>
           </section>
-          <section className="max-w-full h-full md:w-1/2">
+          <section className="h-full max-w-full md:w-1/2">
             <div className="w-full min-h-full">
               <div className="border-b border-bnr-secondary">
                 <h1 className="text-xl font-bold">Detail Penerbangan</h1>
                 <div className="inline-flex justify-between w-full">
                   <p className="text-base font-bold">07.00</p>
-                  <p className="text-bnr-primary text-xs font-bold">
+                  <p className="text-xs font-bold text-bnr-primary">
                     Keberangkatan
                   </p>
                 </div>
                 <p className="text-sm">3 Maret 2023</p>
                 <p className="text-sm">Soekarno Hatta - Terminal 1A Domestik</p>
               </div>
-              <div className="inline-flex gap-2 items-center border-b border-bnr-secondary w-full py-2">
+              <div className="inline-flex items-center w-full gap-2 py-2 border-b border-bnr-secondary">
                 <Image src={Maskapai} alt="maskapai" />
                 <div className="text-sm">
                   <h5 className="font-bold">Jet Air - Economy</h5>
@@ -235,17 +235,17 @@ const BookingPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="border-b border-bnr-secondary py-2">
+              <div className="py-2 border-b border-bnr-secondary">
                 <div className="inline-flex justify-between w-full">
                   <p className="text-base font-bold">11.00</p>
-                  <p className="text-bnr-primary text-xs font-bold">
+                  <p className="text-xs font-bold text-bnr-primary">
                     Kedatangan
                   </p>
                 </div>
                 <p className="text-sm">3 Maret 2023</p>
                 <p className="text-sm">Melbourne International Airport</p>
               </div>
-              <div className="border-b border-bnr-secondary py-2">
+              <div className="py-2 border-b border-bnr-secondary">
                 <h1 className="text-base font-bold">Rincian Harga</h1>
                 <div className="inline-flex justify-between w-full">
                   <p>2 Adults</p>

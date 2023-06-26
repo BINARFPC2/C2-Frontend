@@ -11,6 +11,7 @@ const initialState = {
   message: null,
   modalInput: [],
   seatData: [],
+  total_passenger: null,
   searchFlight: {
     id: "",
     city_from: "",
@@ -126,6 +127,7 @@ export const authSlice = createSlice({
       })
       .addCase(asyncWhoAmI.fulfilled, (state, action) => {
         state.data.push({
+          id: action.payload.id,
           name: action.payload.name,
           email: action.payload.email,
           image: action.payload.image_profile,

@@ -22,6 +22,7 @@ import Loading from "@/assets/images/loading.png"
 
 import Draggable from 'react-draggable';
 import TicketCard from "@/components/Ticket/TicketCard";
+import { getModal } from "@/utils/helper";
 
 const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
   try {
@@ -49,6 +50,8 @@ const TicketPage = () => {
 
   // console.log("dateeeselector", dateDeparture);
   // console.log("dateeeselector", city_from);
+  const inputvalue = getModal();
+  console.log("tessssssss", inputvalue);
   const valueModal = useSelector((state) => state.modal)
 
   console.log("value modal", valueModal);

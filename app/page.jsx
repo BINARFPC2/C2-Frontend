@@ -7,7 +7,6 @@ import { Categories, Favorite, Favorites } from "@/constants";
 import CardFavorite from "@/components/Card/CardFavorite";
 
 export default function Home() {
-
   return (
     <>
       <Navbar />
@@ -24,10 +23,10 @@ export default function Home() {
               className="z-0 w-full h-full" />
           </div>
         </div>
-
-
         <div className="relative z-30 flex justify-center mb-10 sm:-mt-28">
+          {/* <CompProvider> */}
           <FormTicket />
+          {/* </CompProvider> */}
         </div>
         <div className="container flex flex-col md:w-full min-h-fit">
           <h3 className="px-5 mb-4 font-bold text-left md:px-52 sm:mx-32">Destinasi Favorit</h3>

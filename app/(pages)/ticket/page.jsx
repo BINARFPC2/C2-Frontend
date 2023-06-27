@@ -23,6 +23,7 @@ import Loading from "@/assets/images/loading.png"
 import Draggable from 'react-draggable';
 import TicketCard from "@/components/Ticket/TicketCard";
 import { getModal } from "@/utils/helper";
+import TicketTrip from "@/components/Ticket/TicketTrip";
 
 const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
   try {
@@ -38,28 +39,12 @@ const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
 const TicketPage = () => {
   const [value, setValue] = useState()
   const [loading, setLoading] = useState(false)
-
-  // const {
-  //   city_from,
-  //   city_to,
-  //   dateDeparture,
-  //   dateReturn,
-  //   type_seat,
-  //   total_passenger,
-  // } = useSelector((state) => state.search.searchFlight)
-
-  // console.log("dateeeselector", dateDeparture);
-  // console.log("dateeeselector", city_from);
-  const inputvalue = getModal();
-  console.log("tessssssss", inputvalue);
-  const valueModal = useSelector((state) => state.modal)
-
-  console.log("value modal", valueModal);
   const searchFlight = useSearchParams();
   const dateDeparture = searchFlight.get("dateDeparture");
   const city_from = searchFlight.get("city_from");
   const city_to = searchFlight.get("city_to");
   const type_seat = searchFlight.get("type_seat")
+
   const fetchData = async () => {
     const data = await getTicketData(dateDeparture, city_from, city_to, type_seat);
     setValue(data)
@@ -71,7 +56,6 @@ const TicketPage = () => {
     fetchData();
     setLoading(false)
   }, [])
-  console.log(value);
 
   const dateData = [
     { day: 'Senin', date: '27/08/2023' },
@@ -105,14 +89,14 @@ const TicketPage = () => {
     <>
       <Navbar />
       <div className="md:mx-36 max-w-7xl">
-        <div className="ticket-section mx-2">
+        <div className="mx-2 ticket-section">
           <div className="text-heading">
             <h1 className="mt-10 text-xl font-bold leading-8">
               Pilih Penerbangan
             </h1>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4 mt-4 search">
+          <div className="flex flex-col gap-4 mt-4 md:flex-row search">
             <div className="md:w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium leading-6 gap-1">
               <a href="#">
                 <Image
@@ -123,7 +107,7 @@ const TicketPage = () => {
                   alt="" />
               </a>
 
-              <div className="flex gap-1 w-full">
+              <div className="flex w-full gap-1">
                 <div className="text-sm md:text-base">JKT</div>
                 <div className="text-sm md:text-base">&gt;</div>
                 <div className="text-sm md:text-base">MLB</div>
@@ -172,14 +156,10 @@ const TicketPage = () => {
 
         </div>
         <div className="ticket-result">
-          {/*<TicketHabis/>*/}
 
-          {/*isi Loading, TicketHabis, TicketNotFound*/}
-
-
-
-          <div className="flex filter-result mx-auto">
-            <div className="hidden w-full sm:w-1/3 md:block mx-auto">
+          <div className="flex mx-auto filter-result">
+            <div className="hidden w-full mx-auto sm:w-1/3 md:block">
+              <TicketTrip />
               <FilterCard />
             </div>
 
@@ -188,13 +168,13 @@ const TicketPage = () => {
               {loading ? (
                 <>
                   {value?.status !== "Error" ? <TicketCard data={value} /> :
-                    <div className="flex flex-col justify-center items-center">
+                    <div className="flex flex-col items-center justify-center">
                       <Image
                         width={300}
                         height={300}
                         src={NoTicket}
                         alt="sd" />
-                      <div className="text-center pt-10">
+                      <div className="pt-10 text-center">
                         <p>Maaf, Tiket Terjual Habis</p>
                         <p className="text-bnr-primary">Coba cari perjalanan lainnya!</p>
                       </div>
@@ -202,7 +182,7 @@ const TicketPage = () => {
                   }
                 </>
               ) :
-                <div className="animate-pulse transition-all ease-in">
+                <div className="flex flex-col items-center justify-center transition-all ease-in animate-pulse">
                   <Image src={Loading} alt="loading" />
                 </div>
               }

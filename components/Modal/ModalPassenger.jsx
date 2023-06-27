@@ -19,7 +19,7 @@ const ModalPassenger = ({ name, handleChange }) => {
     }
     return (
         <>
-            <input name={name} onClick={openModal} value={resultPassangers?.total} className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary" onChange={handleChange} />
+            <input name={name} onClick={openModal} value={resultPassangers?.total} className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary" onChange={handleChange} autoComplete="off" />
             {showModal ?
                 <InputPassangers onClose={closeModal} name={name} /> : null
             }

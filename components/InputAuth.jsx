@@ -21,7 +21,7 @@ const InputAuth = ({
     setShow(!show);
   };
 
-  const inputType = show ? "text" : type;
+  const inputType = !show ? "text" : type;
 
   return (
     <div className="relative">
@@ -48,15 +48,14 @@ const InputAuth = ({
         onChange={handleChange}
         onBlur={handleBlur}
         value={value}
-        autoComplete="off"
       />
       {type !== "password" ? null : show ? (
-        <FiEye
+        <FiEyeOff
           onClick={handleShow}
           className="absolute text-2xl text-bnr-secondary right-5 top-1/2"
         />
       ) : (
-        <FiEyeOff
+        <FiEye
           onClick={handleShow}
           className="absolute text-2xl text-bnr-secondary right-5 top-1/2"
         />

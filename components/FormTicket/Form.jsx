@@ -8,12 +8,13 @@ import DateSvg from "@/assets/images/date.svg";
 import { FiRepeat } from "react-icons/fi";
 import Modal from "../Modal/Modal";
 // import InputDate from "./InputDate";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addSearchFlight } from "@/store/auth/slice";
 import { handleClientScriptLoad } from "next/script";
 import ModalPassenger from "../Modal/ModalPassenger";
+import { ComponentContext } from "@/context/componentContext";
 
 
 
@@ -22,8 +23,9 @@ const FormTicket = () => {
   const router = useRouter();
   const valueModal = useSelector((state) => state.modal)
   const [values, setValues] = useState(null);
-  const [showReturn, setShowReturn] = useState(false)
-  const [isDoubleClick, setIsDoubleClick] = useState(false);
+  const { handleToggle, showReturn } = useContext(ComponentContext)
+
+  console.log("contexttttttt", showReturn);
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -34,20 +36,6 @@ const FormTicket = () => {
       }
     })
   }
-
-  const handleToggle = () => {
-    if (isDoubleClick) {
-      setShowReturn(!showReturn);
-      setIsDoubleClick(false);
-    } else {
-      setIsDoubleClick(true);
-      setTimeout(() => {
-        setIsDoubleClick(false);
-      }, 300); // 
-    }
-  };
-
-  console.log("===>show return", showReturn);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -141,22 +129,28 @@ const FormTicket = () => {
 
                   </div>
 
-                  <div className="flex items-center w-full ">
+                  <div className="flex items-center w-full">
                     <Image src={ToTwo} className="mt-6 mr-2" alt="fromsvg" />
-                    <div className="relative ml-6 passengers">
+                    <div className="relative w-1/2 ml-6 passengers">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
                       <ModalPassenger name={"passengers"} handleChange={handleChange} />
                     </div>
-                    <div className="ml-4 seat-class">
+                    <div className="w-1/2 ml-4 seat-class">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
                       <div>
-                        <input
-                          type="text"
+                        <select
                           placeholder="Seat"
                           className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
                           name="type_seat"
+                          id="type_seat"
                           onChange={handleChange}
-                        />
+                        >
+                          <option selected disabled></option>
+                          <option defaultValue value="economy">Economy</option>
+                          <option value="premium economy">Premium Economy</option>
+                          <option value="business">Business</option>
+                          <option value="first class">First Class</option>
+                        </select>
                       </div>
                     </div>
                   </div>

@@ -86,7 +86,7 @@ const InputPassangers = ({ onClose, name }) => {
     };
 
     return (
-        <div className="absolute p-5 bg-white">
+        <div className="absolute p-5 bg-white border rounded-xl drop-shadow-md border-bnr-primary">
             <div onClick={onClose} className="inline-flex justify-end w-full text-xl cursor-pointer">
                 <FiX />
             </div>

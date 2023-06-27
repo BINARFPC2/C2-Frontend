@@ -12,23 +12,29 @@ import Link from "next/link";
 
 const TicketCard = ({ data }) => {
   // console.log("dataa ticket", data.data);
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(Array(data?.data?.length).fill(true));
 
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
+  const toggleCollapse = (index) => {
+    setIsCollapsed((prev) => {
+      const updateState = [...prev];
+      updateState[index] = !updateState[index];
+      return updateState
+    })
   };
+
+  console.log("iscollapse", isCollapsed)
 
   console.log("data tesdadasdas", data);
   return (
     <>
-      {data?.data?.map((item) => (
-        <div key={item.id} className="ticket-seacrh flex justify-center w-full">
+      {data?.data?.map((item, index) => (
+        <div key={item.id} className="flex justify-center w-full ticket-seacrh">
           <div className="flex justify-center pb-4">
             <div className="main border-[1px] rounded-lg border-[#D0D0D0] shadow bg-white select-none">
               <div className="w-[657px] h-[127px] border-b-2 border-b-[#D0D0D0] mx-auto">
                 <div
                   className="flex mx-4 my-2.5 justify-between cursor-pointer"
-                  onClick={toggleCollapse}
+                  onClick={() => toggleCollapse(item.id)}
                 >
                   <div className="flex items-center">
                     <Image
@@ -38,16 +44,16 @@ const TicketCard = ({ data }) => {
                       height={24}
                       alt=""
                     />
-                    <span className="font-medium text-xs leading-5 text-center">
+                    <span className="text-xs font-medium leading-5 text-center">
                       {item.airlines}
                     </span>
                     <span className="mx-1 text-center">-</span>
-                    <span className="font-medium text-xs leading-5 text-center">
+                    <span className="text-xs font-medium leading-5 text-center">
                       {item.type_seat}
                     </span>
                   </div>
 
-                  <button type="button" onClick={toggleCollapse}>
+                  <button type="button" onClick={() => toggleCollapse(index)}>
                     <Image
                       className="items-center cursor-pointer"
                       src={IconDrop}
@@ -60,16 +66,14 @@ const TicketCard = ({ data }) => {
 
                 <div className="flex justify-between mx-4 my-auto">
                   <div
-                    className="w-11 my-auto cursor-pointer"
-                    onClick={toggleCollapse}
+                    className="my-auto w-11"
                   >
-                    <div className="font-bold text-sm leading-5">{item.dateTakeoff}</div>
-                    <div className="font-medium text-xs leading-5">{getCode(item.city_from)}</div>
+                    <div className="text-sm font-bold leading-5">{item.dateTakeoff}</div>
+                    <div className="text-xs font-medium leading-5">{getCode(item.city_from)}</div>
                   </div>
 
                   <div
-                    className="w-60 text-center my-auto cursor-pointer"
-                    onClick={toggleCollapse}
+                    className="my-auto text-center w-60"
                   >
                     <div className="font-medium text-xs leading-5 text-[#8A8A8A]">
                       4h 0m
@@ -89,11 +93,10 @@ const TicketCard = ({ data }) => {
                   </div>
 
                   <div
-                    className="w-11 my-auto cursor-pointer"
-                    onClick={toggleCollapse}
+                    className="my-auto w-11"
                   >
-                    <div className="font-bold text-sm leading-5">{item.dateLanding}</div>
-                    <div className="font-medium text-xs leading-5">MLB</div>
+                    <div className="text-sm font-bold leading-5">{item.dateLanding}</div>
+                    <div className="text-xs font-medium leading-5">MLB</div>
                   </div>
 
                   <div
@@ -109,7 +112,7 @@ const TicketCard = ({ data }) => {
                     />
                   </div>
 
-                  <div className="w-52 my-auto">
+                  <div className="my-auto w-52">
                     <div className="flex justify-end font-bold text-base leading-6 text-[#7126B5] pb-1.5">
                       IDR {getMoneyFormat(item.price)}
                     </div>
@@ -123,23 +126,23 @@ const TicketCard = ({ data }) => {
                   </div>
                 </div>
               </div>
-              {!isCollapsed && (
-                <div className="ticket-detail mx-4 my-5">
-                  <div className="detail-headings pb-1">
+              {isCollapsed[item.id] ? (
+                <div className="mx-4 my-5 ticket-detail">
+                  <div className="pb-1 detail-headings">
                     <h1 className="font-bold text-sm leading-5 text-[#4B1979]">
                       Detail Penerbangan
                     </h1>
                   </div>
 
-                  <div className="departure flex justify-between">
+                  <div className="flex justify-between departure">
                     <div className="konten">
-                      <div className="time font-bold text-base leading-6">
+                      <div className="text-base font-bold leading-6 time">
                         07:00
                       </div>
-                      <div className="date font-normal text-sm leading-5">
+                      <div className="text-sm font-normal leading-5 date">
                         3 Maret 2023
                       </div>
-                      <div className="airport font-medium text-sm leading-5">
+                      <div className="text-sm font-medium leading-5 airport">
                         Soekarno Hatta - Terminal 1A Domestik
                       </div>
                     </div>
@@ -150,8 +153,8 @@ const TicketCard = ({ data }) => {
 
                   <div className="line w-[328px] border-b-2 border-b-[#D0D0D0] mx-auto mt-4"></div>
 
-                  <div className="detail-airline flex mt-2">
-                    <div className="logo my-auto">
+                  <div className="flex mt-2 detail-airline">
+                    <div className="my-auto logo">
                       <Image
                         className="items-center mr-2"
                         src={LogoMaskapai}
@@ -162,22 +165,22 @@ const TicketCard = ({ data }) => {
                     </div>
                     <div className="info">
                       <div className="airline">
-                        <div className="name font-bold text-sm leading-5">
+                        <div className="text-sm font-bold leading-5 name">
                           Jet Air - Economy
                         </div>
-                        <div className="type font-bold text-sm leading-5">
+                        <div className="text-sm font-bold leading-5 type">
                           JT - 203
                         </div>
                       </div>
 
-                      <div className="font-bold text-sm leading-5">Informasi</div>
-                      <div className="baggage font-normal text-sm leading-5">
+                      <div className="text-sm font-bold leading-5">Informasi</div>
+                      <div className="text-sm font-normal leading-5 baggage">
                         Baggage 20 kg
                       </div>
-                      <div className="cabin font-normal text-sm leading-5">
+                      <div className="text-sm font-normal leading-5 cabin">
                         Cabin baggage 7 kg
                       </div>
-                      <div className="font-normal text-sm leading-5">
+                      <div className="text-sm font-normal leading-5">
                         In Flight Entertainment
                       </div>
                     </div>
@@ -185,15 +188,15 @@ const TicketCard = ({ data }) => {
 
                   <div className="line w-[328px] border-b-2 border-b-[#D0D0D0] mx-auto mt-4"></div>
 
-                  <div className="arrival flex justify-between">
+                  <div className="flex justify-between arrival">
                     <div className="konten">
-                      <div className="time font-bold text-base leading-6">
+                      <div className="text-base font-bold leading-6 time">
                         11:00
                       </div>
-                      <div className="date font-normal text-sm leading-5">
+                      <div className="text-sm font-normal leading-5 date">
                         3 Maret 2023
                       </div>
-                      <div className="airport font-medium text-sm leading-5">
+                      <div className="text-sm font-medium leading-5 airport">
                         Melbourne International Airport
                       </div>
                     </div>
@@ -202,7 +205,7 @@ const TicketCard = ({ data }) => {
                     </div>
                   </div>
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
         </div>

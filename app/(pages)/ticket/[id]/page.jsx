@@ -11,6 +11,7 @@ import { useParams, useRouter } from "next/navigation";
 import Unauthorized from "@/components/Unauthorized";
 import { input, Form, Formik, useFormik } from "formik";
 import * as Yup from "yup"
+import Link from "next/link";
 
 async function getTicketId(id) {
     const res = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets/${id}`)
@@ -79,7 +80,7 @@ const CheckoutPage = () => {
         fetchTicketDetail()
     }, [id]);
 
-    const initialValue = tes.reduce((acc, _, index) => {
+    const initialValue = dataPassangers.reduce((acc, _, index) => {
         return {
             ...acc,
 
@@ -92,7 +93,7 @@ const CheckoutPage = () => {
     }, {});
 
     const validationSchema = Yup.object().shape(
-        tes.reduce((acc, _, index) => {
+        dataPassangers.reduce((acc, _, index) => {
             return {
                 ...acc,
 
@@ -118,7 +119,7 @@ const CheckoutPage = () => {
     });
 
     const ticketData = {
-        ticketsId: id,
+        departureTicketsId: id,
         passengers: dataPassangers?.map((passenger, index) => ({
             name: value?.[`fullName${index}`],
             email: value?.[`email${index}`],
@@ -132,12 +133,14 @@ const CheckoutPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         postCheckoutTicket(token, ticketData)
+        router.push(`/payment/${ticketData.departureTicketsId}`)
         console.log(value);
     }
 
-    console.log("submittt", isSubmitting);
-    console.log("saveeee", isSaved);
-    console.log("asdfsdfsdf", ticketData);
+    console.log(ticketData.departureTicketsId);
+
+    console.log(isSubmitting);
+
     return (
         <>
             {
@@ -412,7 +415,9 @@ const CheckoutPage = () => {
                                             </div>
                                         </div>
                                         {isSaved ?
-                                            <button type="submit" className="w-full py-3 text-white bg-red-600 rounded-lg drop-shadow-lg">Lanjut Bayar</button> : null
+                                            (
+                                                <button type="submit" className="w-full py-3 text-white bg-red-600 rounded-lg drop-shadow-lg">Lanjut Bayar</button>
+                                            ) : null
                                         }
                                     </form>
                                 </section>

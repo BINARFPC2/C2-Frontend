@@ -9,11 +9,6 @@ import BackArrow from "@/assets/fi_arrow.svg";
 import Navbar from "@/components/Navbar";
 import TicketFilter from "@/components/Ticket/TicketFilter";
 import TicketDetail from "@/components/Ticket/TicketDetail";
-// import TicketCard from "@/components/Ticket/TicketCard";
-// import TicketHabis from "@/components/Ticket/TicketHabis";
-// import TicketNotFound from "@/components/Ticket/TicketNotFound";
-// import TicketLoading from "@/components/Ticket/TicketLoading";
-
 
 import { useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
@@ -24,8 +19,11 @@ import Draggable from 'react-draggable';
 import TicketCard from "@/components/Ticket/TicketCard";
 import { getModal } from "@/utils/helper";
 import TicketTrip from "@/components/Ticket/TicketTrip";
+import { useComponentContext } from "@/app/context/store";
+import ModalTicket from "@/components/Modal/ModalTicket";
 
-const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
+const getTicket = async (dateDeparture, city_from, city_to, type_seat) => {
+  console.log("dattttttt", dateDeparture);
   try {
     const response = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets?dateDeparture=${dateDeparture}&city_from=${city_from}&type_seat=${type_seat}&city_to=${city_to}`);
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -36,26 +34,80 @@ const getTicketData = async (dateDeparture, city_from, city_to, type_seat) => {
     throw error;
   }
 }
+
 const TicketPage = () => {
-  const [value, setValue] = useState()
+  const [value, setValue] = useState();
+  const [isFetchFlight, setIsFetchFlight] = useState(false)
+  const [oneWay, setOneWay] = useState({});
+  const [flightOne, setFlightOne] = useState({
+    id: "",
+    price: "",
+    city_from: "",
+    city_to: ""
+  })
+  const [flightTwo, setFlightTwo] = useState({
+    id: "",
+    city_from: "",
+    city_to: ""
+  })
+  const [twoWay, setTwoWay] = useState("");
+  const [modalTicket, setModalTicket] = useState(false)
   const [loading, setLoading] = useState(false)
   const searchFlight = useSearchParams();
   const dateDeparture = searchFlight.get("dateDeparture");
+  const dateReturn = searchFlight.get("dateReturn");
   const city_from = searchFlight.get("city_from");
   const city_to = searchFlight.get("city_to");
   const type_seat = searchFlight.get("type_seat")
 
-  const fetchData = async () => {
-    const data = await getTicketData(dateDeparture, city_from, city_to, type_seat);
-    setValue(data)
+  const fetchData = async (dateDeparture, city_from, city_to, type_seat) => {
+    setLoading(true)
+    try {
+      const data = await getTicket(dateDeparture, city_from, city_to, type_seat);
+      console.log("datedeparture", data.data);
+      setValue(data)
+    } catch (error) {
+      console.log("error");
+    } finally {
+      setLoading(false)
+    }
   }
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(true);
+  //   }, 2000);
+  //   fetchData(dateDeparture, city_from, city_to, type_seat);
+  //   setLoading(false)
+  // }, [])
+
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(true);
-    }, 2000);
-    fetchData();
+    if (isFetchFlight) {
+      setLoading(true); // Mengatur loading menjadi true saat permintaan data dimulai
+      fetchData(dateReturn, city_to, city_from, type_seat)
+        .then(() => setLoading(false)) // Mengatur loading menjadi false setelah permintaan data selesai
+        .catch((error) => {
+          console.error('An error occurred:', error);
+          // Handle the error accordingly (e.g., show an error message)
+          setLoading(false); // Mengatur loading menjadi false jika terjadi kesalahan
+        });
+    }
+    setIsFetchFlight(false);
+  }, [isFetchFlight]);
+
+  useEffect(() => {
+    setLoading(true);
+    if (flightOne.id === "") {
+      fetchData(dateDeparture, city_from, city_to, type_seat);
+    }
     setLoading(false)
   }, [])
+
+  useEffect(() => {
+    if (flightOne.id === "") {
+      fetchData(dateDeparture, city_from, city_to, type_seat);
+    }
+  }, [flightOne.id, flightTwo.id])
 
   const dateData = [
     { day: 'Senin', date: '27/08/2023' },
@@ -71,22 +123,62 @@ const TicketPage = () => {
   const [containerWidth, setContainerWidth] = useState(0);
   const [maxDragX, setMaxDragX] = useState(0);
 
-  useEffect(() => {
-    const carousel = document.getElementById('carousel');
-    const content = document.getElementById('carousel-content');
+  const { showReturn } = useComponentContext();
 
-    const carouselWidth = carousel.offsetWidth;
-    setContainerWidth(carouselWidth);
+  const handleChoose = (id, city_from, city_to) => {
+    if (flightOne.id === "" && showReturn) {
+      // console.log("id", flightTwo.id);
+      setFlightOne({
+        id: id,
+        city_from: city_from,
+        city_to: city_to
+      }) //fligth 1
+      // fetchData(dateReturn, city_to, city_from, type_seat);
+      setIsFetchFlight(true);
+      // setModalTicket(true)
+      return
+    }
+    if (flightOne.id && flightTwo.id === "" && showReturn) { //fligtht 2
+      console.log(id);
 
-    const contentWidth = content.offsetWidth;
-    setContentWidth(contentWidth);
+      setFlightTwo({
+        id: id,
+        city_from: city_to,
+        city_to: city_from,
+      })
+      setModalTicket(true)
+      return;
+    }
+    if (flightOne.id && flightTwo.id) {
+      setModalTicket(true);
+    }
+    if (flightOne.id === "" && !showReturn) {
+      setFlightOne({
+        id: id
+      })
+      setModalTicket(true)
+    }
+  }
 
-    const maxDragX = contentWidth - carouselWidth;
-    setMaxDragX(maxDragX);
-  }, []);
+  const closeModal = () => {
+    setModalTicket(false);
+    setFlightTwo({
+      id: "",
+      city_from: "",
+      city_to: ""
+    })
+    setFlightOne({
+      id: "",
+      city_from: "",
+      city_to: ""
+    })
+  }
+
+  console.log("valueWayyyy", value);
 
   return (
-    <>
+    <div className={modalTicket ? "fixed" : ""}>
+      {modalTicket && <ModalTicket modal={modalTicket} closeModal={closeModal} data={value} flightOne={flightOne} flightTwo={flightTwo} />}
       <Navbar />
       <div className="md:mx-36 max-w-7xl">
         <div className="mx-2 ticket-section">
@@ -159,38 +251,41 @@ const TicketPage = () => {
 
           <div className="flex mx-auto filter-result">
             <div className="hidden w-full mx-auto sm:w-1/3 md:block">
-              <TicketTrip />
+              {showReturn ?
+                <TicketTrip flightOne={flightOne} flightTwo={flightTwo} /> : null
+              }
               <FilterCard />
             </div>
 
             <div className="justify-center w-full mt-8 search-result w-3/3">
               <TicketFilter />
-              {loading ? (
-                <>
-                  {value?.status !== "Error" ? <TicketCard data={value} /> :
-                    <div className="flex flex-col items-center justify-center">
-                      <Image
-                        width={300}
-                        height={300}
-                        src={NoTicket}
-                        alt="sd" />
-                      <div className="pt-10 text-center">
-                        <p>Maaf, Tiket Terjual Habis</p>
-                        <p className="text-bnr-primary">Coba cari perjalanan lainnya!</p>
-                      </div>
-                    </div>
-                  }
-                </>
-              ) :
+              {loading ?
                 <div className="flex flex-col items-center justify-center transition-all ease-in animate-pulse">
                   <Image src={Loading} alt="loading" />
-                </div>
+                </div> :
+                (
+                  <>
+                    {value?.status !== "Error" ? <TicketCard data={value} handleChoose={handleChoose} /> :
+                      <div className="flex flex-col items-center justify-center">
+                        <Image
+                          width={300}
+                          height={300}
+                          src={NoTicket}
+                          alt="sd" />
+                        <div className="pt-10 text-center">
+                          <p>Maaf, Tiket Terjual Habis</p>
+                          <p className="text-bnr-primary">Coba cari perjalanan lainnya!</p>
+                        </div>
+                      </div>
+                    }
+                  </>
+                )
               }
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

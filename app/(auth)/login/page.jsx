@@ -12,11 +12,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { getToken } from "@/utils/helper";
 
 const LoginPage = () => {
     const [alertMessage, setAlertMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
     const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+    const token = getToken()
 
     const router = useRouter();
     const dispatch = useDispatch();
@@ -28,6 +30,9 @@ const LoginPage = () => {
     };
 
     useEffect(() => {
+        if (token) {
+            router.push("/")
+        }
         if (users.authenticated) {
             localStorage.setItem("token", users.token);
             toast.success(`Welcome ${users.name}`, {
@@ -56,7 +61,7 @@ const LoginPage = () => {
             });
         }
         setSubmitButtonClicked(false);
-    }, [users]);
+    }, [users, token]);
     return (
         <main>
             <ToastContainer

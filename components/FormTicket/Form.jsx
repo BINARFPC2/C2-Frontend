@@ -14,18 +14,15 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addSearchFlight } from "@/store/auth/slice";
 import { handleClientScriptLoad } from "next/script";
 import ModalPassenger from "../Modal/ModalPassenger";
-import { ComponentContext } from "@/context/componentContext";
-
-
+import { useComponentContext } from "@/app/context/store";
 
 const FormTicket = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const valueModal = useSelector((state) => state.modal)
   const [values, setValues] = useState(null);
-  const { handleToggle, showReturn } = useContext(ComponentContext)
 
-  console.log("contexttttttt", showReturn);
+  const { handleToggle, showReturn } = useComponentContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -40,9 +37,15 @@ const FormTicket = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     localStorage.setItem("passengerr", JSON.stringify(valueModal))
-    router.push(`/ticket?dateDeparture=${values?.dateDeparture}&city_from=${values?.city_from}&type_seat=${values?.type_seat}&city_to=${values?.city_to}`)
+    if (showReturn) {
+      router.push(`/ticket?dateDeparture=${values?.dateDeparture}&dateReturn=${values?.dateReturn}&city_from=${values?.city_from}&type_seat=${values?.type_seat}&city_to=${values?.city_to}`)
+    } else {
+      router.push(`/ticket?dateDeparture=${values?.dateDeparture}&city_from=${values?.city_from}&type_seat=${values?.type_seat}&city_to=${values?.city_to}`)
+    }
     console.log(values);
   };
+
+  console.log("showreturn", showReturn);
 
   return (
     <>
@@ -118,8 +121,8 @@ const FormTicket = () => {
                     )}
 
                     <div className="flex button justify-self-end">
-                      <div className="btn-slider" onClick={handleToggle}>
-                        <label className="relative inline-flex items-center cursor-pointer" >
+                      <div className="btn-slider">
+                        <label className="relative inline-flex items-center cursor-pointer" onClick={handleToggle} >
                           <input type="checkbox" value="" className="sr-only peer" />
                           <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-bnr-primary"></div>
                         </label>

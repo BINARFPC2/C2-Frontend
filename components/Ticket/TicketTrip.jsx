@@ -4,7 +4,7 @@ import Box from "@/assets/fi_box.svg";
 import ArrowRight from "@/assets/arrow_right.svg";
 import { MdFlight } from "react-icons/md"
 
-const TicketTrip = () => {
+const TicketTrip = ({ flightOne, flightTwo }) => {
     return (
         <>
             <div className="card-filter w-[268px] rounded-2xl mt-8 shadow-lg border-2 bg-white max-h-full">
@@ -19,8 +19,8 @@ const TicketTrip = () => {
                             <p className="text-xs">
                                 Mon, 26 Jun 2023
                             </p>
-                            <p className="text-sm font-semibold">
-                                Jakarta → Berau
+                            <p className="text-xs font-semibold">
+                                {flightOne.city_from} → {flightOne.city_to}
                             </p>
                         </div>
                     </div>
@@ -30,8 +30,8 @@ const TicketTrip = () => {
                             <p className="text-xs">
                                 Mon, 26 Jun 2023
                             </p>
-                            <p className="text-sm font-semibold">
-                                Jakarta → Berau
+                            <p className="text-xs font-semibold">
+                                {flightTwo.city_from} → {flightTwo.city_to}
                             </p>
                         </div>
                     </div>

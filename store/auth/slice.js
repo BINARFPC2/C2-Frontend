@@ -11,6 +11,7 @@ const initialState = {
   message: null,
   modalInput: [],
   seatData: [],
+  totalPrice: null,
   total_passenger: null,
   searchFlight: {
     id: "",
@@ -141,13 +142,27 @@ export const modalSlice = createSlice({
   initialState,
   reducers: {
     addInput: (state, action) => {
-      state.modalInput.push(action.payload);
+      // state.modalInput.push(action.payload);
+      state.modalInput = [...state.modalInput, action.payload]
+      // state.modalInput = ""
     },
     addInputSeat: (state, action) => {
       state.seatData.push(action.payload);
     },
+    addTotal: (state, action) => {
+      console.log("ini value total price", action.payload);
+      state.totalPrice = action.payload
+    }
   },
 });
+
+// export const totalPriceSlice = createSlice({
+//   name: "totalPrice",
+//   initialState,
+//   reducers: {
+
+//   }
+// })
 
 export const searchSlice = createSlice({
   name: "search",
@@ -168,5 +183,8 @@ export const auth = (state) => state.auth;
 
 export const { unSetAuthUser, setAuthUser } = authSlice.actions;
 
-export const { addInput, addInputSeat } = modalSlice.actions;
+export const { addInput, addInputSeat, addTotal } = modalSlice.actions;
+
+// export const { addTotal } = totalPriceSlice.actions;
+
 export const { addSearchFlight } = searchSlice.actions;

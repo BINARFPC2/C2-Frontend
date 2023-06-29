@@ -6,10 +6,25 @@ export const getMoneyFormat = (number) => {
         .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 
+export const getDateFormat = (originalDate) => {
+    const dateString = originalDate;
+    const date = new Date(dateString);
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString('id-ID', options);
+    return formattedDate
+}
+
 export const getToken = () => {
     if (typeof window !== "undefined") {
         const token = localStorage.getItem("token")
         return token;
+    }
+}
+
+export const getBookingId = () => {
+    if (typeof window !== "undefined") {
+        const ticketId = JSON.parse(localStorage.getItem("booking"))
+        return ticketId;
     }
 }
 
@@ -26,4 +41,40 @@ export const getCode = (value) => {
         i % 2 === 0 && even.push(value[i])
     }
     return even.join("")
+}
+
+export const getDurationFlight = (dateTakeoff, dateLanding) => {
+    const takeoffTime = dateTakeoff;
+    const landingTime = dateLanding;
+
+    // Get current date
+    const currentDate = new Date();
+
+    // Extract hour and minute from the takeoff time
+    const [takeoffHour, takeoffMinute] = takeoffTime.split(":").map(Number);
+
+    // Create new date object for takeoff time
+    const takeoffDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), takeoffHour, takeoffMinute, 0);
+
+    // Format the takeoff date string as "YYYY-MM-DDTHH:MM:SS"
+    const formattedTakeoffDateTime = takeoffDate.toISOString();
+
+    // Extract hour and minute from the landing time
+    const [landingHour, landingMinute] = landingTime.split(":").map(Number);
+
+    // Create new date object for landing time
+    const landingDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), landingHour, landingMinute, 0);
+
+    // Format the landing date string as "YYYY-MM-DDTHH:MM:SS"
+    const formattedLandingDateTime = landingDate.toISOString();
+
+    const takingOffConvert = new Date(formattedTakeoffDateTime);
+    const landingConvert = new Date(formattedLandingDateTime);
+
+    const durationInMilliseconds = landingConvert - takingOffConvert;
+    const durationInMinutes = Math.floor(durationInMilliseconds / 60000);
+    const hours = Math.floor(durationInMinutes / 60);
+    const minutes = durationInMinutes % 60;
+
+    const duration = `${hours} jam ${minutes} menit`;
 }

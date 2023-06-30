@@ -109,15 +109,44 @@ const TicketPage = () => {
     }
   }, [flightOne.id, flightTwo.id])
 
-  const dateData = [
-    { day: 'Senin', date: '27/08/2023' },
-    { day: 'Selasa', date: '27/08/2023' },
-    { day: 'Rabu', date: '27/08/2023' },
-    { day: 'Kamis', date: '27/08/2023' },
-    { day: 'Jumat', date: '27/08/2023' },
-    { day: 'Sabtu', date: '27/08/2023' },
-    { day: 'Minggu', date: '27/08/2023' },
-  ];
+  // const dateData = [
+  //   { day: 'Senin', date: '27/08/2023' },
+  //   { day: 'Selasa', date: '27/08/2023' },
+  //   { day: 'Rabu', date: '27/08/2023' },
+  //   { day: 'Kamis', date: '27/08/2023' },
+  //   { day: 'Jumat', date: '27/08/2023' },
+  //   { day: 'Sabtu', date: '27/08/2023' },
+  //   { day: 'Minggu', date: '27/08/2023' },
+  // ];
+
+
+
+  const newdateDeparture = new Date(dateDeparture);
+  const today = new Date();
+  const dateData = [];
+
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(newdateDeparture);
+    date.setDate(date.getDate() + i);
+    const day = getDayName(date.getDay());
+    const formattedDate = formatDate(date);
+
+    dateData.push({ day, date: formattedDate });
+  }
+
+
+  function getDayName(dayIndex) {
+    const dayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    return dayNames[dayIndex];
+  }
+
+
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
 
   const [contentWidth, setContentWidth] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);

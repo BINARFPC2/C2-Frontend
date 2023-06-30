@@ -21,6 +21,16 @@ import { getModal } from "@/utils/helper";
 import TicketTrip from "@/components/Ticket/TicketTrip";
 import { useComponentContext } from "@/app/context/store";
 import ModalTicket from "@/components/Modal/ModalTicket";
+import FormTicket from "@/components/FormTicket/Form";
+
+
+import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { usePathname, useRouter } from "next/navigation";
+import { addSearchFlight } from "@/store/auth/slice";
+import { handleClientScriptLoad } from "next/script";
+
+
 
 const getTicket = async (dateDeparture, city_from, city_to, type_seat) => {
   console.log("dattttttt", dateDeparture);
@@ -205,6 +215,49 @@ const TicketPage = () => {
 
   console.log("valueWayyyy", value);
 
+
+  const [showForm, setShowForm] = useState(false);
+  const handleOpenForm = () => {
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
+  const handleModalClick = (e) => {
+    // Tutup modal jika di-klik di luar area modal (latar belakang)
+    if (e.target.classList.contains('modal-background')) {
+      handleCloseForm();
+    }
+  };
+
+  const [searchParams, setSearchParams] = useState({
+      dateDeparture: '',
+      dateReturn: '',
+      city_from: '',
+      city_to: '',
+      type_seat: '',
+      passengers: 1,
+    });
+
+    const handleSearch = () => {
+      // Lakukan logika pencarian berdasarkan data yang ada di state searchParams
+      // Misalnya, Anda bisa menggunakan router untuk navigasi ke halaman pencarian dengan parameter yang diperlukan.
+      // Contoh:
+      const searchQuery = `/ticket?dateDeparture=${searchParams.dateDeparture}&dateReturn=${searchParams.dateReturn}&city_from=${searchParams.city_from}&city_to=${searchParams.city_to}&type_seat=${searchParams.type_seat}&passengers=${searchParams.passengers}`;
+      // Lakukan navigasi ke halaman pencarian
+      router.push(searchQuery);
+    };
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setSearchParams((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    };
+
   return (
     <div className={modalTicket ? "fixed" : ""}>
       {modalTicket && <ModalTicket modal={modalTicket} closeModal={closeModal} data={value} flightOne={flightOne} flightTwo={flightTwo} />}
@@ -242,13 +295,12 @@ const TicketPage = () => {
             <div className="hidden button-search md:block">
               <a href="#">
                 {" "}
-                <button className="w-[220px] bg-[#73CA5C] hover:bg-[#67b552] h-[50px] rounded-xl text-white text-base font-bold leading-8">
+                <button className="w-[220px] bg-[#73CA5C] hover:bg-[#67b552] h-[50px] rounded-xl text-white text-base font-bold leading-8" onClick={() => setShowForm(true)}>
                   Ubah Pencarian
                 </button>{" "}
               </a>
             </div>
           </div>
-
 
           <div id="carousel" className="overflow-x-hidden mt-3.5 h-[96px] flex justify-between border-b-2 border-b-[#D0D0D0] content-center self-center my-auto pb-4">
             <Draggable
@@ -275,6 +327,14 @@ const TicketPage = () => {
             </Draggable>
           </div>
 
+          {showForm && (
+            <div className="modal-background fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-lg" onClick={handleModalClick}>
+              <div className="bg-white p-2 rounded-md relative">
+                <FormTicket handleChange={handleChange} handleSearch={handleSearch} searchParams={searchParams} />
+              </div>
+            </div>
+          )}
+
         </div>
         <div className="ticket-result">
 
@@ -283,7 +343,7 @@ const TicketPage = () => {
               {showReturn ?
                 <TicketTrip flightOne={flightOne} flightTwo={flightTwo} /> : null
               }
-              <FilterCard />
+              <FilterCard handleChange={handleChange} handleSearch={handleSearch} searchParams={searchParams}/>
             </div>
 
             <div className="justify-center w-full mt-8 search-result w-3/3">

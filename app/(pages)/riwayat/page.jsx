@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import NavbarLogin from "@/components/NavbarLogin";
@@ -16,16 +16,39 @@ import DetailPemesanan from "@/components/Riwayat/DetailPemesanan"
 import BackArrow from "@/assets/fi_arrow.svg";
 import IconFilter from "@/assets/icon-filter.svg";
 import IconSearch from "@/assets/icon-search.svg";
+import { getToken } from '@/utils/helper';
 
 
-
-
+const getTransaction = async (token) => {
+  try {
+    const res = await fetch("https://c2-backend.up.railway.app/api/v1/transaction", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+    return res.json()
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const HistoryPage = () => {
+  const token = getToken();
+  const [data, setData] = useState()
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const fetchTransaction = async () => {
+    const data = await getTransaction(token);
+    setData(data)
+  }
+
+  useEffect(() => {
+    fetchTransaction()
+  }, [])
+
   return (
     <>
       <NavbarLogin />
@@ -52,55 +75,56 @@ const HistoryPage = () => {
 
             <div className="flex justify-between gap-x-4">
               <div className="items-center my-auto">
-              <button className="flex items-center rounded-2xl w-[90px] font-normal text-base leading-6 border-2 border-[#A06ECE]" onClick={() => setShowModal(true)}>
-                <div className="flex h-8 mx-auto ">
+                <button className="flex items-center rounded-2xl w-[90px] font-normal text-base leading-6 border-2 border-[#A06ECE]" onClick={() => setShowModal(true)}>
+                  <div className="flex h-8 mx-auto ">
                     <Image
-                    className="items-center mr-2.5"
-                    src={IconFilter}
-                    width={17}
-                    height={17}
-                    alt=""
-                  />
-                  <span className="self-center" >Filter</span>
-                </div>
-              </button>
+                      className="items-center mr-2.5"
+                      src={IconFilter}
+                      width={17}
+                      height={17}
+                      alt=""
+                    />
+                    <span className="self-center" >Filter</span>
+                  </div>
+                </button>
+              </div>
+
+              <div className="my-auto" >
+                <Image
+                  className=""
+                  src={IconSearch}
+                  width={24}
+                  height={24}
+                  alt=""
+                />
+              </div>
             </div>
 
-            <div className="my-auto" >
-              <Image
-                className=""
-                src={IconSearch}
-                width={24}
-                height={24}
-                alt=""
-              />
-            </div>
-            </div>
-            
 
           </div>
 
 
         </div>
 
-        {showModal && <ModalSearch showModal={showModal} handleCloseModal={handleCloseModal}/>}
+        {showModal && <ModalSearch showModal={showModal} handleCloseModal={handleCloseModal} />}
 
 
         <div className="main flex flex-col sm:flex-row mx-auto">
 
-          
+
 
           <div className="section-pemesanan w-full sm:w-[518px] mx-auto">
-            
-            <RiwayatBulan/>
+            {data?.data?.map((item, index) => (
+              <RiwayatBulan key={index} />
+            ))}
 
           </div>
 
 
           <div className="section-detail w-full sm:w-[370px] mt-7 mx-auto">
-        
-            <DetailPemesanan/>
-          
+
+            <DetailPemesanan />
+
           </div>
 
 

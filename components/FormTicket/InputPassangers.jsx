@@ -86,7 +86,7 @@ const InputPassangers = ({ onClose, name }) => {
     };
 
     return (
-        <div className="absolute p-5 bg-white border rounded-xl drop-shadow-md border-bnr-primary">
+        <div className="absolute px-5 py-1 bg-white border rounded-xl drop-shadow-md border-bnr-primary">
             <div onClick={onClose} className="inline-flex justify-end w-full text-xl cursor-pointer">
                 <FiX />
             </div>
@@ -106,7 +106,7 @@ const InputPassangers = ({ onClose, name }) => {
                     />
                 </div>
             </div>
-            <div className="flex items-center justify-between py-3 space-x-10 border-b-2">
+            <div className="flex items-center justify-between space-x-10 border-b-2">
                 <div className="flex items-start space-x-4">
                     <Image src={AnakIcon} alt="anak" width={12} height={12} />
                     <div>

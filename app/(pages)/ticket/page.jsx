@@ -114,6 +114,14 @@ const TicketPage = () => {
   }, [])
 
   useEffect(() => {
+    setLoading(true);
+    if (flightOne.id === "") {
+      fetchData(dateDeparture, city_from, city_to, type_seat);
+    }
+    setLoading(false)
+  }, [dateDeparture, city_from, city_to, type_seat])
+
+  useEffect(() => {
     if (flightOne.id === "") {
       fetchData(dateDeparture, city_from, city_to, type_seat);
     }
@@ -233,30 +241,30 @@ const TicketPage = () => {
   };
 
   const [searchParams, setSearchParams] = useState({
-      dateDeparture: '',
-      dateReturn: '',
-      city_from: '',
-      city_to: '',
-      type_seat: '',
-      passengers: 1,
-    });
+    dateDeparture: '',
+    dateReturn: '',
+    city_from: '',
+    city_to: '',
+    type_seat: '',
+    passengers: 1,
+  });
 
-    const handleSearch = () => {
-      // Lakukan logika pencarian berdasarkan data yang ada di state searchParams
-      // Misalnya, Anda bisa menggunakan router untuk navigasi ke halaman pencarian dengan parameter yang diperlukan.
-      // Contoh:
-      const searchQuery = `/ticket?dateDeparture=${searchParams.dateDeparture}&dateReturn=${searchParams.dateReturn}&city_from=${searchParams.city_from}&city_to=${searchParams.city_to}&type_seat=${searchParams.type_seat}&passengers=${searchParams.passengers}`;
-      // Lakukan navigasi ke halaman pencarian
-      router.push(searchQuery);
-    };
+  const handleSearch = () => {
+    // Lakukan logika pencarian berdasarkan data yang ada di state searchParams
+    // Misalnya, Anda bisa menggunakan router untuk navigasi ke halaman pencarian dengan parameter yang diperlukan.
+    // Contoh:
+    const searchQuery = `/ticket?dateDeparture=${searchParams.dateDeparture}&dateReturn=${searchParams.dateReturn}&city_from=${searchParams.city_from}&city_to=${searchParams.city_to}&type_seat=${searchParams.type_seat}&passengers=${searchParams.passengers}`;
+    // Lakukan navigasi ke halaman pencarian
+    router.push(searchQuery);
+  };
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setSearchParams((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSearchParams((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <div className={modalTicket ? "fixed" : ""}>
@@ -343,7 +351,7 @@ const TicketPage = () => {
               {showReturn ?
                 <TicketTrip flightOne={flightOne} flightTwo={flightTwo} /> : null
               }
-              <FilterCard handleChange={handleChange} handleSearch={handleSearch} searchParams={searchParams}/>
+              <FilterCard handleChange={handleChange} handleSearch={handleSearch} searchParams={searchParams} />
             </div>
 
             <div className="justify-center w-full mt-8 search-result w-3/3">

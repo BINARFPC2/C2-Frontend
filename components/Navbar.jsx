@@ -1,7 +1,14 @@
-"use client"
+"use client";
 /* eslint-disable jsx-a11y/alt-text */
 import Image from "next/image";
-import { FiSearch, FiLogIn, FiBell, FiUser, FiList, FiLogOut } from "react-icons/fi";
+import {
+  FiSearch,
+  FiLogIn,
+  FiBell,
+  FiUser,
+  FiList,
+  FiLogOut,
+} from "react-icons/fi";
 import Logo from "@/assets/images/logo-tiketku.svg";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -11,51 +18,54 @@ import { getToken } from "@/utils/helper";
 import { asyncWhoAmI, unSetAuthUser } from "@/store/auth/slice";
 
 const getWhoAmI = async (token) => {
-  const response = await fetch("https://c2-backend.up.railway.app/api/v1/whoami", {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const response = await fetch(
+    "https://c2-backend.up.railway.app/api/v1/whoami",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }
-  })
-  return await response.json()
-}
+  );
+  return await response.json();
+};
 
 const Navbar = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const [open, setOpen] = useState(false)
-  const [data, setData] = useState("")
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState("");
   const userSelect = useSelector((state) => state.auth.data);
   const dispatch = useDispatch();
   const token = getToken();
   const fetch = async () => {
-    const me = await getWhoAmI(token)
-    setData(me)
-  }
+    const me = await getWhoAmI(token);
+    setData(me);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(unSetAuthUser());
-    router.push("/login")
-  }
+    router.push("/login");
+  };
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true);
     if (!token) {
       console.log("error");
     }
     if (token) {
-      fetch()
+      fetch();
       // dispatch(asyncWhoAmI())
     }
-  }, [token])
+  }, [token]);
 
   const handlerOpen = () => {
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   return (
     <div className="relative h-full md:max-w-full">
@@ -69,8 +79,15 @@ const Navbar = () => {
         />
         {mounted && token ? (
           <div className="flex mr-5 space-x-5 text-2xl md:ml-96">
-            <FiList />
-            <FiBell />
+            <Link href={"/riwayat"}>
+              <FiList className="cursor-pointer" />
+            </Link>
+            <Link href={"/notif"}>
+              <div className="relative">
+                <FiBell />
+                <span class="top-0 left-3 absolute  w-3.5 h-3.5 bg-red-600 border-2 border-white dark:border-gray-800 rounded-full"></span>
+              </div>
+            </Link>
             <FiUser onClick={handlerOpen} />
           </div>
         ) : (
@@ -90,21 +107,21 @@ const Navbar = () => {
         open ? (
           <div className="absolute rounded-lg border-2 shadow-lg w-32 transition-all duration-300 ease-in-out bg-white right-20 z-50 -mt-5 drop-shadow-md select-none">
 
-        <Link href="#">
-          <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer p-2 border-b-2 hover:bg-[#9d4edd] hover:text-white">
-            <FiUser className="mr-2"/>
-              Profil
-          </button>
-        </Link>
-          <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer hover:bg-[#9d4edd] hover:text-white" onClick={handleLogout} >
-            <FiLogOut className="mr-2" />
-            Keluar
-          </button>
+            <Link href="#">
+              <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer p-2 border-b-2 hover:bg-[#9d4edd] hover:text-white">
+                <FiUser className="mr-2" />
+                Profil
+              </button>
+            </Link>
+            <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer hover:bg-[#9d4edd] hover:text-white" onClick={handleLogout} >
+              <FiLogOut className="mr-2" />
+              Keluar
+            </button>
           </div>
         ) : null
       }
     </div>
-  )
+  );
 };
 
 export default Navbar;

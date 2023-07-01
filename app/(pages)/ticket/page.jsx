@@ -69,6 +69,11 @@ const TicketPage = () => {
   const city_to = searchFlight.get("city_to");
   const type_seat = searchFlight.get("type_seat");
 
+  const passengers = useSelector((state) => state.modal.modalInput);
+  const index = passengers?.length - 1;
+  const resultPassangers = passengers[index];
+  const totalPassangers = resultPassangers?.total;
+
   const fetchData = async (dateDeparture, city_from, city_to, type_seat) => {
     setLoading(true);
     try {
@@ -113,6 +118,7 @@ const TicketPage = () => {
     setLoading(true);
     if (flightOne.id === "") {
       fetchData(dateDeparture, city_from, city_to, type_seat);
+      setShowForm(false);
     }
     setLoading(false);
   }, []);
@@ -269,42 +275,42 @@ const TicketPage = () => {
       return (
         (options.find((option) => option.label === "Termurah") &&
           item.price ===
-            Math.min(...flightData.map((flight) => flight.price))) ||
+          Math.min(...flightData.map((flight) => flight.price))) ||
         (options.find((option) => option.label === "Terpendek") &&
           item.duration ===
-            Math.min(...flightData.map((flight) => flight.duration))) ||
+          Math.min(...flightData.map((flight) => flight.duration))) ||
         (options.find(
           (option) => option.label === "Paling Awal - Keberangkatan"
         ) &&
           item.departure ===
-            Math.min(
-              ...flightData.map((flight) =>
-                new Date(flight.departure).getTime()
-              )
-            )) ||
+          Math.min(
+            ...flightData.map((flight) =>
+              new Date(flight.departure).getTime()
+            )
+          )) ||
         (options.find(
           (option) => option.label === "Paling Akhir - Keberangkatan"
         ) &&
           item.departure ===
-            Math.max(
-              ...flightData.map((flight) =>
-                new Date(flight.departure).getTime()
-              )
-            )) ||
+          Math.max(
+            ...flightData.map((flight) =>
+              new Date(flight.departure).getTime()
+            )
+          )) ||
         (options.find(
           (option) => option.label === "Paling Awal - Kedatangan"
         ) &&
           item.arrival ===
-            Math.min(
-              ...flightData.map((flight) => new Date(flight.arrival).getTime())
-            )) ||
+          Math.min(
+            ...flightData.map((flight) => new Date(flight.arrival).getTime())
+          )) ||
         (options.find(
           (option) => option.label === "Paling Akhir - Kedatangan"
         ) &&
           item.arrival ===
-            Math.max(
-              ...flightData.map((flight) => new Date(flight.arrival).getTime())
-            )) ||
+          Math.max(
+            ...flightData.map((flight) => new Date(flight.arrival).getTime())
+          )) ||
         true
       );
     });
@@ -334,7 +340,7 @@ const TicketPage = () => {
     router.push(searchQuery);
   };
 
-  const handleFilter = () => {};
+  const handleFilter = () => { };
 
   return (
     <div className={modalTicket ? "fixed" : ""}>
@@ -369,15 +375,22 @@ const TicketPage = () => {
               </a>
 
               <div className="flex w-full gap-1">
-                <div className="text-sm md:text-base">JKT</div>
+                <div className="text-sm md:text-base uppercase">
+                  {city_from}
+                </div>
                 <div className="text-sm md:text-base">&gt;</div>
-                <div className="text-sm md:text-base">MLB</div>
+                <div className="text-sm md:text-base uppercase">{city_to}</div>
                 <div className="text-sm md:text-base">-</div>
                 <div className="text-sm md:text-base">
-                  <span className="text-sm md:text-base">2</span> Penumpang
+                  <span className="text-sm md:text-base">
+                    {totalPassangers}
+                  </span>
+                  <span> Penumpang</span>
                 </div>
                 <div className="text-sm md:text-base">-</div>
-                <div className="text-sm md:text-base">Premium Economy</div>
+                <div className="text-sm md:text-base capitalize">
+                  {type_seat}
+                </div>
               </div>
             </div>
             <div className="hidden button-search md:block">

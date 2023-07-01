@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 
@@ -7,7 +7,12 @@ import IconDrop from "@/assets/icon-drop.svg";
 import LongArrow from "@/assets/icon_long-arrow.svg";
 import IconTime from "@/assets/icon-time.svg";
 import { useState } from "react";
-import { getCode, getMoneyFormat } from "@/utils/helper";
+import {
+  getCode,
+  getMoneyFormat,
+  getFlightDuration,
+  getDateFormat,
+} from "@/utils/helper";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -22,16 +27,16 @@ const TicketCard = ({ data, handleChoose }) => {
     setIsCollapsed((prev) => {
       const updateState = [...prev];
       updateState[index] = !updateState[index];
-      return updateState
-    })
+      return updateState;
+    });
   };
 
   const renderFlightData = (data) => {
     return data?.map((item, index) => (
-      <div key={item.id} className="flex justify-center w-full ticket-seacrh">
-        <div className="flex justify-center pb-4">
+      <div key={item.id} className="ticket-card md:w-full ticket-search mx-2">
+        <div className=" pb-4">
           <div className="main border-[1px] rounded-lg border-[#D0D0D0] shadow bg-white select-none">
-            <div className="w-[657px] h-[127px] border-b-2 border-b-[#D0D0D0] mx-auto">
+            <div className="md:w-[657px] h-[127px] border-b-[#D0D0D0] mx-auto">
               <div
                 className="flex mx-4 my-2.5 justify-between cursor-pointer"
                 onClick={() => toggleCollapse(item.id)}
@@ -65,18 +70,18 @@ const TicketCard = ({ data, handleChoose }) => {
               </div>
 
               <div className="flex justify-between mx-4 my-auto">
-                <div
-                  className="my-auto w-11"
-                >
-                  <div className="text-sm font-bold leading-5">{item.dateTakeoff}</div>
-                  <div className="text-xs font-medium leading-5">{getCode(item.city_from)}</div>
+                <div className="my-auto w-11">
+                  <div className="text-sm font-bold leading-5">
+                    {item.dateTakeoff}
+                  </div>
+                  <div className="text-xs font-medium leading-5">
+                    {getCode(item.city_from)}
+                  </div>
                 </div>
 
-                <div
-                  className="my-auto text-center w-60"
-                >
+                <div className="my-auto text-center w-60">
                   <div className="font-medium text-xs leading-5 text-[#8A8A8A]">
-                    4h 0m
+                    {getFlightDuration(item.dateTakeoff, item.dateLanding)}
                   </div>
                   <div>
                     <Image
@@ -92,11 +97,13 @@ const TicketCard = ({ data, handleChoose }) => {
                   </div>
                 </div>
 
-                <div
-                  className="my-auto w-11"
-                >
-                  <div className="text-sm font-bold leading-5">{item.dateLanding}</div>
-                  <div className="text-xs font-medium leading-5">MLB</div>
+                <div className="my-auto w-11">
+                  <div className="text-sm font-bold leading-5">
+                    {item.dateLanding}
+                  </div>
+                  <div className="text-xs font-medium leading-5">
+                    {getCode(item.city_to)}
+                  </div>
                 </div>
 
                 <div
@@ -117,7 +124,12 @@ const TicketCard = ({ data, handleChoose }) => {
                     IDR {getMoneyFormat(item.price)}
                   </div>
                   <div className="flex justify-end">
-                    <button className="w-[100px] h-[32px] bg-[#4B1979] hover:bg-[#5d2f86] rounded-xl text-white font-medium text-base leading-6" onClick={() => handleChoose(item.id, item.city_from, item.city_to)}>
+                    <button
+                      className="w-[100px] h-[32px] bg-[#4B1979] hover:bg-[#5d2f86] rounded-xl text-white font-medium text-base leading-6"
+                      onClick={() =>
+                        handleChoose(item.id, item.city_from, item.city_to)
+                      }
+                    >
                       Pilih
                     </button>
                   </div>
@@ -135,13 +147,13 @@ const TicketCard = ({ data, handleChoose }) => {
                 <div className="flex justify-between departure">
                   <div className="konten">
                     <div className="text-base font-bold leading-6 time">
-                      07:00
+                      {item.dateTakeoff}
                     </div>
                     <div className="text-sm font-normal leading-5 date">
-                      3 Maret 2023
+                      {getDateFormat(item.dateDeparture)}
                     </div>
                     <div className="text-sm font-medium leading-5 airport">
-                      Soekarno Hatta - Terminal 1A Domestik
+                      {item.airport_from}
                     </div>
                   </div>
                   <div className="text-xs font-bold leading-5 text-[#A06ECE]">
@@ -164,10 +176,10 @@ const TicketCard = ({ data, handleChoose }) => {
                   <div className="info">
                     <div className="airline">
                       <div className="text-sm font-bold leading-5 name">
-                        Jet Air - Economy
+                        {item.airlines} - {item.type_seat}
                       </div>
                       <div className="text-sm font-bold leading-5 type">
-                        JT - 203
+                        {item.code}
                       </div>
                     </div>
 
@@ -189,13 +201,13 @@ const TicketCard = ({ data, handleChoose }) => {
                 <div className="flex justify-between arrival">
                   <div className="konten">
                     <div className="text-base font-bold leading-6 time">
-                      11:00
+                      {item.dateLanding}
                     </div>
                     <div className="text-sm font-normal leading-5 date">
-                      3 Maret 2023
+                      {getDateFormat(item.dateReturn)}
                     </div>
                     <div className="text-sm font-medium leading-5 airport">
-                      Melbourne International Airport
+                      {item.airport_to}
                     </div>
                   </div>
                   <div className="text-xs font-bold leading-5 text-[#A06ECE]">
@@ -210,11 +222,7 @@ const TicketCard = ({ data, handleChoose }) => {
     ));
   };
 
-  return (
-    <>
-      {data && renderFlightData(data.data)}
-    </>
-  );
+  return <>{data && renderFlightData(data.data)}</>;
 };
 
 export default TicketCard;

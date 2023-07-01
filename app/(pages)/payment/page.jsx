@@ -1,20 +1,30 @@
-"use client"
+"use client";
 
 import Navbar from "@/components/Navbar";
 import React, { useEffect, useState } from "react";
 import Maskapai from "@/assets/logo-maskapai.svg";
 import Image from "next/image";
 
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
-import { Disclosure } from '@headlessui/react';
-import { ChevronUpIcon } from '@heroicons/react/20/solid';
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionItem,
+} from "react-headless-accordion";
+import { Disclosure } from "@headlessui/react";
+import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import PaymentOption from "@/assets/payment-options.svg";
 import LogoBRI from "@/assets/Logo_BRI.svg";
 import LogoMandiri from "@/assets/Logo_Mandiri.svg";
 import LogoBCA from "@/assets/Logo_BCA.svg";
 import LogoBNI from "@/assets/Logo_BNI.svg";
 import BreadCrumb from "./[id]/common/BreadCrumb";
-import { getBookingId, getToken, getMoneyFormat, getDateFormat } from "@/utils/helper";
+import {
+  getBookingId,
+  getToken,
+  getMoneyFormat,
+  getDateFormat,
+} from "@/utils/helper";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
@@ -23,17 +33,19 @@ async function postPaymentTicket(token, data) {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
-  })
-  return res.json()
+    body: JSON.stringify(data),
+  });
+  return res.json();
 }
 
 async function getTicketId(bookingId) {
   const ticketPromises = bookingId.map(async (flight) => {
     console.log("get id", flight.id);
-    const res = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets/${flight.id}`);
+    const res = await fetch(
+      `https://c2-backend.up.railway.app/api/v1/tickets/${flight.id}`
+    );
     return res.json();
   });
 
@@ -52,21 +64,21 @@ const PaymentPage = () => {
   const [value, setValue] = useState({});
   const [data, setData] = useState();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const totalPrice = useSelector((state) => state.modal.totalPrice);
   const passengers = useSelector((state) => state.modal.modalInput);
 
-  const index = passengers?.length - 1
+  const index = passengers?.length - 1;
   const resultPassangers = passengers[index].total;
 
   const fetchTicketDetail = async () => {
     const data = await getTicketId(bookingId);
-    setData(data)
-  }
+    setData(data);
+  };
 
   useEffect(() => {
-    fetchTicketDetail()
+    fetchTicketDetail();
   }, []);
 
   const handleChange = (e) => {
@@ -74,10 +86,10 @@ const PaymentPage = () => {
     setValue((prev) => {
       return {
         ...prev,
-        [name]: value
-      }
-    })
-  }
+        [name]: value,
+      };
+    });
+  };
 
   console.log(token);
 
@@ -87,8 +99,8 @@ const PaymentPage = () => {
     cardNumber: value.cardNumber,
     cardHolderName: value.cardHolder,
     cvc: value.cvc,
-    expiration: value.expiration
-  }
+    expiration: value.expiration,
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,14 +108,14 @@ const PaymentPage = () => {
       const response = await postPaymentTicket(token, dataPayment);
       console.log("ressponse", response);
       if (response.status === "Success") {
-        router.push("/payment/success")
+        router.push("/payment/success");
       } else {
         console.log("Payment Failed");
       }
     } catch (error) {
       console.log("An error occurred during payment:", error);
     }
-  }
+  };
   return (
     <>
       <div className="h-full max-w-full">
@@ -125,19 +137,25 @@ const PaymentPage = () => {
                         <Disclosure.Button className="flex w-full justify-between rounded-lg bg-[#3C3C3C] px-4 py-2 text-left text-sm font-medium text-white focus:bg-[#7126B5] focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                           <span>Gopay</span>
                           <ChevronUpIcon
-                            className={`${open ? 'rotate-180 transform' : ''
-                              } h-5 w-5 text-white`}
+                            className={`${
+                              open ? "rotate-180 transform" : ""
+                            } h-5 w-5 text-white`}
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="px-4 pt-2 pb-2 text-sm text-gray-500">
                           <div className="mt-2">
-                            <label className="text-xm leading-6 font-medium text-[#151515]" htmlFor="">Masukkan Nomor Gopay Anda</label>
+                            <label
+                              className="text-xm leading-6 font-medium text-[#151515]"
+                              htmlFor=""
+                            >
+                              Masukkan Nomor Gopay Anda
+                            </label>
                             <input
                               type="text"
                               placeholder="+62 "
                               className="w-full py-2 border-b-2 outline-none border-b-bnr-secondary"
-                            // name="cardHolder"
-                            // onChange={handleChange}
+                              // name="cardHolder"
+                              // onChange={handleChange}
                             />
                           </div>
                         </Disclosure.Panel>
@@ -150,8 +168,9 @@ const PaymentPage = () => {
                         <Disclosure.Button className="flex w-full justify-between rounded-lg bg-[#3C3C3C] px-4 py-2 text-left text-sm font-medium text-white focus:bg-[#7126B5] focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                           <span>Virtual Account</span>
                           <ChevronUpIcon
-                            className={`${open ? 'rotate-180 transform' : ''
-                              } h-5 w-5 text-white`}
+                            className={`${
+                              open ? "rotate-180 transform" : ""
+                            } h-5 w-5 text-white`}
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
@@ -161,7 +180,7 @@ const PaymentPage = () => {
                                 type="radio"
                                 // name="cardHolder"
                                 value="BRI"
-                              // onChange={handleChange}
+                                // onChange={handleChange}
                               />
                               <label for="BRI">
                                 <Image
@@ -170,7 +189,8 @@ const PaymentPage = () => {
                                   width={127}
                                   height={30}
                                   alt=""
-                                /></label>
+                                />
+                              </label>
                             </div>
 
                             <div className="flex mb-4">
@@ -178,7 +198,7 @@ const PaymentPage = () => {
                                 type="radio"
                                 // name="cardHolder"
                                 value="Mandiri"
-                              // onChange={handleChange}
+                                // onChange={handleChange}
                               />
                               <label for="BRI">
                                 <Image
@@ -187,7 +207,8 @@ const PaymentPage = () => {
                                   width={127}
                                   height={30}
                                   alt=""
-                                /></label>
+                                />
+                              </label>
                             </div>
 
                             <div className="flex mb-4">
@@ -195,7 +216,7 @@ const PaymentPage = () => {
                                 type="radio"
                                 // name="cardHolder"
                                 value="BRI"
-                              // onChange={handleChange}
+                                // onChange={handleChange}
                               />
                               <label for="BCA">
                                 <Image
@@ -204,7 +225,8 @@ const PaymentPage = () => {
                                   width={127}
                                   height={30}
                                   alt=""
-                                /></label>
+                                />
+                              </label>
                             </div>
 
                             <div className="flex mb-4">
@@ -212,7 +234,7 @@ const PaymentPage = () => {
                                 type="radio"
                                 // name="cardHolder"
                                 value="BRI"
-                              // onChange={handleChange}
+                                // onChange={handleChange}
                               />
                               <label for="BNI">
                                 <Image
@@ -221,9 +243,9 @@ const PaymentPage = () => {
                                   width={127}
                                   height={20}
                                   alt=""
-                                /></label>
+                                />
+                              </label>
                             </div>
-
                           </div>
                         </Disclosure.Panel>
                       </>
@@ -236,8 +258,9 @@ const PaymentPage = () => {
                           <Disclosure.Button className="flex w-full justify-between rounded-lg bg-[#3C3C3C] px-4 py-2 text-left text-sm font-medium text-white focus:bg-[#7126B5] focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                             <span>Credit Card</span>
                             <ChevronUpIcon
-                              className={`${open ? 'rotate-180 transform' : ''
-                                } h-5 w-5 text-white`}
+                              className={`${
+                                open ? "rotate-180 transform" : ""
+                              } h-5 w-5 text-white`}
                             />
                           </Disclosure.Button>
                           <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
@@ -251,7 +274,12 @@ const PaymentPage = () => {
                               />
                             </div>
                             <div className="mt-4">
-                              <label className="text-xm leading-6 font-medium text-[#151515]" htmlFor="">Card number</label>
+                              <label
+                                className="text-xm leading-6 font-medium text-[#151515]"
+                                htmlFor=""
+                              >
+                                Card number
+                              </label>
                               <input
                                 type="text"
                                 placeholder="4480 0000 0000 0000"
@@ -261,7 +289,12 @@ const PaymentPage = () => {
                               />
 
                               <div className="mt-4">
-                                <label className="text-xm leading-6 font-medium text-[#151515]" htmlFor="">Card holder name</label>
+                                <label
+                                  className="text-xm leading-6 font-medium text-[#151515]"
+                                  htmlFor=""
+                                >
+                                  Card holder name
+                                </label>
                                 <input
                                   type="text"
                                   placeholder="John Doe"
@@ -273,7 +306,12 @@ const PaymentPage = () => {
 
                               <div className="mt-4 flex w-full">
                                 <div className="w-1/2">
-                                  <label className="text-xm leading-6 font-medium text-[#151515]" htmlFor="">CVV</label>
+                                  <label
+                                    className="text-xm leading-6 font-medium text-[#151515]"
+                                    htmlFor=""
+                                  >
+                                    CVV
+                                  </label>
                                   <input
                                     type="number"
                                     placeholder="000"
@@ -284,7 +322,12 @@ const PaymentPage = () => {
                                 </div>
 
                                 <div className="w-1/2 ml-2">
-                                  <label className="text-xm leading-6 font-medium text-[#151515]" htmlFor="">Expiry date</label>
+                                  <label
+                                    className="text-xm leading-6 font-medium text-[#151515]"
+                                    htmlFor=""
+                                  >
+                                    Expiry date
+                                  </label>
                                   <input
                                     type="date"
                                     placeholder="07/24"
@@ -293,63 +336,83 @@ const PaymentPage = () => {
                                     onChange={handleChange}
                                   />
                                 </div>
-
                               </div>
-
                             </div>
                           </Disclosure.Panel>
                         </>
                       )}
                     </Disclosure>
-                    <button type="submit" className="w-full rounded-xl text-white bg-[#7126B5] mt-4 py-2">Bayar</button>
+                    <button
+                      type="submit"
+                      className="w-full rounded-xl text-white bg-[#7126B5] mt-4 py-2"
+                    >
+                      Bayar
+                    </button>
                   </form>
                 </div>
               </div>
-
             </div>
-
           </section>
           <section className="h-full max-w-full md:w-1/2">
             {data?.map((detail, index) => (
-              <div key={index} className="w-full min-h-full shadow-md p-5 rounded-lg border border-bnr-secondary my-5">
+              <div
+                key={index}
+                className="w-full min-h-full shadow-md p-5 rounded-lg border border-bnr-secondary my-5"
+              >
                 <div className="border-b border-bnr-secondary">
-                  <h1 className="text-lg font-bold">Booking Code : <span className="text-[#7126B5]">{detail.data.booking_code}</span> </h1>
+                  <h1 className="text-lg font-bold">
+                    Booking Code :{" "}
+                    <span className="text-[#7126B5]">
+                      {detail.data.booking_code}
+                    </span>{" "}
+                  </h1>
                   <div className="inline-flex justify-between w-full mt-4">
-                    <p className="text-base font-bold">{detail?.data.dateTakeoff}</p>
+                    <p className="text-base font-bold">
+                      {detail?.data.dateTakeoff}
+                    </p>
                     <p className="text-xs font-bold text-bnr-primary">
                       Keberangkatan
                     </p>
                   </div>
-                  <p className="text-sm">{getDateFormat(detail?.data?.dateDeparture)}</p>
+                  <p className="text-sm">
+                    {getDateFormat(detail?.data?.dateDeparture)}
+                  </p>
                   <p className="text-sm">{detail?.data?.airport_from}</p>
                 </div>
                 <div className="inline-flex items-center w-full gap-2 py-2 border-b border-bnr-secondary">
                   <Image src={Maskapai} alt="maskapai" />
                   <div className="text-sm">
-                    <h5 className="font-bold">{detail?.data?.airlines} - {detail?.data?.type_seat}</h5>
+                    <h5 className="font-bold">
+                      {detail?.data?.airlines} - {detail?.data?.type_seat}
+                    </h5>
                     <h5 className="font-bold">{detail?.data?.code}</h5>
                     <div className="mt-5">
                       <h5 className="font-bold">Informasi</h5>
-                      <div className="w-32">
-                        {detail?.data?.information}
-                      </div>
+                      <div className="w-32">{detail?.data?.information}</div>
                     </div>
                   </div>
                 </div>
                 <div className="py-2 border-b border-bnr-secondary">
                   <div className="inline-flex justify-between w-full">
-                    <p className="text-base font-bold">{detail?.data?.dateLanding}</p>
+                    <p className="text-base font-bold">
+                      {detail?.data?.dateLanding}
+                    </p>
                     <p className="text-xs font-bold text-bnr-primary">
                       Kedatangan
                     </p>
                   </div>
-                  <p className="text-sm">{getDateFormat(detail?.data?.dateEnd)}</p>
+                  <p className="text-sm">
+                    {getDateFormat(detail?.data?.dateEnd)}
+                  </p>
                   <p className="text-sm">{detail?.data?.airport_to}</p>
                 </div>
                 <div className="py-2 border-b border-bnr-secondary">
                   <h1 className="text-base font-bold">Rincian</h1>
                   <div className="inline-flex justify-between w-full">
-                    <p>{resultPassangers} {resultPassangers > 1 ? "Passanngers" : "Passanger"}</p>
+                    <p>
+                      {resultPassangers}{" "}
+                      {resultPassangers > 1 ? "Passanngers" : "Passanger"}
+                    </p>
                     {/* <p>IDR 9.550.000</p> */}
                   </div>
                   {/* <div className="inline-flex justify-between w-full">

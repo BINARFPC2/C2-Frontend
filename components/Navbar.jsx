@@ -89,18 +89,6 @@ const Navbar = () => {
               </div>
             </Link>
             <FiUser onClick={handlerOpen} />
-            {open ? (
-              // <div className="absolute w-32 p-2 transition-all duration-300 ease-in-out bg-red-300 right-20 -bottom-10 drop-shadow-md">
-              <button
-                type="button"
-                className="z-40 inline-flex items-center w-full px-3 py-1 text-xl text-white rounded-lg cursor-pointer bg-bnr-primary"
-                onClick={handleLogout}
-              >
-                <FiLogOut />
-                Keluar
-              </button>
-            ) : // </div>
-            null}
           </div>
         ) : (
           <div className="flex mr-4">
@@ -115,6 +103,23 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      {
+        open ? (
+          <div className="absolute rounded-lg border-2 shadow-lg w-32 transition-all duration-300 ease-in-out bg-white right-20 z-50 -mt-5 drop-shadow-md select-none">
+
+            <Link href="#">
+              <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer p-2 border-b-2 hover:bg-[#9d4edd] hover:text-white">
+                <FiUser className="mr-2" />
+                Profil
+              </button>
+            </Link>
+            <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer hover:bg-[#9d4edd] hover:text-white" onClick={handleLogout} >
+              <FiLogOut className="mr-2" />
+              Keluar
+            </button>
+          </div>
+        ) : null
+      }
     </div>
   );
 };

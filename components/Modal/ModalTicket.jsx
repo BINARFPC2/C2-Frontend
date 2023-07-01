@@ -151,12 +151,15 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
   return (
     <div className="relative z-50">
       <div
-        className={`fixed top-0 right-0 h-screen bottom-0 bg-black bg-opacity-50 transition-all ease-in-out duration-700 transform w-full ${
-          modal ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-screen bottom-0 bg-black bg-opacity-50 transition-all ease-in-out duration-700 transform w-full ${modal ? "translate-x-0" : "md:hidden translate-y-full"
+          }`}
       >
-        <div className="w-full h-full px-6 py-4 transition-all duration-500 bg-black bg-opacity-50 rounded-lg"></div>
-        <div className="fixed top-0 bottom-0 right-0 w-1/2 p-8 transition-all duration-700 ease-out bg-white rounded-tl-3xl rounded-bl-3xl">
+        <div className="w-full h-full px-4 py-4 transition-all duration-500 bg-black bg-opacity-50 rounded-lg"></div>
+        <div
+          className={`fixed md:h-screen md:w-1/2 ${modal ? "bottom-0" : "right-0"
+            } right-0 w-full  p-8 transition-all duration-500 ease-out bg-white rounded-tl-3xl rounded-bl-3xl transform ${modal ? "translate-y-0" : "translate-x-full md:translate-y-full"
+            }`}
+        >
           <div
             className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 rounded-md cursor-pointer text-bnr-primary"
             onClick={closeModal}
@@ -241,9 +244,9 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
                       Rp.
                       {getMoneyFormat(
                         totalPassangers *
-                          (dataTes.length > 1
-                            ? item.data.price + item.data.price
-                            : item.data.price)
+                        (dataTes.length > 1
+                          ? item.data.price + item.data.price
+                          : item.data.price)
                       )}
                     </h3>
                   </div>
@@ -252,9 +255,9 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
                     onClick={() =>
                       handleChooseTicket(
                         totalPassangers *
-                          (dataTes.length > 1
-                            ? item.data.price + item.data.price
-                            : item.data.price)
+                        (dataTes.length > 1
+                          ? item.data.price + item.data.price
+                          : item.data.price)
                       )
                     }
                   >

@@ -46,7 +46,6 @@ export const getCode = (value) => {
 export const getDurationFlight = (dateTakeoff, dateLanding) => {
     const takeoffTime = dateTakeoff;
     const landingTime = dateLanding;
-
     // Get current date
     const currentDate = new Date();
 
@@ -78,3 +77,39 @@ export const getDurationFlight = (dateTakeoff, dateLanding) => {
 
     const duration = `${hours} jam ${minutes} menit`;
 }
+
+
+export const getFlightDuration = (dateTakeoff, dateLanding) => {
+  const takeoffTime = dateTakeoff;
+  const landingTime = dateLanding;
+
+  const currentDate = new Date();
+
+
+  const [takeoffHour, takeoffMinute] = takeoffTime.split(":").map(Number);
+
+
+  const takeoffDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), takeoffHour, takeoffMinute, 0);
+
+
+  const formattedTakeoffDateTime = takeoffDate.toISOString();
+
+
+  const [landingHour, landingMinute] = landingTime.split(":").map(Number);
+
+
+  const landingDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), landingHour, landingMinute, 0);
+
+
+  const formattedLandingDateTime = landingDate.toISOString();
+
+  const takingOffConvert = new Date(formattedTakeoffDateTime);
+  const landingConvert = new Date(formattedLandingDateTime);
+
+  const durationInMilliseconds = landingConvert - takingOffConvert;
+  const durationInMinutes = Math.floor(durationInMilliseconds / 60000);
+  const hours = Math.floor(durationInMinutes / 60);
+  const minutes = durationInMinutes % 60;
+  
+  return `${hours} jam ${minutes} menit`;
+};

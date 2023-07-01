@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 
@@ -7,7 +7,12 @@ import IconDrop from "@/assets/icon-drop.svg";
 import LongArrow from "@/assets/icon_long-arrow.svg";
 import IconTime from "@/assets/icon-time.svg";
 import { useState } from "react";
-import { getCode, getMoneyFormat, getFlightDuration, getDateFormat } from "@/utils/helper";
+import {
+  getCode,
+  getMoneyFormat,
+  getFlightDuration,
+  getDateFormat,
+} from "@/utils/helper";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -22,8 +27,8 @@ const TicketCard = ({ data, handleChoose }) => {
     setIsCollapsed((prev) => {
       const updateState = [...prev];
       updateState[index] = !updateState[index];
-      return updateState
-    })
+      return updateState;
+    });
   };
 
   const renderFlightData = (data) => {
@@ -65,18 +70,18 @@ const TicketCard = ({ data, handleChoose }) => {
               </div>
 
               <div className="flex justify-between mx-4 my-auto">
-                <div
-                  className="my-auto w-11"
-                >
-                  <div className="text-sm font-bold leading-5">{item.dateTakeoff}</div>
-                  <div className="text-xs font-medium leading-5">{getCode(item.city_from)}</div>
+                <div className="my-auto w-11">
+                  <div className="text-sm font-bold leading-5">
+                    {item.dateTakeoff}
+                  </div>
+                  <div className="text-xs font-medium leading-5">
+                    {getCode(item.city_from)}
+                  </div>
                 </div>
 
-                <div
-                  className="my-auto text-center w-60"
-                >
+                <div className="my-auto text-center w-60">
                   <div className="font-medium text-xs leading-5 text-[#8A8A8A]">
-                  {getFlightDuration(item.dateTakeoff, item.dateLanding)}
+                    {getFlightDuration(item.dateTakeoff, item.dateLanding)}
                   </div>
                   <div>
                     <Image
@@ -92,11 +97,13 @@ const TicketCard = ({ data, handleChoose }) => {
                   </div>
                 </div>
 
-                <div
-                  className="my-auto w-11"
-                >
-                  <div className="text-sm font-bold leading-5">{item.dateLanding}</div>
-                  <div className="text-xs font-medium leading-5">{getCode(item.city_to)}</div>
+                <div className="my-auto w-11">
+                  <div className="text-sm font-bold leading-5">
+                    {item.dateLanding}
+                  </div>
+                  <div className="text-xs font-medium leading-5">
+                    {getCode(item.city_to)}
+                  </div>
                 </div>
 
                 <div
@@ -117,7 +124,12 @@ const TicketCard = ({ data, handleChoose }) => {
                     IDR {getMoneyFormat(item.price)}
                   </div>
                   <div className="flex justify-end">
-                    <button className="w-[100px] h-[32px] bg-[#4B1979] hover:bg-[#5d2f86] rounded-xl text-white font-medium text-base leading-6" onClick={() => handleChoose(item.id, item.city_from, item.city_to)}>
+                    <button
+                      className="w-[100px] h-[32px] bg-[#4B1979] hover:bg-[#5d2f86] rounded-xl text-white font-medium text-base leading-6"
+                      onClick={() =>
+                        handleChoose(item.id, item.city_from, item.city_to)
+                      }
+                    >
                       Pilih
                     </button>
                   </div>
@@ -210,11 +222,7 @@ const TicketCard = ({ data, handleChoose }) => {
     ));
   };
 
-  return (
-    <>
-      {data && renderFlightData(data.data)}
-    </>
-  );
+  return <>{data && renderFlightData(data.data)}</>;
 };
 
 export default TicketCard;

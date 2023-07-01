@@ -32,6 +32,7 @@ import { handleClientScriptLoad } from "next/script";
 
 
 
+
 const getTicket = async (dateDeparture, city_from, city_to, type_seat) => {
   console.log("dattttttt", dateDeparture);
   try {
@@ -126,17 +127,6 @@ const TicketPage = () => {
       fetchData(dateDeparture, city_from, city_to, type_seat);
     }
   }, [flightOne.id, flightTwo.id])
-
-  // const dateData = [
-  //   { day: 'Senin', date: '27/08/2023' },
-  //   { day: 'Selasa', date: '27/08/2023' },
-  //   { day: 'Rabu', date: '27/08/2023' },
-  //   { day: 'Kamis', date: '27/08/2023' },
-  //   { day: 'Jumat', date: '27/08/2023' },
-  //   { day: 'Sabtu', date: '27/08/2023' },
-  //   { day: 'Minggu', date: '27/08/2023' },
-  // ];
-
 
 
   const newdateDeparture = new Date(dateDeparture);
@@ -234,7 +224,6 @@ const TicketPage = () => {
   };
 
   const handleModalClick = (e) => {
-    // Tutup modal jika di-klik di luar area modal (latar belakang)
     if (e.target.classList.contains('modal-background')) {
       handleCloseForm();
     }
@@ -248,13 +237,9 @@ const TicketPage = () => {
     type_seat: '',
     passengers: 1,
   });
-
+ const router = useRouter();
   const handleSearch = () => {
-    // Lakukan logika pencarian berdasarkan data yang ada di state searchParams
-    // Misalnya, Anda bisa menggunakan router untuk navigasi ke halaman pencarian dengan parameter yang diperlukan.
-    // Contoh:
     const searchQuery = `/ticket?dateDeparture=${searchParams.dateDeparture}&dateReturn=${searchParams.dateReturn}&city_from=${searchParams.city_from}&city_to=${searchParams.city_to}&type_seat=${searchParams.type_seat}&passengers=${searchParams.passengers}`;
-    // Lakukan navigasi ke halaman pencarian
     router.push(searchQuery);
   };
 
@@ -265,6 +250,62 @@ const TicketPage = () => {
       [name]: value,
     }));
   };
+
+// Filter Ticket
+const handleFilterChange = (selectedOptions) => {
+    setOptions(selectedOptions);
+  };
+
+  const handleFilterOptions = () => {
+    const filteredData = flightData.filter((item) => {
+      return (
+        (options.find((option) => option.label === "Termurah") &&
+          item.price === Math.min(...flightData.map((flight) => flight.price))) ||
+        (options.find((option) => option.label === "Terpendek") &&
+          item.duration === Math.min(...flightData.map((flight) => flight.duration))) ||
+        (options.find((option) => option.label === "Paling Awal - Keberangkatan") &&
+          item.departure === Math.min(...flightData.map((flight) => new Date(flight.departure).getTime()))) ||
+        (options.find((option) => option.label === "Paling Akhir - Keberangkatan") &&
+          item.departure === Math.max(...flightData.map((flight) => new Date(flight.departure).getTime()))) ||
+        (options.find((option) => option.label === "Paling Awal - Kedatangan") &&
+          item.arrival === Math.min(...flightData.map((flight) => new Date(flight.arrival).getTime()))) ||
+        (options.find((option) => option.label === "Paling Akhir - Kedatangan") &&
+          item.arrival === Math.max(...flightData.map((flight) => new Date(flight.arrival).getTime()))) ||
+        true
+      );
+    });
+
+    setFilteredFlightData(filteredData);
+  };
+
+
+  //Filter Date
+  const handleDateSelect = (selectedDate) => {
+  setSearchParams((prevSearchParams) => ({
+    ...prevSearchParams,
+    dateDeparture: selectedDate,
+  }));
+
+  handleDateSearch(selectedDate);
+};
+
+const handleDateSearch = (selectedDate) => {
+  const [day, month, year] = selectedDate.split('/');
+  const formattedDate = `${year}/${month}/${day}`;
+
+  setSearchParams((prevSearchParams) => ({
+    ...prevSearchParams,
+    dateDeparture: formattedDate,
+  }));
+  const searchQuery = `/ticket?dateDeparture=${formattedDate}&city_from=${city_from}&city_to=${city_to}&type_seat=${type_seat}`;
+  router.push(searchQuery);
+};
+
+
+const handleFilter = () => {
+
+}
+
 
   return (
     <div className={modalTicket ? "fixed" : ""}>
@@ -316,16 +357,12 @@ const TicketPage = () => {
               bounds={{ left: -maxDragX, right: 0 }}
             >
               <div id="carousel-content" className="flex md:justify-between md:w-full">
-                {dateData.map((button, index) => (
+                {dateData.map((filter, index) => (
                   <React.Fragment key={index}>
-                    <button className="w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
-                      <div className="text-sm font-bold leading-5">
-                        {button.day}
-                      </div>
-                      <div className="font-medium text-xs leading-5 text-[#8A8A8A] hover:text-white active:text-white">
-                        {button.date}
-                      </div>
-                    </button>
+                    <div className="content w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-auto py-2 self-center" onClick={() => handleDateSelect(filter.date)}>
+                      <div className="font-bold leading-5 text-sm">{filter.day}</div>
+                      <div className="w-full font-medium text-xs leading-5">{filter.date}</div>
+                    </div>
                     {index !== dateData.length - 1 && (
                       <div className="garis w-[1px] h-6 bg-[#D0D0D0] self-center"></div>
                     )}
@@ -351,11 +388,11 @@ const TicketPage = () => {
               {showReturn ?
                 <TicketTrip flightOne={flightOne} flightTwo={flightTwo} /> : null
               }
-              <FilterCard handleChange={handleChange} handleSearch={handleSearch} searchParams={searchParams} />
+              <FilterCard handleChange={handleChange} handleSearch={handleSearch} searchParams={searchParams} handleFilter={handleFilter} />
             </div>
 
             <div className="justify-center w-full mt-8 search-result w-3/3">
-              <TicketFilter />
+            <TicketFilter />
               {loading ?
                 <div className="flex flex-col items-center justify-center transition-all ease-in animate-pulse">
                   <Image src={Loading} alt="loading" />

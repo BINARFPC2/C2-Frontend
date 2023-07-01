@@ -16,11 +16,15 @@ import { handleClientScriptLoad } from "next/script";
 import ModalPassenger from "../Modal/ModalPassenger";
 import { useComponentContext } from "@/app/context/store";
 
+
+import Select from "react-select";
+
 const FormTicket = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const valueModal = useSelector((state) => state.modal)
   const [values, setValues] = useState(null);
+
 
   const { handleToggle, showReturn } = useComponentContext();
 
@@ -37,6 +41,7 @@ const FormTicket = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     localStorage.setItem("passengerr", JSON.stringify(valueModal))
+    // const { dateDeparture, dateReturn, city_from, type_seat, city_to } = values;
     if (showReturn) {
       router.push(`/ticket?dateDeparture=${values?.dateDeparture}&dateReturn=${values?.dateReturn}&city_from=${values?.city_from}&type_seat=${values?.type_seat}&city_to=${values?.city_to}`)
     } else {
@@ -46,6 +51,41 @@ const FormTicket = () => {
   };
 
   console.log("showreturn", showReturn);
+
+// Date
+
+
+// Seat
+const options = [
+    { value: "economy", label: "Economy" },
+    { value: "premium economy", label: "Premium Economy" },
+    { value: "business", label: "Business" },
+    { value: "first class", label: "First Class" },
+  ];
+  const [selected, setSelected] = useState(null);
+
+  const handleSelect = (selectedOption, { name }) => {
+   setSelected(selectedOption);
+   handleChange({ target: { name, value: selectedOption.value } });
+ };
+
+ const customStyles = {
+    option: (defaultStyles, state) => ({
+      ...defaultStyles,
+      color: state.isSelected ? "#fff" : state.isFocused ? "white" : "black",
+      backgroundColor: state.isSelected ? "#7400b8" : state.isFocused ? "#9d4edd" : "#fff",
+      fontSize:  "16px"
+    }),
+
+    control: (defaultStyles) => ({
+      ...defaultStyles,
+      backgroundColor: "#fff",
+      padding: "5px",
+      border: "none",
+      boxShadow: "none",
+    }),
+    singleValue: (defaultStyles) => ({ ...defaultStyles, color: "black" }),
+  };
 
   return (
     <>
@@ -94,29 +134,33 @@ const FormTicket = () => {
 
                 <div className="flex flex-col items-center justify-between w-full gap-2 py-2 md:flex-row">
                   <div className="flex w-full pilih-tanggal">
-                    <Image src={DateSvg} className="mt-6 mr-2" alt="fromsvg" />
+                    <Image src={DateSvg} className="mt-6 mr-4" alt="fromsvg" />
 
-                    <div className="w-1/2 departure">
+                    <div className="departure border-b-2">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Departure</label>
+                      <div className="mt-2">
                       <input
                         type="date"
                         placeholder="Input Tanggal"
-                        className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                        className="md:w-[160px] w-[100px] py-3 border-b-2 outline-none border-b-bnr-secondary"
                         name="dateDeparture"
                         onChange={handleChange}
                       />
+                      </div>
                     </div>
 
                     {showReturn && (
-                      <div className="w-1/2 ml-4 return">
+                      <div className="ml-4 return">
                         <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
+                        <div className="mt-2">
                         <input
                           type="date"
-                          placeholder="To"
-                          className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
+                          placeholder="Input Tanggal"
+                          className="md:w-[160px] w-[100px] py-3 border-b-2 outline-none border-b-bnr-secondary"
                           name="dateReturn"
                           onChange={handleChange}
                         />
+                        </div>
                       </div>
                     )}
 
@@ -138,22 +182,14 @@ const FormTicket = () => {
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
                       <ModalPassenger name={"passengers"} handleChange={handleChange} />
                     </div>
-                    <div className="w-1/2 ml-4 seat-class">
+                    <div className="w-1/2 ml-4 seat-class border-b-2 border-b-bnr-secondary">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
                       <div>
-                        <select
-                          placeholder="Seat"
-                          className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary"
-                          name="type_seat"
-                          id="type_seat"
-                          onChange={handleChange}
-                        >
-                          <option selected disabled></option>
-                          <option defaultValue value="economy">Economy</option>
-                          <option value="premium economy">Premium Economy</option>
-                          <option value="business">Business</option>
-                          <option value="first class">First Class</option>
-                        </select>
+                      <div className="select">
+                        <div className="m-auto w-50 ">
+                          <Select options={options} onChange={(selectedOption) => handleSelect(selectedOption, { name: "type_seat" })} value={selected} autoFocus={true} styles={customStyles}  />
+                        </div>
+                      </div>
                       </div>
                     </div>
                   </div>

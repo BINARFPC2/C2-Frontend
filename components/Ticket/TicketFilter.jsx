@@ -27,7 +27,6 @@ const TicketFilter = () => {
     { id: 4, isChecked: false, filter: "Keberangkatan", label: "Paling Akhir" },
     { id: 5, isChecked: false, filter: "Kedatangan", label: "Paling Awal" },
     { id: 6, isChecked: false, filter: "Kedatangan", label: "Paling Akhir" },
-    // Tambahkan elemen 1lain sesuai kebutuhan
   ]);
 
   const handleCheckboxChange = (id) => {
@@ -55,6 +54,7 @@ const TicketFilter = () => {
   };
 
   console.log("selected options", selectedOptions);
+
 
   return (
     <>

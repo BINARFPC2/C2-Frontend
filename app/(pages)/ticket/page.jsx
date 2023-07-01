@@ -12,10 +12,10 @@ import TicketDetail from "@/components/Ticket/TicketDetail";
 
 import { useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
-import NoTicket from "@/assets/images/noTicketImage.png"
-import Loading from "@/assets/images/loading.png"
+import NoTicket from "@/assets/images/noTicketImage.png";
+import Loading from "@/assets/images/loading.png";
 
-import Draggable from 'react-draggable';
+import Draggable from "react-draggable";
 import TicketCard from "@/components/Ticket/TicketCard";
 import { getModal } from "@/utils/helper";
 import TicketTrip from "@/components/Ticket/TicketTrip";
@@ -23,65 +23,74 @@ import { useComponentContext } from "@/app/context/store";
 import ModalTicket from "@/components/Modal/ModalTicket";
 import FormTicket from "@/components/FormTicket/Form";
 
-
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { usePathname, useRouter } from "next/navigation";
 import { addSearchFlight } from "@/store/auth/slice";
 import { handleClientScriptLoad } from "next/script";
 
-
-
 const getTicket = async (dateDeparture, city_from, city_to, type_seat) => {
   console.log("dattttttt", dateDeparture);
   try {
-    const response = await fetch(`https://c2-backend.up.railway.app/api/v1/tickets?dateDeparture=${dateDeparture}&city_from=${city_from}&type_seat=${type_seat}&city_to=${city_to}`);
+    const response = await fetch(
+      `https://c2-backend.up.railway.app/api/v1/tickets?dateDeparture=${dateDeparture}&city_from=${city_from}&type_seat=${type_seat}&city_to=${city_to}`
+    );
     await new Promise((resolve) => setTimeout(resolve, 2000));
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error("An error occurred:", error);
     throw error;
   }
-}
+};
 
 const TicketPage = () => {
   const [value, setValue] = useState();
-  const [isFetchFlight, setIsFetchFlight] = useState(false)
+  const [isFetchFlight, setIsFetchFlight] = useState(false);
   const [oneWay, setOneWay] = useState({});
   const [flightOne, setFlightOne] = useState({
     id: "",
     price: "",
     city_from: "",
-    city_to: ""
-  })
+    city_to: "",
+  });
   const [flightTwo, setFlightTwo] = useState({
     id: "",
     city_from: "",
-    city_to: ""
-  })
+    city_to: "",
+  });
   const [twoWay, setTwoWay] = useState("");
-  const [modalTicket, setModalTicket] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [modalTicket, setModalTicket] = useState(false);
+  const [loading, setLoading] = useState(false);
   const searchFlight = useSearchParams();
   const dateDeparture = searchFlight.get("dateDeparture");
   const dateReturn = searchFlight.get("dateReturn");
   const city_from = searchFlight.get("city_from");
   const city_to = searchFlight.get("city_to");
-  const type_seat = searchFlight.get("type_seat")
+  const type_seat = searchFlight.get("type_seat");
+
+  const passengers = useSelector((state) => state.modal.modalInput);
+  const index = passengers?.length - 1;
+  const resultPassangers = passengers[index];
+  const totalPassangers = resultPassangers?.total;
 
   const fetchData = async (dateDeparture, city_from, city_to, type_seat) => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const data = await getTicket(dateDeparture, city_from, city_to, type_seat);
+      const data = await getTicket(
+        dateDeparture,
+        city_from,
+        city_to,
+        type_seat
+      );
       console.log("datedeparture", data.data);
-      setValue(data)
+      setValue(data);
     } catch (error) {
       console.log("error");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   // useEffect(() => {
   //   setTimeout(() => {
@@ -97,7 +106,7 @@ const TicketPage = () => {
       fetchData(dateReturn, city_to, city_from, type_seat)
         .then(() => setLoading(false)) // Mengatur loading menjadi false setelah permintaan data selesai
         .catch((error) => {
-          console.error('An error occurred:', error);
+          console.error("An error occurred:", error);
           // Handle the error accordingly (e.g., show an error message)
           setLoading(false); // Mengatur loading menjadi false jika terjadi kesalahan
         });
@@ -109,23 +118,24 @@ const TicketPage = () => {
     setLoading(true);
     if (flightOne.id === "") {
       fetchData(dateDeparture, city_from, city_to, type_seat);
+      setShowForm(false);
     }
-    setLoading(false)
-  }, [])
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
     if (flightOne.id === "") {
       fetchData(dateDeparture, city_from, city_to, type_seat);
     }
-    setLoading(false)
-  }, [dateDeparture, city_from, city_to, type_seat])
+    setLoading(false);
+  }, [dateDeparture, city_from, city_to, type_seat]);
 
   useEffect(() => {
     if (flightOne.id === "") {
       fetchData(dateDeparture, city_from, city_to, type_seat);
     }
-  }, [flightOne.id, flightTwo.id])
+  }, [flightOne.id, flightTwo.id]);
 
   // const dateData = [
   //   { day: 'Senin', date: '27/08/2023' },
@@ -136,8 +146,6 @@ const TicketPage = () => {
   //   { day: 'Sabtu', date: '27/08/2023' },
   //   { day: 'Minggu', date: '27/08/2023' },
   // ];
-
-
 
   const newdateDeparture = new Date(dateDeparture);
   const today = new Date();
@@ -152,16 +160,22 @@ const TicketPage = () => {
     dateData.push({ day, date: formattedDate });
   }
 
-
   function getDayName(dayIndex) {
-    const dayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const dayNames = [
+      "Minggu",
+      "Senin",
+      "Selasa",
+      "Rabu",
+      "Kamis",
+      "Jumat",
+      "Sabtu",
+    ];
     return dayNames[dayIndex];
   }
 
-
   function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   }
@@ -178,22 +192,23 @@ const TicketPage = () => {
       setFlightOne({
         id: id,
         city_from: city_from,
-        city_to: city_to
-      }) //fligth 1
+        city_to: city_to,
+      }); //fligth 1
       // fetchData(dateReturn, city_to, city_from, type_seat);
       setIsFetchFlight(true);
       // setModalTicket(true)
-      return
+      return;
     }
-    if (flightOne.id && flightTwo.id === "" && showReturn) { //fligtht 2
+    if (flightOne.id && flightTwo.id === "" && showReturn) {
+      //fligtht 2
       console.log(id);
 
       setFlightTwo({
         id: id,
         city_from: city_to,
         city_to: city_from,
-      })
-      setModalTicket(true)
+      });
+      setModalTicket(true);
       return;
     }
     if (flightOne.id && flightTwo.id) {
@@ -201,28 +216,27 @@ const TicketPage = () => {
     }
     if (flightOne.id === "" && !showReturn) {
       setFlightOne({
-        id: id
-      })
-      setModalTicket(true)
+        id: id,
+      });
+      setModalTicket(true);
     }
-  }
+  };
 
   const closeModal = () => {
     setModalTicket(false);
     setFlightTwo({
       id: "",
       city_from: "",
-      city_to: ""
-    })
+      city_to: "",
+    });
     setFlightOne({
       id: "",
       city_from: "",
-      city_to: ""
-    })
-  }
+      city_to: "",
+    });
+  };
 
   console.log("valueWayyyy", value);
-
 
   const [showForm, setShowForm] = useState(false);
   const handleOpenForm = () => {
@@ -235,17 +249,17 @@ const TicketPage = () => {
 
   const handleModalClick = (e) => {
     // Tutup modal jika di-klik di luar area modal (latar belakang)
-    if (e.target.classList.contains('modal-background')) {
+    if (e.target.classList.contains("modal-background")) {
       handleCloseForm();
     }
   };
 
   const [searchParams, setSearchParams] = useState({
-    dateDeparture: '',
-    dateReturn: '',
-    city_from: '',
-    city_to: '',
-    type_seat: '',
+    dateDeparture: "",
+    dateReturn: "",
+    city_from: "",
+    city_to: "",
+    type_seat: "",
     passengers: 1,
   });
 
@@ -268,7 +282,15 @@ const TicketPage = () => {
 
   return (
     <div className={modalTicket ? "fixed" : ""}>
-      {modalTicket && <ModalTicket modal={modalTicket} closeModal={closeModal} data={value} flightOne={flightOne} flightTwo={flightTwo} />}
+      {modalTicket && (
+        <ModalTicket
+          modal={modalTicket}
+          closeModal={closeModal}
+          data={value}
+          flightOne={flightOne}
+          flightTwo={flightTwo}
+        />
+      )}
       <Navbar />
       <div className="md:mx-36 max-w-7xl">
         <div className="mx-2 ticket-section">
@@ -286,36 +308,51 @@ const TicketPage = () => {
                   src={BackArrow}
                   width={24}
                   height={24}
-                  alt="" />
+                  alt=""
+                />
               </a>
 
               <div className="flex w-full gap-1">
-                <div className="text-sm md:text-base">JKT</div>
+                <div className="text-sm md:text-base uppercase">
+                  {city_from}
+                </div>
                 <div className="text-sm md:text-base">&gt;</div>
-                <div className="text-sm md:text-base">MLB</div>
+                <div className="text-sm md:text-base uppercase">{city_to}</div>
                 <div className="text-sm md:text-base">-</div>
-                <div className="text-sm md:text-base"><span className="text-sm md:text-base">2</span> Penumpang</div>
+                <div className="text-sm md:text-base">
+                  <span className="text-sm md:text-base">
+                    {totalPassangers}
+                  </span>
+                  <span> Penumpang</span>
+                </div>
                 <div className="text-sm md:text-base">-</div>
-                <div className="text-sm md:text-base">Premium Economy</div>
+                <div className="text-sm md:text-base capitalize">
+                  {type_seat}
+                </div>
               </div>
-
             </div>
             <div className="hidden button-search md:block">
               <a href="#">
                 {" "}
-                <button className="w-[220px] bg-[#73CA5C] hover:bg-[#67b552] h-[50px] rounded-xl text-white text-base font-bold leading-8" onClick={() => setShowForm(true)}>
+                <button
+                  className="w-[220px] bg-[#73CA5C] hover:bg-[#67b552] h-[50px] rounded-xl text-white text-base font-bold leading-8"
+                  onClick={() => setShowForm(true)}
+                >
                   Ubah Pencarian
                 </button>{" "}
               </a>
             </div>
           </div>
 
-          <div id="carousel" className="overflow-x-hidden mt-3.5 h-[96px] flex justify-between border-b-2 border-b-[#D0D0D0] content-center self-center my-auto pb-4">
-            <Draggable
-              axis="x"
-              bounds={{ left: -maxDragX, right: 0 }}
-            >
-              <div id="carousel-content" className="flex md:justify-between md:w-full">
+          <div
+            id="carousel"
+            className="overflow-x-hidden mt-3.5 h-[96px] flex justify-between border-b-2 border-b-[#D0D0D0] content-center self-center my-auto pb-4"
+          >
+            <Draggable axis="x" bounds={{ left: -maxDragX, right: 0 }}>
+              <div
+                id="carousel-content"
+                className="flex md:justify-between md:w-full"
+              >
                 {dateData.map((button, index) => (
                   <React.Fragment key={index}>
                     <button className="w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-2 py-2 self-center">
@@ -336,54 +373,62 @@ const TicketPage = () => {
           </div>
 
           {showForm && (
-            <div className="modal-background fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-lg" onClick={handleModalClick}>
+            <div
+              className="modal-background fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-lg"
+              onClick={handleModalClick}
+            >
               <div className="bg-white p-2 rounded-md relative">
-                <FormTicket handleChange={handleChange} handleSearch={handleSearch} searchParams={searchParams} />
+                <FormTicket
+                  handleChange={handleChange}
+                  handleSearch={handleSearch}
+                  searchParams={searchParams}
+                />
               </div>
             </div>
           )}
-
         </div>
         <div className="ticket-result">
-
           <div className="flex mx-auto filter-result">
             <div className="hidden w-full mx-auto sm:w-1/3 md:block">
-              {showReturn ?
-                <TicketTrip flightOne={flightOne} flightTwo={flightTwo} /> : null
-              }
-              <FilterCard handleChange={handleChange} handleSearch={handleSearch} searchParams={searchParams} />
+              {showReturn ? (
+                <TicketTrip flightOne={flightOne} flightTwo={flightTwo} />
+              ) : null}
+              <FilterCard
+                handleChange={handleChange}
+                handleSearch={handleSearch}
+                searchParams={searchParams}
+              />
             </div>
 
             <div className="justify-center w-full mt-8 search-result w-3/3">
               <TicketFilter />
-              {loading ?
+              {loading ? (
                 <div className="flex flex-col items-center justify-center transition-all ease-in animate-pulse">
                   <Image src={Loading} alt="loading" />
-                </div> :
-                (
-                  <>
-                    {value?.status !== "Error" ? <TicketCard data={value} handleChoose={handleChoose} /> :
-                      <div className="flex flex-col items-center justify-center">
-                        <Image
-                          width={300}
-                          height={300}
-                          src={NoTicket}
-                          alt="sd" />
-                        <div className="pt-10 text-center">
-                          <p>Maaf, Tiket Terjual Habis</p>
-                          <p className="text-bnr-primary">Coba cari perjalanan lainnya!</p>
-                        </div>
+                </div>
+              ) : (
+                <>
+                  {value?.status !== "Error" ? (
+                    <TicketCard data={value} handleChoose={handleChoose} />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center">
+                      <Image width={300} height={300} src={NoTicket} alt="sd" />
+                      <div className="pt-10 text-center">
+                        <p>Maaf, Tiket Terjual Habis</p>
+                        <p className="text-bnr-primary">
+                          Coba cari perjalanan lainnya!
+                        </p>
                       </div>
-                    }
-                  </>
-                )
-              }
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default TicketPage;

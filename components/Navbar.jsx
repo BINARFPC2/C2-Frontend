@@ -1,7 +1,14 @@
-"use client"
+"use client";
 /* eslint-disable jsx-a11y/alt-text */
 import Image from "next/image";
-import { FiSearch, FiLogIn, FiBell, FiUser, FiList, FiLogOut } from "react-icons/fi";
+import {
+  FiSearch,
+  FiLogIn,
+  FiBell,
+  FiUser,
+  FiList,
+  FiLogOut,
+} from "react-icons/fi";
 import Logo from "@/assets/images/logo-tiketku.svg";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -11,51 +18,54 @@ import { getToken } from "@/utils/helper";
 import { asyncWhoAmI, unSetAuthUser } from "@/store/auth/slice";
 
 const getWhoAmI = async (token) => {
-  const response = await fetch("https://c2-backend.up.railway.app/api/v1/whoami", {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const response = await fetch(
+    "https://c2-backend.up.railway.app/api/v1/whoami",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }
-  })
-  return await response.json()
-}
+  );
+  return await response.json();
+};
 
 const Navbar = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const [open, setOpen] = useState(false)
-  const [data, setData] = useState("")
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState("");
   const userSelect = useSelector((state) => state.auth.data);
   const dispatch = useDispatch();
   const token = getToken();
   const fetch = async () => {
-    const me = await getWhoAmI(token)
-    setData(me)
-  }
+    const me = await getWhoAmI(token);
+    setData(me);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(unSetAuthUser());
-    router.push("/login")
-  }
+    router.push("/login");
+  };
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true);
     if (!token) {
       console.log("error");
     }
     if (token) {
-      fetch()
+      fetch();
       // dispatch(asyncWhoAmI())
     }
-  }, [token])
+  }, [token]);
 
   const handlerOpen = () => {
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   return (
     <div className="relative h-full md:max-w-full">
@@ -72,19 +82,25 @@ const Navbar = () => {
             <Link href={"/riwayat"}>
               <FiList className="cursor-pointer" />
             </Link>
-            <FiBell />
+            <Link href={"/notif"}>
+              <div className="relative">
+                <FiBell />
+                <span class="top-0 left-3 absolute  w-3.5 h-3.5 bg-red-600 border-2 border-white dark:border-gray-800 rounded-full"></span>
+              </div>
+            </Link>
             <FiUser onClick={handlerOpen} />
-            {
-              open ? (
-                // <div className="absolute w-32 p-2 transition-all duration-300 ease-in-out bg-red-300 right-20 -bottom-10 drop-shadow-md">
-                <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl text-white rounded-lg cursor-pointer bg-bnr-primary" onClick={handleLogout} >
-                  <FiLogOut />
-                  Keluar
-                </button>
-                // </div>
-              ) : null
-            }
-
+            {open ? (
+              // <div className="absolute w-32 p-2 transition-all duration-300 ease-in-out bg-red-300 right-20 -bottom-10 drop-shadow-md">
+              <button
+                type="button"
+                className="z-40 inline-flex items-center w-full px-3 py-1 text-xl text-white rounded-lg cursor-pointer bg-bnr-primary"
+                onClick={handleLogout}
+              >
+                <FiLogOut />
+                Keluar
+              </button>
+            ) : // </div>
+            null}
           </div>
         ) : (
           <div className="flex mr-4">
@@ -100,7 +116,7 @@ const Navbar = () => {
         )}
       </div>
     </div>
-  )
+  );
 };
 
 export default Navbar;

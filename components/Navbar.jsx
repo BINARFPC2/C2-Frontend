@@ -69,7 +69,9 @@ const Navbar = () => {
         />
         {mounted && token ? (
           <div className="flex mr-5 space-x-5 text-2xl md:ml-96">
-            <FiList />
+            <Link href={"/riwayat"}>
+              <FiList className="cursor-pointer" />
+            </Link>
             <FiBell />
             <FiUser onClick={handlerOpen} />
             {

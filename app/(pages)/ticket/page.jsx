@@ -109,6 +109,7 @@ const TicketPage = () => {
     setLoading(true);
     if (flightOne.id === "") {
       fetchData(dateDeparture, city_from, city_to, type_seat);
+      setShowForm(false)
     }
     setLoading(false)
   }, [])

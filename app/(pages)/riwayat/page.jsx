@@ -16,7 +16,7 @@ import DetailPemesanan from "@/components/Riwayat/DetailPemesanan"
 import BackArrow from "@/assets/fi_arrow.svg";
 import IconFilter from "@/assets/icon-filter.svg";
 import IconSearch from "@/assets/icon-search.svg";
-import { getToken } from '@/utils/helper';
+import { getDateFormat, getToken } from '@/utils/helper';
 
 
 const getTransaction = async (token) => {
@@ -110,13 +110,15 @@ const HistoryPage = () => {
 
 
         <div className="main flex flex-col sm:flex-row mx-auto">
-
-
-
           <div className="section-pemesanan w-full sm:w-[518px] mx-auto">
-            {data?.data?.map((item, index) => (
-              <RiwayatBulan key={index} />
-            ))}
+            {data?.data?.map((item, index) => {
+              return (
+                <div key={index}>
+                  <div className="font-bold text-base leading-6 my-3">{getDateFormat(item.createdAt)}</div>
+                  <RiwayatBulan data={item} />
+                </div>
+              )
+            })}
 
           </div>
 

@@ -36,7 +36,7 @@ const TicketCard = ({ data, handleChoose }) => {
       <div key={item.id} className="ticket-card md:w-full ticket-search mx-2">
         <div className=" pb-4">
           <div className="main border-[1px] rounded-lg border-[#D0D0D0] shadow bg-white select-none">
-            <div className="md:w-[657px] h-[127px] border-b-[#D0D0D0] mx-auto">
+            <div className="md:w-full h-[127px] border-b-[#D0D0D0] mx-auto">
               <div
                 className="flex mx-4 my-2.5 justify-between cursor-pointer"
                 onClick={() => toggleCollapse(item.id)}
@@ -119,7 +119,7 @@ const TicketCard = ({ data, handleChoose }) => {
                   />
                 </div>
 
-                <div className="my-auto w-52">
+                <div className="my-auto w-48">
                   <div className="flex justify-end font-bold text-base leading-6 text-[#7126B5] pb-1.5">
                     IDR {getMoneyFormat(item.price)}
                   </div>

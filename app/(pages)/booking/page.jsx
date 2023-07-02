@@ -18,6 +18,11 @@ import { input, Form, Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 
+import MustLogin from "@/components/Addon/MustLogin";
+import DataSave from "@/components/Addon/DataSave";
+import TransactionSuccess from "@/components/Addon/TransactionSuccess";
+import ModalNotif from "@/components/Addon/ModalNotif";
+
 async function getTicketId(bookingId) {
   const ticketPromises = bookingId.map(async (flight) => {
     console.log("get id", flight.id);
@@ -176,23 +181,23 @@ const CheckoutPage = () => {
         <div className="h-full max-w-full">
           <Navbar />
           <section>
-            <div className="flex items-center w-full h-32 px-5 bg-white shadow-md md:px-72">
+            <div className="flex items-center w-full h-36 px-5 bg-white shadow-md md:px-72">
               <BreadCrumb />
             </div>
           </section>
-          <main className="flex flex-col w-full gap-10 px-5 py-3 md:flex-row md:px-80">
-            <section className="max-w-full space-y-10 md:w-1/2">
+          <main className="flex flex-col w-full gap-6 px-5 py-3 md:flex-row md:px-80 mt-4">
+            <section className="max-w-full space-y-10 md:w-[600px] ">
               <form onSubmit={formik.handleSubmit}>
-                <div className="w-full px-5 border border-black rounded-md">
+                <div className="w-full px-4 border border-[#8A8A8A] rounded-md mb-6">
                   <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
                   <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
                     Data Diri Pemesan
                   </div>
-                  <div className="p-4 space-y-3">
+                  <div className="p-6 space-y-3">
                     <div>
                       <label
                         htmlFor="fullName"
-                        className="font-bold text-bnr-primary"
+                        className="font-bold text-[#4B1979]"
                       >
                         Nama Lengkap
                       </label>
@@ -213,7 +218,7 @@ const CheckoutPage = () => {
                     <div>
                       <label
                         htmlFor="familyName"
-                        className="font-bold text-bnr-primary"
+                        className="font-bold text-[#4B1979]"
                       >
                         Nama Keluarga
                       </label>
@@ -234,7 +239,7 @@ const CheckoutPage = () => {
                     <div>
                       <label
                         htmlFor="phoneNumber"
-                        className="font-bold text-bnr-primary"
+                        className="font-bold text-[#4B1979]"
                       >
                         Nomor Telepon
                       </label>
@@ -256,7 +261,7 @@ const CheckoutPage = () => {
                     <div>
                       <label
                         htmlFor="email"
-                        className="font-bold text-bnr-primary"
+                        className="font-bold text-[#4B1979]"
                       >
                         Email
                       </label>
@@ -277,18 +282,18 @@ const CheckoutPage = () => {
                   </div>
                 </div>
 
-                <div className="w-full px-5 border border-black rounded-md">
+                <div className="w-full px-4 border border-[#8A8A8A] rounded-md ">
                   <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
                   {dataPassangers?.map((passanger, index) => (
                     <div key={index}>
                       <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
                         Data Diri Pemesan - {index + 1}
                       </div>
-                      <div className="p-4 space-y-3">
+                      <div className="p-6 space-y-3">
                         <div>
                           <label
                             htmlFor={`fullName${index}`}
-                            className="font-bold text-bnr-primary"
+                            className="font-bold text-[#4B1979]"
                           >
                             Nama Lengkap
                           </label>
@@ -310,7 +315,7 @@ const CheckoutPage = () => {
                         <div>
                           <label
                             htmlFor={`title${index}`}
-                            className="font-bold text-bnr-primary"
+                            className="font-bold text-[#4B1979]"
                           >
                             Title
                           </label>
@@ -334,7 +339,7 @@ const CheckoutPage = () => {
                         <div>
                           <label
                             htmlFor={`familyName${index}`}
-                            className="font-bold text-bnr-primary"
+                            className="font-bold text-[#4B1979]"
                           >
                             Nama Keluarga
                           </label>
@@ -356,7 +361,7 @@ const CheckoutPage = () => {
                         <div>
                           <label
                             htmlFor={`phoneNumber`}
-                            className="font-bold text-bnr-primary"
+                            className="font-bold text-[#4B1979]"
                           >
                             Nomor Telepon
                           </label>
@@ -378,7 +383,7 @@ const CheckoutPage = () => {
                         <div>
                           <label
                             htmlFor={`email`}
-                            className="font-bold text-bnr-primary"
+                            className="font-bold text-[#4B1979]"
                           >
                             Email
                           </label>
@@ -412,7 +417,7 @@ const CheckoutPage = () => {
                 </button>
               </form>
             </section>
-            <section className="h-full max-w-full md:w-1/2">
+            <section className="h-full max-w-full md:w-[500px]">
               <form onSubmit={handleSubmit}>
                 {data?.map((item, index) => (
                   <div key={index} className="w-full min-h-full">

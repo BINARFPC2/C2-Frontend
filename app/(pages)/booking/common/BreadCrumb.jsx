@@ -5,7 +5,7 @@ const BreadCrumb = () => {
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
-          <a href="#" className="inline-flex items-center text-xl font-medium ">
+          <a href="#" className="inline-flex items-center text-xl font-medium">
             Isi Data Diri
           </a>
         </li>

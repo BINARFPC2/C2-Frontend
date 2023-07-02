@@ -17,7 +17,7 @@ import Loading from "@/assets/images/loading.png";
 
 import Draggable from "react-draggable";
 import TicketCard from "@/components/Ticket/TicketCard";
-import { getModal } from "@/utils/helper";
+import { getModal, getCode } from "@/utils/helper";
 import TicketTrip from "@/components/Ticket/TicketTrip";
 import { useComponentContext } from "@/app/context/store";
 import ModalTicket from "@/components/Modal/ModalTicket";
@@ -376,10 +376,10 @@ const TicketPage = () => {
 
               <div className="flex w-full gap-1">
                 <div className="text-sm md:text-base uppercase">
-                  {city_from}
+                  {getCode(city_from)}
                 </div>
                 <div className="text-sm md:text-base">&gt;</div>
-                <div className="text-sm md:text-base uppercase">{city_to}</div>
+                <div className="text-sm md:text-base uppercase">{getCode(city_to)}</div>
                 <div className="text-sm md:text-base">-</div>
                 <div className="text-sm md:text-base">
                   <span className="text-sm md:text-base">

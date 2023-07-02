@@ -5,14 +5,16 @@ import NotifBell from "@/assets/notif-bell.svg";
 import EllipseSucces from "@/assets/ellipse_succes.svg";
 
 
-const ModalNotif = () => {
+const ModalNotif = ({ show, onClose }) => {
+
   return (
     <>
+    {show && (
       <div className="absolute inset-x-0 top-auto z-50 flex justify-end -mt-4 outline-none modal-filter focus:outline-none">
         <div className="modal-card bg-white w-[400px] h-[194px] rounded-2xl shadow border-2">
           <div className="relative mx-0 kontent">
             <div className="close-button h-[44px] flex justify-end border-b-2">
-              <button type="button" onClick={() => setShowModal(false)}>
+              <button type="button" onClick={onClose}>
                 <Image
                   className="mt-2 mr-4"
                   src={ButtonClose}
@@ -66,6 +68,7 @@ const ModalNotif = () => {
           </div>
         </div>
       </div>
+      )}
     </>
   );
 };

@@ -175,6 +175,28 @@ const CheckoutPage = () => {
     console.log(value);
   };
 
+  // Modal MustLogin
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+// Modal Notif
+  const [showNotif, setShowNotif] = useState(false);
+
+  const handleOpenNotif = () => {
+    setShowNotif(true);
+  };
+
+  const handleCloseNotif = () => {
+    setShowNotif(false);
+  };
+
   return (
     <>
       {tokenExist ? (
@@ -185,6 +207,14 @@ const CheckoutPage = () => {
               <BreadCrumb />
             </div>
           </section>
+
+          
+          <button onClick={handleOpenModal}>Open Modal</button>
+          <MustLogin show={showModal} onClose={handleCloseModal} />
+
+          <button onClick={handleOpenNotif}>Open Notif</button>
+          <ModalNotif show={showNotif} onClose={handleCloseNotif} />
+
           <main className="flex flex-col w-full gap-6 px-5 py-3 md:flex-row md:px-80 mt-4">
             <section className="max-w-full space-y-10 md:w-[600px] ">
               <form onSubmit={formik.handleSubmit}>
@@ -205,7 +235,7 @@ const CheckoutPage = () => {
                         type="text"
                         name="fullName"
                         id=""
-                        className="w-full h-10 border rounded border-bnr-secondary"
+                        className="w-full h-10 border rounded border-bnr-secondary px-3"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         // value={formik.values.fullName}
@@ -226,7 +256,7 @@ const CheckoutPage = () => {
                         type="text"
                         name="familyName"
                         id=""
-                        className="w-full h-10 border rounded border-bnr-secondary"
+                        className="w-full h-10 border rounded border-bnr-secondary px-3"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         // value={formik.values.familyName}
@@ -247,7 +277,7 @@ const CheckoutPage = () => {
                         type="text"
                         name="phoneNumber"
                         id=""
-                        className="w-full h-10 border rounded border-bnr-secondary"
+                        className="w-full h-10 border rounded border-bnr-secondary px-3"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         // value={formik.values.phoneNumber}
@@ -269,7 +299,7 @@ const CheckoutPage = () => {
                         type="text"
                         name="email"
                         id=""
-                        className="w-full h-10 border rounded border-bnr-secondary"
+                        className="w-full h-10 border rounded border-bnr-secondary px-3"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         // value={formik.values.email}
@@ -301,7 +331,7 @@ const CheckoutPage = () => {
                             type="text"
                             name={`fullName${index}`}
                             id=""
-                            className="w-full h-10 border rounded border-bnr-secondary"
+                            className="w-full h-10 border rounded border-bnr-secondary px-3"
                             onChange={formik.handleChange}
                             // value={formik.values[`fullName${index}`]}
                             onBlur={formik.handleBlur}
@@ -322,7 +352,7 @@ const CheckoutPage = () => {
                           <select
                             name={`title${index}`}
                             id=""
-                            className="w-full h-10 border rounded border-bnr-secondary"
+                            className="w-full h-10 border rounded border-bnr-secondary px-3"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             {...formik.getFieldProps(`title${index}`)}
@@ -347,7 +377,7 @@ const CheckoutPage = () => {
                             type="text"
                             name={`familyName${index}`}
                             id=""
-                            className="w-full h-10 border rounded border-bnr-secondary"
+                            className="w-full h-10 border rounded border-bnr-secondary px-3"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             // value={formik.values[`familyName${index}`]}
@@ -369,7 +399,7 @@ const CheckoutPage = () => {
                             type="text"
                             name={`phoneNumber${index}`}
                             id=""
-                            className="w-full h-10 border rounded border-bnr-secondary"
+                            className="w-full h-10 border rounded border-bnr-secondary px-3"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             // value={formik.values[`phoneNumber${index}`]}
@@ -391,7 +421,7 @@ const CheckoutPage = () => {
                             type="text"
                             name={`email${index}`}
                             id=""
-                            className="w-full h-10 border rounded border-bnr-secondary"
+                            className="w-full h-10 border rounded border-bnr-secondary px-3"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             // value={formik.values[`email${index}`]}

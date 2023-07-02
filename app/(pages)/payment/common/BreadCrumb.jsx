@@ -24,9 +24,9 @@ const BreadCrumb = () => {
                 clipRule="evenodd"
               ></path>
             </svg>
-            <a href="#" className="ml-1 text-xl font-medium md:ml-2 text-bnr-primary">
+            <span className="ml-1 text-xl font-medium md:ml-2 text-bnr-primary">
               Bayar
-            </a>
+            </span>
           </div>
         </li>
         <li aria-current="page">

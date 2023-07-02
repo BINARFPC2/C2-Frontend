@@ -18,7 +18,6 @@ import LogoBRI from "@/assets/Logo_BRI.svg";
 import LogoMandiri from "@/assets/Logo_Mandiri.svg";
 import LogoBCA from "@/assets/Logo_BCA.svg";
 import LogoBNI from "@/assets/Logo_BNI.svg";
-import BreadCrumb from "./[id]/common/BreadCrumb";
 import {
   getBookingId,
   getToken,
@@ -27,6 +26,7 @@ import {
 } from "@/utils/helper";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import BreadCrumb from "./common/BreadCrumb";
 
 async function postPaymentTicket(token, data) {
   const res = await fetch(`https://c2-backend.up.railway.app/api/v1/payment`, {
@@ -125,21 +125,20 @@ const PaymentPage = () => {
             <BreadCrumb />
           </div>
         </section>
-        <main className="flex flex-col w-full gap-5 px-5 py-3 md:flex-row md:px-80 mt-8">
+        <main className="flex flex-col w-full gap-5 px-5 py-3 mt-8 md:flex-row md:px-80">
           <section className="max-w-full space-y-10 md:w-1/2">
             <div className="w-full px-2 rounded-md">
               <h1 className="py-2 text-xl font-bold">Isi Data Pembayaran </h1>
               <div className="w-full pt-2">
-                <div className="mx-auto w-full  rounded-2xl bg-white p-2">
+                <div className="w-full p-2 mx-auto bg-white rounded-2xl">
                   <Disclosure>
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full justify-between rounded-lg bg-[#3C3C3C] px-4 py-2 text-left text-sm font-medium text-white focus:bg-[#7126B5] focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                           <span>Gopay</span>
                           <ChevronUpIcon
-                            className={`${
-                              open ? "rotate-180 transform" : ""
-                            } h-5 w-5 text-white`}
+                            className={`${open ? "rotate-180 transform" : ""
+                              } h-5 w-5 text-white`}
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="px-4 pt-2 pb-2 text-sm text-gray-500">
@@ -154,8 +153,8 @@ const PaymentPage = () => {
                               type="text"
                               placeholder="+62 "
                               className="w-full py-2 border-b-2 outline-none border-b-bnr-secondary"
-                              // name="cardHolder"
-                              // onChange={handleChange}
+                            // name="cardHolder"
+                            // onChange={handleChange}
                             />
                           </div>
                         </Disclosure.Panel>
@@ -168,9 +167,8 @@ const PaymentPage = () => {
                         <Disclosure.Button className="flex w-full justify-between rounded-lg bg-[#3C3C3C] px-4 py-2 text-left text-sm font-medium text-white focus:bg-[#7126B5] focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                           <span>Virtual Account</span>
                           <ChevronUpIcon
-                            className={`${
-                              open ? "rotate-180 transform" : ""
-                            } h-5 w-5 text-white`}
+                            className={`${open ? "rotate-180 transform" : ""
+                              } h-5 w-5 text-white`}
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
@@ -180,7 +178,7 @@ const PaymentPage = () => {
                                 type="radio"
                                 // name="cardHolder"
                                 value="BRI"
-                                // onChange={handleChange}
+                              // onChange={handleChange}
                               />
                               <label for="BRI">
                                 <Image
@@ -198,7 +196,7 @@ const PaymentPage = () => {
                                 type="radio"
                                 // name="cardHolder"
                                 value="Mandiri"
-                                // onChange={handleChange}
+                              // onChange={handleChange}
                               />
                               <label for="BRI">
                                 <Image
@@ -216,7 +214,7 @@ const PaymentPage = () => {
                                 type="radio"
                                 // name="cardHolder"
                                 value="BRI"
-                                // onChange={handleChange}
+                              // onChange={handleChange}
                               />
                               <label for="BCA">
                                 <Image
@@ -234,7 +232,7 @@ const PaymentPage = () => {
                                 type="radio"
                                 // name="cardHolder"
                                 value="BRI"
-                                // onChange={handleChange}
+                              // onChange={handleChange}
                               />
                               <label for="BNI">
                                 <Image
@@ -258,9 +256,8 @@ const PaymentPage = () => {
                           <Disclosure.Button className="flex w-full justify-between rounded-lg bg-[#3C3C3C] px-4 py-2 text-left text-sm font-medium text-white focus:bg-[#7126B5] focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                             <span>Credit Card</span>
                             <ChevronUpIcon
-                              className={`${
-                                open ? "rotate-180 transform" : ""
-                              } h-5 w-5 text-white`}
+                              className={`${open ? "rotate-180 transform" : ""
+                                } h-5 w-5 text-white`}
                             />
                           </Disclosure.Button>
                           <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
@@ -304,7 +301,7 @@ const PaymentPage = () => {
                                 />
                               </div>
 
-                              <div className="mt-4 flex w-full">
+                              <div className="flex w-full mt-4">
                                 <div className="w-1/2">
                                   <label
                                     className="text-xm leading-6 font-medium text-[#151515]"
@@ -357,7 +354,7 @@ const PaymentPage = () => {
             {data?.map((detail, index) => (
               <div
                 key={index}
-                className="w-full min-h-full shadow-md p-5 rounded-lg border border-bnr-secondary my-5"
+                className="w-full min-h-full p-5 my-5 border rounded-lg shadow-md border-bnr-secondary"
               >
                 <div className="border-b border-bnr-secondary">
                   <h1 className="text-lg font-bold">
@@ -426,7 +423,7 @@ const PaymentPage = () => {
                 </div>
               </div>
             ))}
-            <div className="py-3 bg-bnr-primary px-5 rounded-lg">
+            <div className="px-5 py-3 rounded-lg bg-bnr-primary">
               <div className="inline-flex justify-between w-full">
                 <p className="text-lg font-bold text-white">Total</p>
                 <p className="text-lg font-bold text-white">

@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "@/utils/helper";
 import { asyncWhoAmI, unSetAuthUser } from "@/store/auth/slice";
+import ModalNotif from "./Addon/ModalNotif";
 
 const getWhoAmI = async (token) => {
   const response = await fetch(
@@ -34,12 +35,22 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState("");
+  const [showNotif, setShowNotif] = useState(false);
   const userSelect = useSelector((state) => state.auth.data);
   const dispatch = useDispatch();
   const token = getToken();
   const fetch = async () => {
     const me = await getWhoAmI(token);
     setData(me);
+  };
+
+
+  const handleOpenNotif = () => {
+    setShowNotif(true);
+  };
+
+  const handleCloseNotif = () => {
+    setShowNotif(false);
   };
 
   const handleLogout = () => {
@@ -82,12 +93,14 @@ const Navbar = () => {
             <Link href={"/riwayat"}>
               <FiList className="cursor-pointer" />
             </Link>
-            <Link href={"/notif"}>
-              <div className="relative">
+            {/* <Link href={"/notif"}> */}
+            {/* <div className="relative">
                 <FiBell />
                 <span class="top-0 left-3 absolute  w-3.5 h-3.5 bg-red-600 border-2 border-white dark:border-gray-800 rounded-full"></span>
-              </div>
-            </Link>
+              </div> */}
+            <button onClick={handleOpenNotif}><FiBell /></button>
+            <ModalNotif show={showNotif} onClose={handleCloseNotif} />
+            {/* </Link> */}
             <FiUser onClick={handlerOpen} />
           </div>
         ) : (
@@ -105,7 +118,7 @@ const Navbar = () => {
       </div>
       {
         open ? (
-          <div className="absolute rounded-lg border-2 shadow-lg w-32 transition-all duration-300 ease-in-out bg-white right-20 z-50 -mt-5 drop-shadow-md select-none">
+          <div className="absolute z-50 w-32 -mt-5 transition-all duration-300 ease-in-out bg-white border-2 rounded-lg shadow-lg select-none right-20 drop-shadow-md">
 
             <Link href="#">
               <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer p-2 border-b-2 hover:bg-[#9d4edd] hover:text-white">

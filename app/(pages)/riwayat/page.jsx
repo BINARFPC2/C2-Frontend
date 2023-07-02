@@ -60,14 +60,14 @@ const HistoryPage = () => {
     <>
       <Navbar />
       <div className="container mx-auto max-w-[968px]">
-        <div className="ticket-section pb-4 border-b-2 drop-shadow-md mx-2">
+        <div className="pb-4 mx-2 border-b-2 ticket-section drop-shadow-md">
           <div className="text-heading">
-            <h1 className="text-xl font-bold leading-8 mt-12">
+            <h1 className="mt-12 text-xl font-bold leading-8">
               Riwayat Pemesanan
             </h1>
           </div>
 
-          <div className="search flex flex-col sm:flex-row gap-4 mt-4">
+          <div className="flex flex-col gap-4 mt-4 search sm:flex-row">
             <div className="sm:w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium text-base leading-6 gap-1">
               <Link href={"/"}>
                 <div className="flex">
@@ -122,12 +122,12 @@ const HistoryPage = () => {
           />
         )}
 
-        <div className="main flex flex-col sm:flex-row mx-auto">
+        <div className="flex flex-col mx-auto main sm:flex-row">
           <div className="section-pemesanan w-full sm:w-[518px] mx-auto">
             {data?.data?.map((item, index) => {
               return (
                 <div key={index}>
-                  <div className="font-bold text-base leading-6 my-3">
+                  <div className="my-3 text-base font-bold leading-6">
                     {getDateFormat(item.createdAt)}
                   </div>
                   <RiwayatBulan

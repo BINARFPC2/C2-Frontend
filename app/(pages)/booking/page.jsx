@@ -17,10 +17,10 @@ import Unauthorized from "@/components/Unauthorized";
 import { input, Form, Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
+import { FiCheck } from "react-icons/fi"
 
 import MustLogin from "@/components/Addon/MustLogin";
 import DataSave from "@/components/Addon/DataSave";
-import TransactionSuccess from "@/components/Addon/TransactionSuccess";
 import ModalNotif from "@/components/Addon/ModalNotif";
 
 async function getTicketId(bookingId) {
@@ -178,323 +178,313 @@ const CheckoutPage = () => {
   // Modal MustLogin
   const [showModal, setShowModal] = useState(false);
 
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
+  const handleDirectLogin = () => {
     setShowModal(false);
-  };
-
-// Modal Notif
-  const [showNotif, setShowNotif] = useState(false);
-
-  const handleOpenNotif = () => {
-    setShowNotif(true);
-  };
-
-  const handleCloseNotif = () => {
-    setShowNotif(false);
-  };
+    router.push("/login")
+  }
 
   return (
     <>
-      {tokenExist ? (
-        <div className="h-full max-w-full">
-          <Navbar />
-          <section>
-            <div className="flex items-center w-full h-36 px-5 bg-white shadow-md md:px-72">
-              <BreadCrumb />
-            </div>
-          </section>
-
-          
-          <button onClick={handleOpenModal}>Open Modal</button>
-          <MustLogin show={showModal} onClose={handleCloseModal} />
-
-          <button onClick={handleOpenNotif}>Open Notif</button>
-          <ModalNotif show={showNotif} onClose={handleCloseNotif} />
-
-          <main className="flex flex-col w-full gap-6 px-5 py-3 md:flex-row md:px-80 mt-4">
-            <section className="max-w-full space-y-10 md:w-[600px] ">
-              <form onSubmit={formik.handleSubmit}>
-                <div className="w-full px-4 border border-[#8A8A8A] rounded-md mb-6">
-                  <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
-                  <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
-                    Data Diri Pemesan
+      <div className={`${!token ? `fixed max-w-full` : "h-full max-w-full"}`}>
+        <Navbar />
+        <section>
+          <div className="flex items-center w-full px-5 bg-white shadow-md h-36 md:px-72">
+            <BreadCrumb />
+          </div>
+        </section>
+        {
+          isSubmitting ?
+            <DataSave /> : null
+        }
+        <main className="flex flex-col w-full gap-6 px-5 py-3 mt-4 md:flex-row md:px-80">
+          {!tokenExist && <MustLogin token={!token} onClose={handleDirectLogin} />}
+          <section className="max-w-full space-y-10 md:w-[600px] ">
+            <form onSubmit={formik.handleSubmit}>
+              <div className="w-full px-4 border border-[#8A8A8A] rounded-md mb-6">
+                <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
+                <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
+                  Data Diri Pemesan
+                </div>
+                <div className="p-6 space-y-3">
+                  <div>
+                    <label
+                      htmlFor="fullName"
+                      className="font-bold text-[#4B1979]"
+                    >
+                      Nama Lengkap
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      id=""
+                      className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    // value={formik.values.fullName}
+                    // {...formik.getFieldProps("fullName")}
+                    />
+                    {formik.errors.fullName && formik.touched.fullName ? (
+                      <span>{formik.errors.fullName}</span>
+                    ) : null}
                   </div>
-                  <div className="p-6 space-y-3">
-                    <div>
-                      <label
-                        htmlFor="fullName"
-                        className="font-bold text-[#4B1979]"
-                      >
-                        Nama Lengkap
-                      </label>
-                      <input
-                        type="text"
-                        name="fullName"
-                        id=""
-                        className="w-full h-10 border rounded border-bnr-secondary px-3"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        // value={formik.values.fullName}
-                        // {...formik.getFieldProps("fullName")}
-                      />
-                      {formik.errors.fullName && formik.touched.fullName ? (
-                        <span>{formik.errors.fullName}</span>
-                      ) : null}
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="familyName"
-                        className="font-bold text-[#4B1979]"
-                      >
-                        Nama Keluarga
-                      </label>
-                      <input
-                        type="text"
-                        name="familyName"
-                        id=""
-                        className="w-full h-10 border rounded border-bnr-secondary px-3"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        // value={formik.values.familyName}
-                        // {...formik.getFieldProps("familyName")}
-                      />
-                      {formik.errors.familyName && formik.touched.familyName ? (
-                        <span>{formik.errors.familyName}</span>
-                      ) : null}
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="phoneNumber"
-                        className="font-bold text-[#4B1979]"
-                      >
-                        Nomor Telepon
-                      </label>
-                      <input
-                        type="text"
-                        name="phoneNumber"
-                        id=""
-                        className="w-full h-10 border rounded border-bnr-secondary px-3"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        // value={formik.values.phoneNumber}
-                        // {...formik.getFieldProps("phoneNumber")}
-                      />
-                      {formik.errors["phoneNumber"] &&
+                  <div>
+                    <label
+                      htmlFor="familyName"
+                      className="font-bold text-[#4B1979]"
+                    >
+                      Nama Keluarga
+                    </label>
+                    <input
+                      type="text"
+                      name="familyName"
+                      id=""
+                      className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    // value={formik.values.familyName}
+                    // {...formik.getFieldProps("familyName")}
+                    />
+                    {formik.errors.familyName && formik.touched.familyName ? (
+                      <span>{formik.errors.familyName}</span>
+                    ) : null}
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="phoneNumber"
+                      className="font-bold text-[#4B1979]"
+                    >
+                      Nomor Telepon
+                    </label>
+                    <input
+                      type="text"
+                      name="phoneNumber"
+                      id=""
+                      className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    // value={formik.values.phoneNumber}
+                    // {...formik.getFieldProps("phoneNumber")}
+                    />
+                    {formik.errors["phoneNumber"] &&
                       formik.touched["phoneNumber"] ? (
-                        <span>{formik.errors["phoneNumber"]}</span>
-                      ) : null}
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="font-bold text-[#4B1979]"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="text"
-                        name="email"
-                        id=""
-                        className="w-full h-10 border rounded border-bnr-secondary px-3"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        // value={formik.values.email}
-                        // {...formik.getFieldProps("email")}
-                      />
-                      {formik.errors["email"] && formik.touched["email"] ? (
-                        <span>{formik.errors["email"]}</span>
-                      ) : null}
-                    </div>
+                      <span>{formik.errors["phoneNumber"]}</span>
+                    ) : null}
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="font-bold text-[#4B1979]"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="text"
+                      name="email"
+                      id=""
+                      className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    // value={formik.values.email}
+                    // {...formik.getFieldProps("email")}
+                    />
+                    {formik.errors["email"] && formik.touched["email"] ? (
+                      <span>{formik.errors["email"]}</span>
+                    ) : null}
                   </div>
                 </div>
+              </div>
 
-                <div className="w-full px-4 border border-[#8A8A8A] rounded-md ">
-                  <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
-                  {dataPassangers?.map((passanger, index) => (
-                    <div key={index}>
-                      <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
-                        Data Diri Pemesan - {index + 1}
-                      </div>
-                      <div className="p-6 space-y-3">
-                        <div>
-                          <label
-                            htmlFor={`fullName${index}`}
-                            className="font-bold text-[#4B1979]"
-                          >
-                            Nama Lengkap
-                          </label>
-                          <input
-                            type="text"
-                            name={`fullName${index}`}
-                            id=""
-                            className="w-full h-10 border rounded border-bnr-secondary px-3"
-                            onChange={formik.handleChange}
-                            // value={formik.values[`fullName${index}`]}
-                            onBlur={formik.handleBlur}
-                            {...formik.getFieldProps(`fullName${index}`)}
-                          />
-                          {formik.errors[`fullName${index}`] &&
+              <div className="w-full px-4 border border-[#8A8A8A] rounded-md ">
+                <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
+                {dataPassangers?.map((passanger, index) => (
+                  <div key={index}>
+                    <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl flex justify-between items-center">
+                      <span>Data Diri Pemesan - {index + 1}</span>
+                      {isSubmitting
+                        ? (
+                          <div className="bg-[#73CA5C] text-xl rounded-full text-[#3C3C3C] font-bold">
+                            <FiCheck />
+                          </div>
+                        ) :
+                        null
+                      }
+                    </div>
+                    <div className="p-6 space-y-3">
+                      <div>
+                        <label
+                          htmlFor={`fullName${index}`}
+                          className="font-bold text-[#4B1979]"
+                        >
+                          Nama Lengkap
+                        </label>
+                        <input
+                          type="text"
+                          name={`fullName${index}`}
+                          id=""
+                          className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                          onChange={formik.handleChange}
+                          // value={formik.values[`fullName${index}`]}
+                          onBlur={formik.handleBlur}
+                          {...formik.getFieldProps(`fullName${index}`)}
+                        />
+                        {formik.errors[`fullName${index}`] &&
                           formik.touched[`fullName${index}`] ? (
-                            <span>{formik.errors[`fullName${index}`]}</span>
-                          ) : null}
-                        </div>
-                        <div>
-                          <label
-                            htmlFor={`title${index}`}
-                            className="font-bold text-[#4B1979]"
-                          >
-                            Title
-                          </label>
-                          <select
-                            name={`title${index}`}
-                            id=""
-                            className="w-full h-10 border rounded border-bnr-secondary px-3"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            {...formik.getFieldProps(`title${index}`)}
-                          >
-                            <option value="Mr">Mr</option>
-                            <option value="Ms">Ms</option>
-                          </select>
-                          {formik.errors[`title${index}`] &&
+                          <span>{formik.errors[`fullName${index}`]}</span>
+                        ) : null}
+                      </div>
+                      <div>
+                        <label
+                          htmlFor={`title${index}`}
+                          className="font-bold text-[#4B1979]"
+                        >
+                          Title
+                        </label>
+                        <select
+                          name={`title${index}`}
+                          id=""
+                          className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          {...formik.getFieldProps(`title${index}`)}
+                        >
+                          <option defaultValue=""></option>
+                          <option value="Mr">Mr</option>
+                          <option value="Ms">Ms</option>
+                        </select>
+                        {formik.errors[`title${index}`] &&
                           formik.touched[`title${index}`] ? (
-                            <span>{formik.errors[`title${index}`]}</span>
-                          ) : null}
-                        </div>
+                          <span>{formik.errors[`title${index}`]}</span>
+                        ) : null}
+                      </div>
 
-                        <div>
-                          <label
-                            htmlFor={`familyName${index}`}
-                            className="font-bold text-[#4B1979]"
-                          >
-                            Nama Keluarga
-                          </label>
-                          <input
-                            type="text"
-                            name={`familyName${index}`}
-                            id=""
-                            className="w-full h-10 border rounded border-bnr-secondary px-3"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            // value={formik.values[`familyName${index}`]}
-                            {...formik.getFieldProps(`familyName${index}`)}
-                          />
-                          {formik.errors[`familyName${index}`] &&
+                      <div>
+                        <label
+                          htmlFor={`familyName${index}`}
+                          className="font-bold text-[#4B1979]"
+                        >
+                          Nama Keluarga
+                        </label>
+                        <input
+                          type="text"
+                          name={`familyName${index}`}
+                          id=""
+                          className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          // value={formik.values[`familyName${index}`]}
+                          {...formik.getFieldProps(`familyName${index}`)}
+                        />
+                        {formik.errors[`familyName${index}`] &&
                           formik.touched[`familyName${index}`] ? (
-                            <span>{formik.errors[`familyName${index}`]}</span>
-                          ) : null}
-                        </div>
-                        <div>
-                          <label
-                            htmlFor={`phoneNumber`}
-                            className="font-bold text-[#4B1979]"
-                          >
-                            Nomor Telepon
-                          </label>
-                          <input
-                            type="text"
-                            name={`phoneNumber${index}`}
-                            id=""
-                            className="w-full h-10 border rounded border-bnr-secondary px-3"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            // value={formik.values[`phoneNumber${index}`]}
-                            {...formik.getFieldProps(`phoneNumber${index}`)}
-                          />
-                          {formik.errors[`phoneNumber${index}`] &&
+                          <span>{formik.errors[`familyName${index}`]}</span>
+                        ) : null}
+                      </div>
+                      <div>
+                        <label
+                          htmlFor={`phoneNumber`}
+                          className="font-bold text-[#4B1979]"
+                        >
+                          Nomor Telepon
+                        </label>
+                        <input
+                          type="text"
+                          name={`phoneNumber${index}`}
+                          id=""
+                          className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          // value={formik.values[`phoneNumber${index}`]}
+                          {...formik.getFieldProps(`phoneNumber${index}`)}
+                        />
+                        {formik.errors[`phoneNumber${index}`] &&
                           formik.touched[`phoneNumber${index}`] ? (
-                            <span>{formik.errors[`phoneNumber${index}`]}</span>
-                          ) : null}
-                        </div>
-                        <div>
-                          <label
-                            htmlFor={`email`}
-                            className="font-bold text-[#4B1979]"
-                          >
-                            Email
-                          </label>
-                          <input
-                            type="text"
-                            name={`email${index}`}
-                            id=""
-                            className="w-full h-10 border rounded border-bnr-secondary px-3"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            // value={formik.values[`email${index}`]}
-                            {...formik.getFieldProps(`email${index}`)}
-                          />
-                          {formik.errors[`email${index}`] &&
+                          <span>{formik.errors[`phoneNumber${index}`]}</span>
+                        ) : null}
+                      </div>
+                      <div>
+                        <label
+                          htmlFor={`email`}
+                          className="font-bold text-[#4B1979]"
+                        >
+                          Email
+                        </label>
+                        <input
+                          type="text"
+                          name={`email${index}`}
+                          id=""
+                          className="w-full h-10 px-3 border rounded border-bnr-secondary"
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          // value={formik.values[`email${index}`]}
+                          {...formik.getFieldProps(`email${index}`)}
+                        />
+                        {formik.errors[`email${index}`] &&
                           formik.touched[`email${index}`] ? (
-                            <span>{formik.errors[`email${index}`]}</span>
-                          ) : null}
-                        </div>
+                          <span>{formik.errors[`email${index}`]}</span>
+                        ) : null}
                       </div>
                     </div>
-                  ))}
-                </div>
-                <button
-                  type="submit"
-                  className={`w-full py-3 mt-5 text-white rounded-lg ${
-                    isSubmitting ? "bg-[#D0D0D0]" : "bg-bnr-primary"
+                  </div>
+                ))}
+              </div>
+              <button
+                type="submit"
+                className={`w-full py-3 mt-5 text-white rounded-lg ${isSubmitting ? "bg-[#D0D0D0]" : "bg-bnr-primary"
                   } drop-shadow-lg`}
-                  disabled={isSubmitting}
-                >
-                  Simpan
-                </button>
-              </form>
-            </section>
-            <section className="h-full max-w-full md:w-[500px]">
-              <form onSubmit={handleSubmit}>
-                {data?.map((item, index) => (
-                  <div key={index} className="w-full min-h-full">
-                    <div className="border-b border-bnr-secondary pt-10">
-                      <h1 className="text-xl font-bold">Detail Penerbangan</h1>
-                      <div className="inline-flex justify-between w-full">
-                        <p className="text-base font-bold">
-                          {item?.data?.dateTakeoff}
-                        </p>
-                        <p className="text-xs font-bold text-bnr-primary">
-                          Keberangkatan
-                        </p>
-                      </div>
-                      <p className="text-sm">3 Maret 2023</p>
-                      <p className="text-sm">{item?.data?.airport_from}</p>
+                disabled={isSubmitting}
+              >
+                Simpan
+              </button>
+            </form>
+          </section>
+          <section className="h-full max-w-full md:w-[500px]">
+            <form onSubmit={handleSubmit}>
+              {data?.map((item, index) => (
+                <div key={index} className="w-full min-h-full">
+                  <div className="pt-10 border-b border-bnr-secondary">
+                    <h1 className="text-xl font-bold">Detail Penerbangan</h1>
+                    <div className="inline-flex justify-between w-full">
+                      <p className="text-base font-bold">
+                        {item?.data?.dateTakeoff}
+                      </p>
+                      <p className="text-xs font-bold text-bnr-primary">
+                        Keberangkatan
+                      </p>
                     </div>
-                    <div className="inline-flex items-center w-full gap-2 py-2 border-b border-bnr-secondary">
-                      <Image src={Maskapai} alt="maskapai" />
-                      <div className="text-sm">
-                        <h5 className="font-bold">{item?.data?.airlines}</h5>
-                        {/* <h5 className="font-bold">JT - 203</h5> */}
-                        <div className="mt-5">
-                          <h5 className="font-bold">Informasi</h5>
-                          <p className="w-36">{item?.data?.information}</p>
-                        </div>
+                    <p className="text-sm">3 Maret 2023</p>
+                    <p className="text-sm">{item?.data?.airport_from}</p>
+                  </div>
+                  <div className="inline-flex items-center w-full gap-2 py-2 border-b border-bnr-secondary">
+                    <Image src={Maskapai} alt="maskapai" />
+                    <div className="text-sm">
+                      <h5 className="font-bold">{item?.data?.airlines}</h5>
+                      {/* <h5 className="font-bold">JT - 203</h5> */}
+                      <div className="mt-5">
+                        <h5 className="font-bold">Informasi</h5>
+                        <p className="w-36">{item?.data?.information}</p>
                       </div>
                     </div>
-                    <div className="py-2 border-b border-bnr-secondary">
-                      <div className="inline-flex justify-between w-full">
-                        <p className="text-base font-bold">
-                          {item?.data?.dateLanding}
-                        </p>
-                        <p className="text-xs font-bold text-bnr-primary">
-                          Kedatangan
-                        </p>
-                      </div>
-                      <p className="text-sm">3 Maret 2023</p>
-                      <p className="text-sm">{item?.data?.airlines_to}</p>
+                  </div>
+                  <div className="py-2 border-b border-bnr-secondary">
+                    <div className="inline-flex justify-between w-full">
+                      <p className="text-base font-bold">
+                        {item?.data?.dateLanding}
+                      </p>
+                      <p className="text-xs font-bold text-bnr-primary">
+                        Kedatangan
+                      </p>
                     </div>
-                    <div className="py-2 border-b border-bnr-secondary">
-                      <h1 className="text-base font-bold">Rincian</h1>
-                      <div className="inline-flex justify-between w-full">
-                        <p>{resultPassangers.total} Passangers</p>
+                    <p className="text-sm">3 Maret 2023</p>
+                    <p className="text-sm">{item?.data?.airlines_to}</p>
+                  </div>
+                  <div className="py-2 border-b border-bnr-secondary">
+                    <h1 className="text-base font-bold">Rincian</h1>
+                    <div className="inline-flex justify-between w-full">
+                      <p>{resultPassangers?.total} Passangers</p>
 
-                        {/* <p>Rp. {getMoneyFormat(resultPassangers.total * (data.length > 1 ? item.data.price + item.data.price : item.data.price))}</p> */}
-                      </div>
-                      {/* <div className="inline-flex justify-between w-full">
+                      {/* <p>Rp. {getMoneyFormat(resultPassangers.total * (data.length > 1 ? item.data.price + item.data.price : item.data.price))}</p> */}
+                    </div>
+                    {/* <div className="inline-flex justify-between w-full">
                                     <p>1 Baby</p>
                                     <p>IDR 0</p>
                                 </div>
@@ -502,32 +492,29 @@ const CheckoutPage = () => {
                                     <p>Tax</p>
                                     <p>IDR 300.000</p>
                                 </div> */}
-                    </div>
-                  </div>
-                ))}
-                <div className="py-3">
-                  <div className="inline-flex justify-between w-full">
-                    <p className="text-lg font-bold">Total</p>
-                    <p className="text-lg font-bold text-bnr-primary">
-                      IDR {totalPrice}
-                    </p>
                   </div>
                 </div>
-                {isSaved ? (
-                  <button
-                    type="submit"
-                    className="w-full py-3 text-white bg-red-600 rounded-lg drop-shadow-lg"
-                  >
-                    Lanjut Bayar
-                  </button>
-                ) : null}
-              </form>
-            </section>
-          </main>
-        </div>
-      ) : (
-        <Unauthorized />
-      )}
+              ))}
+              <div className="py-3">
+                <div className="inline-flex justify-between w-full">
+                  <p className="text-lg font-bold">Total</p>
+                  <p className="text-lg font-bold text-bnr-primary">
+                    IDR {getMoneyFormat(totalPrice)}
+                  </p>
+                </div>
+              </div>
+              {isSaved ? (
+                <button
+                  type="submit"
+                  className="w-full py-3 text-white bg-red-600 rounded-lg drop-shadow-lg"
+                >
+                  Lanjut Bayar
+                </button>
+              ) : null}
+            </form>
+          </section>
+        </main>
+      </div>
     </>
   );
 };

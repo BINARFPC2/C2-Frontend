@@ -10,8 +10,8 @@ const ModalNotif = ({ show, onClose }) => {
   return (
     <>
       {show && (
-        <div className="absolute inset-x-0 z-50 flex justify-end -mt-4 outline-none top-20 right-40 modal-filter focus:outline-none">
-          <div className="modal-card bg-white w-[400px] h-[194px] rounded-2xl shadow border-2">
+        <div className="absolute inset-x-0 z-50 flex justify-end -mt-4 outline-none top-20 md:right-48 right-5 modal-filter focus:outline-none">
+          <div className="modal-card bg-white md:w-[400px] md:h-[194px] rounded-2xl shadow border-2">
             <div className="relative mx-0 kontent">
               <div className="close-button h-[44px] flex justify-end border-b-2">
                 <button type="button" onClick={onClose}>
@@ -26,8 +26,8 @@ const ModalNotif = ({ show, onClose }) => {
               </div>
 
               <div className="flex flex-col mx-auto main sm:flex-row">
-                <div className="mx-2 notifikasi">
-                  <div className="notif-card flex sm:w-[800px] my-4 border-b-2 pb-2 cursor-pointer">
+                <div className="px-2 notifikasi pb-6 w-full">
+                  <div className="notif-card md:w-full flex my-4 border-b-2 pb-2 cursor-pointer">
                     <div className="mr-5 notif-bell">
                       <Image
                         className=""

@@ -79,7 +79,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="relative h-full md:max-w-full">
+    <div className="relative z-40 h-full md:max-w-full">
       <div className="flex items-center justify-between h-20 bg-white md:px-36 md:w-full drop-shadow-md">
         <Image
           src={Logo}
@@ -89,16 +89,16 @@ const Navbar = () => {
           alt="Picture of the author"
         />
         {mounted && token ? (
-          <div className="flex mr-5 space-x-5 text-2xl md:ml-96">
+          <div className="flex mr-5 text-2xl md:ml-96">
             <Link href={"/riwayat"}>
-              <FiList className="cursor-pointer" />
+              <FiList className="cursor-pointer mr-5" />
             </Link>
             {/* <Link href={"/notif"}> */}
             {/* <div className="relative">
                 <FiBell />
                 <span class="top-0 left-3 absolute  w-3.5 h-3.5 bg-red-600 border-2 border-white dark:border-gray-800 rounded-full"></span>
               </div> */}
-            <button onClick={handleOpenNotif}><FiBell /></button>
+            <button onClick={handleOpenNotif}><FiBell className="mr-5" /></button>
             <ModalNotif show={showNotif} onClose={handleCloseNotif} />
             {/* </Link> */}
             <FiUser onClick={handlerOpen} />

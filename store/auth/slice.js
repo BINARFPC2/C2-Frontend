@@ -40,9 +40,11 @@ export const asyncLogin = createAsyncThunk(
     const response = await AuthAPI.login({ email, password });
 
     if (response.status === "error") {
-      return { error: true, message: "tesss" };
+      return { error: true, status: response.status };
     }
-    return { error: false, token: response.token };
+    if (response.status !== "error") {
+      return { error: false, token: response.token, status: "" };
+    }
   }
 );
 
@@ -62,7 +64,10 @@ export const asyncForget = createAsyncThunk(
   "auth/forget",
   async ({ email }) => {
     const response = await AuthAPI.forgotPassword({ email });
-    return response
+    if (response.status === "error") {
+      return { error: true, status: response.status };
+    }
+    return { error: false, token: response.token, status: "" };
   }
 )
 
@@ -89,16 +94,17 @@ export const authSlice = createSlice({
         state.loading = true
       })
       .addCase(asyncLogin.fulfilled, (state, action) => {
-        const { error, token, name } = action.payload
+        const { error, token, name, status } = action.payload
         state.token = token;
         state.loading = false;
         state.authenticated = !error;
         state.name = name
+        state.status = status
         state.error = false;
       })
       .addCase(asyncLogin.rejected, (state, action) => {
-        const { error } = action.payload
-        state.status = action.payload.status;
+        const { error, message } = action.payload
+        state.status = !action.payload.status;
         state.authenticated = error;
         state.error = true;
       })
@@ -119,6 +125,7 @@ export const authSlice = createSlice({
       })
       .addCase(asyncForget.fulfilled, (state, action) => {
         state.status = action.payload.status
+        state.error = !action.payload.error
         state.loading = false;
         state.message = action.payload.message
       })

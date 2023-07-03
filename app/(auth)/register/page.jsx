@@ -21,12 +21,11 @@ const RegisterPage = () => {
 
     const handleRegister = (formValue) => {
         dispatch(asyncRegister(formValue))
-        console.log(formValue);
     }
 
     useEffect(() => {
-        if (users.registered === true) {
-            toast.success("Berhasil Login", {
+        if (users.registered) {
+            toast.success("Berhasil Daftar", {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -38,18 +37,8 @@ const RegisterPage = () => {
             });
             setTimeout(() => {
                 router.push("/login")
+                dispatch(asyncRegister(!users.registered))
             }, 1000);
-        } else if (users.registered === false) {
-            toast.error(`${users.message}`, {
-                position: "top-right",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
         }
     }, [router, users, toast])
 

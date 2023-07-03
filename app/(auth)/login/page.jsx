@@ -33,9 +33,9 @@ const LoginPage = () => {
         if (token) {
             router.push("/")
         }
-        if (users.authenticated) {
+        if (submitButtonClicked && users.authenticated) {
             localStorage.setItem("token", users.token);
-            toast.success(`Welcome ${users.name}`, {
+            toast.success(`Welcome Brooo`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -48,8 +48,10 @@ const LoginPage = () => {
             setTimeout(() => {
                 router.push("/");
             }, 1000);
-        } else if (submitButtonClicked && users.error === false) {
-            toast.error("Password And Email is wrong", {
+        }
+        if (users.status === "error") {
+            // localStorage.setItem("token", users.token);
+            toast.error(`Password Or Email is Wrong`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -62,6 +64,25 @@ const LoginPage = () => {
         }
         setSubmitButtonClicked(false);
     }, [users, token]);
+
+    // if (users.status === "false") {
+    // localStorage.setItem("token", users.token);
+    // toast.success(`Welcome Brooo`, {
+    //     position: "top-right",
+    //     autoClose: 1000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "light",
+    // });
+    // setTimeout(() => {
+    //     router.push("/");
+    // }, 1000);
+    // }
+
+    console.log("auth", users.authenticated);
     return (
         <main>
             <ToastContainer

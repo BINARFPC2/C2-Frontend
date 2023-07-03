@@ -50,6 +50,7 @@ const storage = typeof window !== 'undefined' ? createWebStorage('session') : cr
 const persistConfig = {
   key: 'ticketGo',
   storage,
+  blacklist: ['auth'],
 };
 
 // ngide 1 jam :'(

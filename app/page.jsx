@@ -11,12 +11,12 @@ export default function Home() {
     <>
       <Navbar />
       <div className="h-screen md:max-w-full">
-        <div className="relative flex items-center justify-center sm:h-1/2">
+        <div className="relative z-10 flex items-center justify-center sm:h-1/2">
           <div className="flex md:w-full h-[150px]">
             <div className="hidden w-1/2 bg-[#B792D9] md:block"></div>
             <div className="hidden w-1/2 bg-[#E2D4F0] md:block"></div>
           </div>
-          <div className="hidden absolute w-[80%] min-h-56 justify-end md:block ">
+          <div className="hidden absolute z-20 w-[80%] min-h-56 justify-end md:block ">
             <Image
               src={HeroImage}
               alt="hero-image"

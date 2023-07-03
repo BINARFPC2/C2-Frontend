@@ -143,7 +143,7 @@ const HistoryPage = () => {
             {data?.data?.map((item, index) => {
               return (
                 <div key={index}>
-                  <div className="my-3 text-base font-bold leading-6">
+                  <div className="my-3 text-base font-bold leading-6 mx-2">
                     {getDateFormat(item.createdAt)}
                   </div>
                   <RiwayatBulan

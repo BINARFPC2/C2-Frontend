@@ -8,17 +8,19 @@ import { ResetPasswordSchema } from "@/utils/validation"
 import { useSearchParams } from "next/navigation"
 import { asyncResetPassword } from "@/store/auth/slice"
 import { useDispatch } from "react-redux"
+import { useRouter } from "next/navigation"
 
 const ResetPage = () => {
     const dispatch = useDispatch()
     const searchParams = useSearchParams();
-    const tes = searchParams.get("token")
+    const tes = searchParams.get("token");
+    const router = useRouter()
     console.log("t", tes);
     // if (searchParams.has("token")) {
     const handleReset = (values) => {
         // console.log("sadfjsfhksdf", token);
         dispatch(asyncResetPassword(values));
-        console.log(values);
+        router.push("/login")
     }
     // }
     return (

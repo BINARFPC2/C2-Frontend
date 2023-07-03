@@ -18,45 +18,34 @@ const ForgotPage = () => {
     const [showAlert, setShowAlert] = useState(false);
     // const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
 
-    // const router = useRouter();
+    const router = useRouter();
     const dispatch = useDispatch();
-    // const users = useSelector((state) => state.auth);
+    const users = useSelector((state) => state.auth);
 
-    const handleLogin = (formValue) => {
+    const handleForgot = (formValue) => {
         dispatch(asyncForget(formValue));
         // console.log(formValue);
     };
 
-    // useEffect(() => {
-    //     if (users.authenticated) {
-    //         localStorage.setItem("token", users.token);
-    //         toast.success(`Welcome ${users.name}`, {
-    //             position: "top-right",
-    //             autoClose: 1000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             theme: "light",
-    //         });
-    //         setTimeout(() => {
-    //             router.push("/");
-    //         }, 1000);
-    //     } else if (submitButtonClicked && users.error === false) {
-    //         toast.error("Password And Email is wrong", {
-    //             position: "top-right",
-    //             autoClose: 1000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             theme: "light",
-    //         });
-    //     }
-    //     setSubmitButtonClicked(false);
-    // }, [users]);
+    useEffect(() => {
+        if (users.error) {
+            toast.success(`Silahkan check email anda`, {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setTimeout(() => {
+                router.push("/login")
+            }, 1000);
+        }
+    }, [users.error])
+
+    console.log("errror", users.error);
     return (
         <main>
             <ToastContainer
@@ -85,7 +74,7 @@ const ForgotPage = () => {
                                 email: "",
                             }}
                             onSubmit={(values, { resetForm }) => {
-                                handleLogin(values)
+                                handleForgot(values)
                                 resetForm()
                             }}
                             validationSchema={ForgotSchema}

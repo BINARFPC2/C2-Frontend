@@ -17,6 +17,8 @@ import IconSearch from "@/assets/icon-search.svg";
 import { getDateFormat, getToken } from "@/utils/helper";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import MustLogin from "@/components/Addon/MustLogin";
+import { useRouter } from "next/navigation";
 
 const getTransaction = async (token) => {
   try {
@@ -38,7 +40,9 @@ const HistoryPage = () => {
   const token = getToken();
   const [data, setData] = useState();
   const [detailTicket, setDetailTicket] = useState("");
+  const [tokenExist, setTokenExist] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter()
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -49,6 +53,14 @@ const HistoryPage = () => {
   };
 
   useEffect(() => {
+    if (!token) {
+      setTokenExist(false);
+    } else {
+      setTokenExist(true);
+    }
+  }, [token]);
+
+  useEffect(() => {
     fetchTransaction();
   }, []);
 
@@ -56,18 +68,23 @@ const HistoryPage = () => {
     setDetailTicket(id);
   };
 
+  const handleDirectLogin = () => {
+    setShowModal(false);
+    router.push("/login")
+  }
+
   return (
-    <>
+    <div className={`${!token ? `fixed w-full` : ""}`}>
       <Navbar />
-      <div className="container mx-auto max-w-[968px]">
+      <div className="container mx-auto max-w-[968px] z-0">
+        {!tokenExist && <MustLogin token={!token} onClose={handleDirectLogin} />}
         <div className="pb-4 mx-2 border-b-2 ticket-section drop-shadow-md">
           <div className="text-heading">
             <h1 className="mt-12 text-xl font-bold leading-8">
               Riwayat Pemesanan
             </h1>
           </div>
-
-          <div className="flex flex-col gap-4 mt-4 search sm:flex-row">
+          <div className="z-0 flex flex-col gap-4 mt-4 search sm:flex-row">
             <div className="sm:w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium text-base leading-6 gap-1">
               <Link href={"/"}>
                 <div className="flex">
@@ -82,7 +99,6 @@ const HistoryPage = () => {
                 </div>
               </Link>
             </div>
-
             <div className="flex justify-between gap-x-4">
               <div className="items-center my-auto">
                 <button
@@ -158,7 +174,7 @@ const HistoryPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

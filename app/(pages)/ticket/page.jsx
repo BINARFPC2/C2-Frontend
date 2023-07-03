@@ -28,6 +28,7 @@ import { useDispatch } from "react-redux";
 import { usePathname, useRouter } from "next/navigation";
 import { addSearchFlight } from "@/store/auth/slice";
 import { handleClientScriptLoad } from "next/script";
+import Link from "next/link";
 
 const getTicket = async (dateDeparture, city_from, city_to, type_seat) => {
   console.log("dattttttt", dateDeparture);
@@ -363,8 +364,8 @@ const TicketPage = () => {
           </div>
 
           <div className="flex flex-col gap-4 mt-4 md:flex-row search">
-            <div className="md:w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium leading-6 gap-1">
-              <a href="#">
+            <Link href={"/"}>
+              <div className="md:w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium leading-6 gap-1">
                 <Image
                   className="ml-3 md:mr-5"
                   src={BackArrow}
@@ -372,27 +373,26 @@ const TicketPage = () => {
                   height={24}
                   alt=""
                 />
-              </a>
-
-              <div className="flex w-full gap-1">
-                <div className="text-sm md:text-base uppercase">
-                  {getCode(city_from)}
-                </div>
-                <div className="text-sm md:text-base">&gt;</div>
-                <div className="text-sm md:text-base uppercase">{getCode(city_to)}</div>
-                <div className="text-sm md:text-base">-</div>
-                <div className="text-sm md:text-base">
-                  <span className="text-sm md:text-base">
-                    {totalPassangers}
-                  </span>
-                  <span> Penumpang</span>
-                </div>
-                <div className="text-sm md:text-base">-</div>
-                <div className="text-sm md:text-base capitalize">
-                  {type_seat}
+                <div className="flex w-full gap-1">
+                  <div className="text-sm md:text-base uppercase">
+                    {getCode(city_from)}
+                  </div>
+                  <div className="text-sm md:text-base">&gt;</div>
+                  <div className="text-sm md:text-base uppercase">{getCode(city_to)}</div>
+                  <div className="text-sm md:text-base">-</div>
+                  <div className="text-sm md:text-base">
+                    <span className="text-sm md:text-base">
+                      {totalPassangers}
+                    </span>
+                    <span> Penumpang</span>
+                  </div>
+                  <div className="text-sm md:text-base">-</div>
+                  <div className="text-sm md:text-base capitalize">
+                    {type_seat}
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
             <div className="hidden button-search md:block">
               <a href="#">
                 {" "}

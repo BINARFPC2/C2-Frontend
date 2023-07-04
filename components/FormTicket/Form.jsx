@@ -19,6 +19,7 @@ import { useComponentContext } from "@/app/context/store";
 
 import Select from "react-select";
 
+
 const FormTicket = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -52,7 +53,54 @@ const FormTicket = () => {
 
   console.log("showreturn", showReturn);
 
-// Date
+
+// Kota
+const [selectFrom, setSelectFrom] = useState(null);
+const [inputFrom, setInputFrom] = useState("");
+
+const [selectTo, setSelectTo] = useState(null);
+const [inputTo, setInputTo] = useState("");
+
+const city = [
+    { value: "Jakarta", label: "Jakarta" },
+    { value: "Yogyakarta", label: "Yogyakarta" },
+    { value: "Surabaya", label: "Surabaya" },
+    { value: "Tokyo", label: "Tokyo" },
+    { value: "Medan", label: "Medan" },
+  ];
+
+
+const handleChangeCityFrom = (selectFromCityFrom, actionMeta) => {
+    setSelectFrom(selectFromCityFrom);
+    handleChange({ target: { name: "city_from", value: selectFromCityFrom.value } });
+  };
+
+const handleInputFrom = (inputFrom) => {
+    setInputFrom(inputFrom);
+  };
+
+const handleChangeCityTo = (selectToCityTo, actionMeta) => {
+    setSelectTo(selectToCityTo);
+    handleChange({ target: { name: "city_to", value: selectToCityTo.value } });
+  };
+
+const handleInputTo = (inputTo) => {
+    setInputTo(inputTo);
+  };
+
+
+const handleSwapInputs = (event) => {
+  event.preventDefault();
+  // Swap the values of inputFrom and inputTo
+  const tempInputFrom = inputFrom;
+  setInputFrom(inputTo);
+  setInputTo(tempInputFrom);
+
+  // Swap the selected options of selectFrom and selectTo (if needed)
+  const tempSelectFrom = selectFrom;
+  setSelectFrom(selectTo);
+  setSelectTo(tempSelectFrom);
+};
 
 
 // Seat
@@ -83,6 +131,7 @@ const options = [
       padding: "5px",
       border: "none",
       boxShadow: "none",
+      width: "100%",
     }),
     singleValue: (defaultStyles) => ({ ...defaultStyles, color: "black" }),
   };
@@ -102,32 +151,49 @@ const options = [
                   <div className="flex justify-between w-full from">
                     <div className="flex w-full mr-2">
                       <Image src={From} alt="fromsvg" />
-                      <input
-                        type="text"
-                        placeholder="From"
-                        className="w-full py-3 ml-4 border-b-2 outline-none border-b-bnr-secondary"
-                        name="city_from"
-                        // value={cityFrom}
-                        onChange={handleChange}
+                      {/*<Select
+                        options={city}
+                        onChange={(selectFromCityFrom) => handleSelectCityFrom(selectFromCityFrom, { name: "city_from" })} value={selectFrom} autoFocus={true} styles={customStyles} isSearchable   />*/}
+
+                      <Select
+                        options={city}
+                        onChange={handleChangeCityFrom}
+                        onInputChange={handleInputFrom}
+                        inputValue={inputFrom}
+                        value={selectFrom}
+                        isSearchable
+                        autoFocus={true}
+                        styles={customStyles}
+                        menuIsOpen={inputFrom.trim().length > 0}
+                        className="w-full border-b-2"
+                        placeholder={'City From'}
                       />
                     </div>
 
                     <div className="relative inline-flex items-center cursor-pointer btn-swap">
                       <div className="p-2 my-2 text-white bg-black cursor-pointer rounded-xl">
-                        <FiRepeat />
+                      <button type="button">
+                        <FiRepeat onClick={handleSwapInputs} />
+                      </button>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex w-full to">
                     <Image src={To} alt="fromsvg" />
-                    <input
-                      type="text"
-                      placeholder="To"
-                      className="w-full py-3 border-b-2 outline-none ml-9 border-b-bnr-secondary"
-                      name="city_to"
-                      // value={cityTo}
-                      onChange={handleChange}
+                    {/*<Select options={city} onChange={(selectToCityTo) => handleSelectCityTo(selectToCityTo, { name: "city_to" })} value={selectTo} autoFocus={true} styles={customStyles} isSearchable  />*/}
+                    <Select
+                      options={city}
+                      onChange={handleChangeCityTo}
+                      onInputChange={handleInputTo}
+                      inputValue={inputTo}
+                      value={selectTo}
+                      isSearchable
+                      autoFocus={true}
+                      styles={customStyles}
+                      menuIsOpen={inputTo.trim().length > 0}
+                      className="w-full border-b-2"
+                      placeholder={'City To'}
                     />
                   </div>
                 </div>
@@ -149,9 +215,9 @@ const options = [
                       </div>
                     </div>
 
-                    {showReturn && (
-                      <div className="ml-4 return">
+                    <div className="return ml-4 return w-full">
                         <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
+                        {showReturn && (
                         <div className="mt-2">
                         <input
                           type="date"
@@ -161,8 +227,9 @@ const options = [
                           onChange={handleChange}
                         />
                         </div>
-                      </div>
-                    )}
+                        )}
+                    </div>
+
 
                     <div className="flex button justify-self-end">
                       <div className="btn-slider">
@@ -173,8 +240,8 @@ const options = [
                       </div>
 
                     </div>
-
                   </div>
+
 
                   <div className="flex items-center w-full">
                     <Image src={ToTwo} className="mt-6 mr-2" alt="fromsvg" />
@@ -187,7 +254,8 @@ const options = [
                       <div>
                       <div className="select">
                         <div className="m-auto w-50 ">
-                          <Select options={options} onChange={(selectedOption) => handleSelect(selectedOption, { name: "type_seat" })} value={selected} autoFocus={true} styles={customStyles}  />
+                          <Select options={options} onChange={(selectedOption) => handleSelect(selectedOption, { name: "type_seat" })} value={selected} autoFocus={true} styles={customStyles} placeholder={'Input Class'}  />
+
                         </div>
                       </div>
                       </div>
@@ -203,11 +271,6 @@ const options = [
           </form>
         </div>
       </div>
-
-
-
-
-
 
     </>
   );

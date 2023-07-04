@@ -5,6 +5,22 @@ import FormTicket from "@/components/FormTicket/Form";
 import { FiSearch } from "react-icons/fi";
 import { Categories, Favorite, Favorites } from "@/constants";
 import CardFavorite from "@/components/Card/CardFavorite";
+import Logo from "@/assets/images/logo-tiketku.svg";
+
+import LogoBRI from "@/assets/Logo_BRI.svg";
+import LogoMandiri from "@/assets/Logo_Mandiri.svg";
+import LogoBCA from "@/assets/Logo_BCA.svg";
+import LogoBNI from "@/assets/Logo_BNI.svg";
+
+import Facebook from "@/assets/images/fb.svg";
+import Instagram from "@/assets/images/instagram.svg";
+import Twitter from "@/assets/images/twitter.svg";
+import Tiktok from "@/assets/images/tiktok.svg";
+import Youtube from "@/assets/images/youtube.svg";
+import PlayStore from "@/assets/images/googleplay.svg";
+import AppStore from "@/assets/images/appstore.svg";
+
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -26,8 +42,8 @@ export default function Home() {
         <div className="relative z-30 flex justify-center mb-10 sm:-mt-28">
           <FormTicket />
         </div>
-        <div className="container flex flex-col md:w-full min-h-fit">
-          <h3 className="px-5 mb-4 font-bold text-left md:px-52 sm:mx-32">Destinasi Favorit</h3>
+        <div className="container flex flex-col w-full min-h-fit">
+          <h3 className="px-5 mb-4 font-bold text-left md:mx-40">Destinasi Favorit</h3>
 
           <div className="pb-10 md:w-full">
             <div className="flex flex-wrap justify-center gap-4">
@@ -56,7 +72,9 @@ export default function Home() {
             </div>
           </div>
 
+
         </div>
+        <Footer/>
 
       </div>
     </>

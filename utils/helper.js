@@ -50,6 +50,13 @@ export const getCode = (value) => {
     return even.join("")
 }
 
+export const formatEmail = (email) => {
+    const baseEmail = email.split("@");
+    const firstCharacter = baseEmail[0].charAt(0);
+    const leftCharacter = baseEmail[0].replace(`${baseEmail[0]}`, "*****")
+    return `${firstCharacter}${leftCharacter}@${baseEmail[1]}`
+}
+
 export const getDurationFlight = (dateTakeoff, dateLanding) => {
     const takeoffTime = dateTakeoff;
     const landingTime = dateLanding;

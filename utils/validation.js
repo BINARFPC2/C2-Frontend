@@ -26,3 +26,10 @@ export const ResetPasswordSchema = Yup.object().shape({
 export const ForgotSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email address format").required("Email is required"),
 });
+
+export const OtpSchema = Yup.object().shape({
+    otp: Yup.string()
+        .required('OTP is required')
+        .length(6, 'OTP must be exactly 6 digits')
+        .matches(/^\d+$/, 'OTP must only contain digits'),
+});

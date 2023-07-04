@@ -56,10 +56,10 @@ export const asyncOtpVerify = createAsyncThunk(
       otp: otp
     })
     if (!response.ok) {
-      return { status: response.status };
+      return { status: response?.status };
     }
     if (response.ok) {
-      return { status: response.status };
+      return { status: response?.status };
     }
   }
 )
@@ -181,7 +181,7 @@ export const authSlice = createSlice({
         // state.message = action.payload.message
         return {
           ...state,
-          status: action.payload.status
+          status: action?.payload?.status
         };
       })
   },

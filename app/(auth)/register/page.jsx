@@ -12,11 +12,13 @@ import { useEffect } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import { useRouter } from "next/navigation";
 import 'react-toastify/dist/ReactToastify.css';
+import { getEmail } from "@/utils/helper"
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
     const router = useRouter()
     const users = useSelector((state) => state.auth);
+    const email = getEmail();
     console.log(users.registered);
 
     const handleRegister = (formValue) => {
@@ -25,6 +27,9 @@ const RegisterPage = () => {
     }
 
     useEffect(() => {
+        if (email) {
+            router.push("/otp")
+        }
         if (users.registered) {
             toast.success("Berhasil Mengirimkan OTP", {
                 position: "top-right",

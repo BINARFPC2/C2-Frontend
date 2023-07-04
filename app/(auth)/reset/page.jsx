@@ -5,24 +5,50 @@ import SideBackground from "@/assets/sidebackground.png"
 import InputAuth from "@/components/InputAuth"
 import { Form, Formik } from "formik"
 import { ResetPasswordSchema } from "@/utils/validation"
-import { useSearchParams } from "next/navigation"
 import { asyncResetPassword } from "@/store/auth/slice"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 const ResetPage = () => {
     const dispatch = useDispatch()
-    const searchParams = useSearchParams();
-    const tes = searchParams.get("token");
     const router = useRouter()
-    console.log("t", tes);
-    // if (searchParams.has("token")) {
+
     const handleReset = (values) => {
-        // console.log("sadfjsfhksdf", token);
         dispatch(asyncResetPassword(values));
-        router.push("/login")
+        setSubmitButtonClicked(true);
     }
-    // }
+
+    useEffect(() => {
+        if (submitButtonClicked && users.status === "Success") {
+            toast.success(`Berhasil reset password`, {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setTimeout(() => {
+                router.push("/login")
+            }, 1000);
+        }
+        if (submitButtonClicked && users.status === "error") {
+            toast.error(`Gagal Reset Password`, {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }, [users])
+
     return (
         <main>
             <section>

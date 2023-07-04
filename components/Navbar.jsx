@@ -30,11 +30,24 @@ const getWhoAmI = async (token) => {
   return await response.json();
 };
 
+const getNotification = async (token) => {
+  const response = await fetch(
+    "https://c2-backend.up.railway.app/api/v1/notif",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return await response.json();
+};
+
 const Navbar = () => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState("");
+  const [notif, setNotif] = useState([])
   const [showNotif, setShowNotif] = useState(false);
   const userSelect = useSelector((state) => state.auth.data);
   const dispatch = useDispatch();
@@ -44,6 +57,12 @@ const Navbar = () => {
     setData(me);
   };
 
+  const fetchNotification = async () => {
+    const dataNotification = await getNotification(token);
+    setNotif(dataNotification.data);
+  };
+
+  console.log("notif lenght", notif.length);
 
   const handleOpenNotif = () => {
     setShowNotif(true);
@@ -76,6 +95,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setMounted(true);
+    fetchNotification();
   }, []);
 
   return (
@@ -84,8 +104,8 @@ const Navbar = () => {
         <Image
           src={Logo}
           className="ml-4"
-          width={78}
-          height={33}
+          width={150}
+          height={250}
           alt="Picture of the author"
         />
         {mounted && token ? (
@@ -93,14 +113,13 @@ const Navbar = () => {
             <Link href={"/riwayat"}>
               <FiList className="cursor-pointer mr-5" />
             </Link>
-            {/* <Link href={"/notif"}> */}
-            {/* <div className="relative">
-                <FiBell />
-                <span class="top-0 left-3 absolute  w-3.5 h-3.5 bg-red-600 border-2 border-white dark:border-gray-800 rounded-full"></span>
-              </div> */}
-            <button onClick={handleOpenNotif}><FiBell className="mr-5" /></button>
-            <ModalNotif show={showNotif} onClose={handleCloseNotif} />
-            {/* </Link> */}
+            <Link href={"/notif"}>
+              <div className="relative">
+                <FiBell className="mr-5" />
+                <span className="top-[-5px] left-2 absolute w-5 h-5 bg-red-600 border-2 border-white rounded-full"></span>
+                <span className="top-[-2px] left-3.5 absolute text-xs text-white">{notif.length}</span>
+              </div>
+            </Link>
             <FiUser onClick={handlerOpen} className="cursor-pointer" />
           </div>
         ) : (

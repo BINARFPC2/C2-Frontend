@@ -16,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const ForgotPage = () => {
     // const [alertMessage, setAlertMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
-    // const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+    const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
 
     const router = useRouter();
     const dispatch = useDispatch();
@@ -24,11 +24,11 @@ const ForgotPage = () => {
 
     const handleForgot = (formValue) => {
         dispatch(asyncForget(formValue));
-        // console.log(formValue);
+        setSubmitButtonClicked(true);
     };
 
     useEffect(() => {
-        if (users.error) {
+        if (submitButtonClicked && users.status === "Success") {
             toast.success(`Silahkan check email anda`, {
                 position: "top-right",
                 autoClose: 1000,
@@ -43,9 +43,21 @@ const ForgotPage = () => {
                 router.push("/login")
             }, 1000);
         }
-    }, [users.error])
+        if (submitButtonClicked && users.status === "error") {
+            toast.error(`Email tidak tersedia`, {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }, [users])
 
-    console.log("errror", users.error);
+    console.log("errror", users.status);
     return (
         <main>
             <ToastContainer

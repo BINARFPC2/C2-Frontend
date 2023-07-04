@@ -72,7 +72,12 @@ export const asyncResetPassword = createAsyncThunk(
     const response = await AuthAPI.resetPassword({
       password, confirmPassword
     })
-    return response.json()
+    if (!response.ok) {
+      return { status: response.status };
+    }
+    if (response.ok) {
+      return { status: response.status };
+    }
   }
 )
 
@@ -80,10 +85,12 @@ export const asyncForget = createAsyncThunk(
   "auth/forget",
   async ({ email }) => {
     const response = await AuthAPI.forgotPassword({ email });
-    if (response.status === "error") {
-      return { error: true, status: response.status };
+    if (!response.ok) {
+      return { status: response.status };
     }
-    return { error: false, token: response.token, status: "" };
+    if (response.ok) {
+      return { status: response.status };
+    }
   }
 )
 
@@ -142,14 +149,24 @@ export const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(asyncForget.fulfilled, (state, action) => {
-        state.status = action.payload.status
-        state.error = !action.payload.error
-        state.loading = false;
-        state.message = action.payload.message
+        // state.status = action.payload.status
+        // state.error = !action.payload.error
+        // state.loading = false;
+        // state.message = action.payload.message
+        return {
+          ...state,
+          status: action.payload.status,
+        };
       })
       .addCase(asyncForget.rejected, (state, action) => {
         state.status = action.payload.status
         state.message = action.payload.message
+      })
+      .addCase(asyncResetPassword.fulfilled, (state, action) => {
+        return {
+          ...state,
+          status: action.payload.status,
+        };
       })
       .addCase(asyncWhoAmI.fulfilled, (state, action) => {
         state.data.push({

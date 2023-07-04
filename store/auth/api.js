@@ -47,6 +47,19 @@ const AuthAPI = {
         })
         return await response.json()
     },
+    otpVerify: async ({ otp }) => {
+        console.log("otp", otp);
+        const response = await fetch(BASE_URL + "verify-user", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                otp
+            })
+        })
+        return await response.json();
+    },
     resetPassword: async ({ password, confirmPassword }) => {
         const urlParams = new URLSearchParams(window.location.search);
 

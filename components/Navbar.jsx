@@ -101,7 +101,7 @@ const Navbar = () => {
             <button onClick={handleOpenNotif}><FiBell className="mr-5" /></button>
             <ModalNotif show={showNotif} onClose={handleCloseNotif} />
             {/* </Link> */}
-            <FiUser onClick={handlerOpen} />
+            <FiUser onClick={handlerOpen} className="cursor-pointer" />
           </div>
         ) : (
           <div className="flex mr-4">
@@ -120,7 +120,7 @@ const Navbar = () => {
         open ? (
           <div className="absolute z-50 w-32 -mt-5 transition-all duration-300 ease-in-out bg-white border-2 rounded-lg shadow-lg select-none right-20 drop-shadow-md">
 
-            <Link href="#">
+            <Link href="/user">
               <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer p-2 border-b-2 hover:bg-[#9d4edd] hover:text-white">
                 <FiUser className="mr-2" />
                 Profil

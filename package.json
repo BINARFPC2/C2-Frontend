@@ -26,6 +26,7 @@
     "react-draggable": "^4.4.5",
     "react-headless-accordion": "^1.0.2",
     "react-icons": "^4.9.0",
+    "react-otp-input": "^3.0.2",
     "react-redux": "^8.0.7",
     "react-select": "^5.7.3",
     "react-tailwindcss-datepicker": "^1.6.1",

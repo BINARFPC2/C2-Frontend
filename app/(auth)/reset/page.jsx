@@ -6,13 +6,14 @@ import InputAuth from "@/components/InputAuth"
 import { Form, Formik } from "formik"
 import { ResetPasswordSchema } from "@/utils/validation"
 import { asyncResetPassword } from "@/store/auth/slice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
 const ResetPage = () => {
     const dispatch = useDispatch()
     const router = useRouter()
+    const users = useSelector((state) => state.auth);
 
     const handleReset = (values) => {
         dispatch(asyncResetPassword(values));

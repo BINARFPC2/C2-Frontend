@@ -9,6 +9,8 @@ import { asyncResetPassword } from "@/store/auth/slice"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const ResetPage = () => {
     const dispatch = useDispatch()
@@ -53,6 +55,20 @@ const ResetPage = () => {
 
     return (
         <main>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+            {/* Same as */}
+            <ToastContainer />
             <section>
                 <div className="flex h-full max-w-full">
                     <div className="hidden w-1/2 h-full md:block">

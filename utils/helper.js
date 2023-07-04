@@ -21,6 +21,13 @@ export const getToken = () => {
     }
 }
 
+export const getEmail = () => {
+    if (typeof window !== "undefined") {
+        const email = JSON.parse(localStorage.getItem("email"))
+        return email;
+    }
+}
+
 export const getBookingId = () => {
     if (typeof window !== "undefined") {
         const ticketId = JSON.parse(localStorage.getItem("booking"))
@@ -80,36 +87,36 @@ export const getDurationFlight = (dateTakeoff, dateLanding) => {
 
 
 export const getFlightDuration = (dateTakeoff, dateLanding) => {
-  const takeoffTime = dateTakeoff;
-  const landingTime = dateLanding;
+    const takeoffTime = dateTakeoff;
+    const landingTime = dateLanding;
 
-  const currentDate = new Date();
-
-
-  const [takeoffHour, takeoffMinute] = takeoffTime.split(":").map(Number);
+    const currentDate = new Date();
 
 
-  const takeoffDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), takeoffHour, takeoffMinute, 0);
+    const [takeoffHour, takeoffMinute] = takeoffTime.split(":").map(Number);
 
 
-  const formattedTakeoffDateTime = takeoffDate.toISOString();
+    const takeoffDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), takeoffHour, takeoffMinute, 0);
 
 
-  const [landingHour, landingMinute] = landingTime.split(":").map(Number);
+    const formattedTakeoffDateTime = takeoffDate.toISOString();
 
 
-  const landingDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), landingHour, landingMinute, 0);
+    const [landingHour, landingMinute] = landingTime.split(":").map(Number);
 
 
-  const formattedLandingDateTime = landingDate.toISOString();
+    const landingDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), landingHour, landingMinute, 0);
 
-  const takingOffConvert = new Date(formattedTakeoffDateTime);
-  const landingConvert = new Date(formattedLandingDateTime);
 
-  const durationInMilliseconds = landingConvert - takingOffConvert;
-  const durationInMinutes = Math.floor(durationInMilliseconds / 60000);
-  const hours = Math.floor(durationInMinutes / 60);
-  const minutes = durationInMinutes % 60;
-  
-  return `${hours} jam ${minutes} menit`;
+    const formattedLandingDateTime = landingDate.toISOString();
+
+    const takingOffConvert = new Date(formattedTakeoffDateTime);
+    const landingConvert = new Date(formattedLandingDateTime);
+
+    const durationInMilliseconds = landingConvert - takingOffConvert;
+    const durationInMinutes = Math.floor(durationInMilliseconds / 60000);
+    const hours = Math.floor(durationInMinutes / 60);
+    const minutes = durationInMinutes % 60;
+
+    return `${hours} jam ${minutes} menit`;
 };

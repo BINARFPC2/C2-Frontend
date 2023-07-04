@@ -8,6 +8,10 @@ import BackArrow from "@/assets/fi_arrow.svg";
 import Navbar from "@/components/Navbar";
 import { useEffect, useState } from "react";
 import { getToken } from "@/utils/helper";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { unSetAuthUser } from "@/store/auth/slice";
 
 const getWhoAmI = async (token) => {
   const response = await fetch("https://c2-backend.up.railway.app/api/v1/whoami", {
@@ -20,8 +24,11 @@ const getWhoAmI = async (token) => {
 
 const UserPage = () => {
   const [isEdit, setIsEdit] = useState(false);
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
+  const [formValues, setFormValues] = useState({});
   const token = getToken();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const fetchUser = async () => {
     const user = await getWhoAmI(token);
@@ -35,35 +42,73 @@ const UserPage = () => {
   const handleToggle = () => {
     setIsEdit(true)
   }
+
   const initialValues = {
-    fullName: '',
-    phoneNumber: '',
-    email: ''
+    fullName: "",
+    phoneNumber: "",
+    email: "",
   };
 
-  const handleSubmit = (values) => {
-    console.log('Data yang di-submit:', values);
+
+
+  const handleSubmit = async (values) => {
+    try {
+      const response = await fetch("https://c2-backend.up.railway.app/api/v1/users", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: values.fullName || data.name,
+          phone: values.phoneNumber || data.phone,
+        }),
+      });
+
+      if (response.ok) {
+        // Update the data state with the new values
+        setData({
+          ...data,
+          name: values.fullName,
+          phone: values.phoneNumber || data.phone,
+        });
+        setIsEdit(false);
+      } else {
+        // Handle error
+        console.log("Error:", response.status);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
   };
 
-  const validateForm = (values) => {
-    const errors = {};
-
-    if (!values.fullName) {
-      errors.fullName = 'Nama Lengkap harus diisi';
-    }
-
-    if (!values.phoneNumber) {
-      errors.phoneNumber = 'No Telepon harus diisi';
-    }
-
-    if (!values.email) {
-      errors.email = 'Email harus diisi';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = 'Email tidak valid';
-    }
-
-    return errors;
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(unSetAuthUser());
+    router.push("/login");
   };
+
+  // const validateForm = (values) => {
+  //   const errors = {};
+
+  //   if (!values.fullName) {
+  //     errors.fullName = 'Nama Lengkap harus diisi';
+  //   }
+
+  //   if (!values.phoneNumber) {
+  //     errors.phoneNumber = 'No Telepon harus diisi';
+  //   }
+
+  //   if (!values.email) {
+  //     errors.email = 'Email harus diisi';
+  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+  //     errors.email = 'Email tidak valid';
+  //   }
+
+  //   return errors;
+  // };
+
+  console.log("data", data);
   return (
     <>
       <Navbar />
@@ -74,14 +119,18 @@ const UserPage = () => {
           </div>
           <div className="search flex flex-col sm:flex-row gap-4 mt-4">
             <div className="sm:w-full flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium text-base leading-6 gap-1">
-              <a href="#"><Image
-                className="ml-3 mr-5"
-                src={BackArrow}
-                width={24}
-                height={24}
-                alt=""
-              /></a>
-              <span>Beranda</span>
+              <Link href={"/"}>
+                <div className="flex">
+                  <Image
+                    className="ml-3 mr-5"
+                    src={BackArrow}
+                    width={24}
+                    height={24}
+                    alt=""
+                  />
+                  <span>Beranda</span>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -109,7 +158,7 @@ const UserPage = () => {
                   />
                   Pengaturan Akun
                 </div>
-                <div className="flex font-medium text-base leading-6 border-b-2 pb-4">
+                <div className="flex font-medium text-base leading-6 border-b-2 pb-4 cursor-pointer" onClick={handleLogout}>
                   <Image
                     className="mr-4"
                     src={IconLogOut}
@@ -132,7 +181,7 @@ const UserPage = () => {
                       <Formik
                         initialValues={initialValues}
                         onSubmit={handleSubmit}
-                        validate={validateForm}
+                      // validate={validateForm}
                       >
                         <Form className="bg-white rounded px-8 py-6">
                           <div className="mb-4">
@@ -143,12 +192,13 @@ const UserPage = () => {
                               type="text"
                               name="fullName"
                               placeholder="Masukkan Nama Lengkap"
+                              value={isEdit ? formValues.fullName : data.name}
                             />
-                            <ErrorMessage
+                            {/* <ErrorMessage
                               className="text-red-500 text-xs italic"
                               name="fullName"
                               component="div"
-                            />
+                            /> */}
                           </div>
                           <div className="mb-4">
                             <label className="block text-[#4B1979] text-sm font-bold mb-2" htmlFor="phoneNumber">No Telepon</label>
@@ -158,12 +208,13 @@ const UserPage = () => {
                               type="text"
                               name="phoneNumber"
                               placeholder="Masukkan No Telepon"
+                              value={isEdit ? formValues.phoneNumber : data.phone}
                             />
-                            <ErrorMessage
+                            {/* <ErrorMessage
                               className="text-red-500 text-xs italic"
                               name="phoneNumber"
                               component="div"
-                            />
+                            /> */}
                           </div>
                           <div className="mb-4">
                             <label className="block text-[#4B1979] text-sm font-bold mb-2" htmlFor="email">Email</label>
@@ -173,29 +224,35 @@ const UserPage = () => {
                               type="email"
                               name="email"
                               placeholder="Masukkan Email"
+                              value={data.email}
+                              disabled
                             />
-                            <ErrorMessage
+                            {/* <ErrorMessage
                               className="text-red-500 text-xs italic"
                               name="email"
                               component="div"
-                            />
+                            /> */}
                           </div>
                           <div className="flex justify-center mt-8">
-                            {isEdit ? (<button
+                            {isEdit && (<button
                               className="w-[150px] h-[48px] bg-[#4B1979] rounded-xl text-white text-base leading-6"
-                              type="submit"
-                            >
-                              Edit
-                            </button>) : (<button
-                              className="w-[150px] h-[48px] bg-[#4B1979] rounded-xl text-white text-base leading-6"
-                              type="submit" onClick={handleToggle}
+                              type="simpan"
                             >
                               Simpan
-                            </button>)}
-
+                            </button>)
+                            }
                           </div>
                         </Form>
                       </Formik>
+                      <div className="flex justify-center">
+                        {isEdit ? null : <button
+                          className="w-[150px] h-[48px] bg-[#4B1979] rounded-xl text-white text-base leading-6"
+                          type="button" onClick={handleToggle}
+                        >
+                          Edit
+                        </button>}
+
+                      </div>
                     </div>
                   </div>
                 </div>

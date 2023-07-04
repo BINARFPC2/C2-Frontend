@@ -20,12 +20,13 @@ const RegisterPage = () => {
     console.log(users.registered);
 
     const handleRegister = (formValue) => {
-        dispatch(asyncRegister(formValue))
+        dispatch(asyncRegister(formValue));
+        localStorage.setItem("email", JSON.stringify(formValue.email))
     }
 
     useEffect(() => {
         if (users.registered) {
-            toast.success("Berhasil Daftar", {
+            toast.success("Berhasil Mengirimkan OTP", {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -36,7 +37,7 @@ const RegisterPage = () => {
                 theme: "light",
             });
             setTimeout(() => {
-                router.push("/login")
+                router.push("/otp")
                 dispatch(asyncRegister(!users.registered))
             }, 1000);
         }

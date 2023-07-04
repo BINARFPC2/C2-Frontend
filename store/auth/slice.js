@@ -7,7 +7,7 @@ const initialState = {
   loading: false,
   authenticated: null,
   error: false,
-  status: null,
+  status: "",
   message: null,
   modalInput: [],
   seatData: [],
@@ -47,6 +47,22 @@ export const asyncLogin = createAsyncThunk(
     }
   }
 );
+
+export const asyncOtpVerify = createAsyncThunk(
+  "auth/otp",
+  async (otp) => {
+    console.log("otprttt", otp);
+    const response = await AuthAPI.otpVerify({
+      otp: otp
+    })
+    if (!response.ok) {
+      return { status: response.status };
+    }
+    if (response.ok) {
+      return { status: response.status };
+    }
+  }
+)
 
 export const asyncResetPassword = createAsyncThunk(
   "auth/reset",
@@ -94,13 +110,15 @@ export const authSlice = createSlice({
         state.loading = true
       })
       .addCase(asyncLogin.fulfilled, (state, action) => {
-        const { error, token, name, status } = action.payload
-        state.token = token;
-        state.loading = false;
-        state.authenticated = !error;
-        state.name = name
-        state.status = status
-        state.error = false;
+        const { error, token, status } = action.payload
+        console.log("token", token);
+        // state.token = action.payload.token
+        return {
+          ...state,
+          token: token,
+          status: status,
+          authenticated: status !== "error"
+        };
       })
       .addCase(asyncLogin.rejected, (state, action) => {
         const { error, message } = action.payload
@@ -140,6 +158,14 @@ export const authSlice = createSlice({
           email: action.payload.email,
           image: action.payload.image_profile,
         })
+      })
+      .addCase(asyncOtpVerify.fulfilled, (state, action) => {
+        console.log("tes", action.payload.status);
+        // state.message = action.payload.message
+        return {
+          ...state,
+          status: action.payload.status
+        };
       })
   },
 });

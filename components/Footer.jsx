@@ -16,163 +16,139 @@ import AppStore from "@/assets/images/appstore.svg";
 
 const Footer = () => {
 
-return (
+  return (
 
-<>
-<div className="footer bg-[#292332] md:h-[250px] w-full flex flex-col sm:flex-wrap justify-between gap-1">
-  <div className="w-full sm:w-1/4">
-    <Image
-      src={Logo}
-      className="mt-6 ml-4"
-      alt="fromsvg"
-      width={130}
-      height={50}
-    />
-    <div className="ml-4 mt-8">
-      <div className="text-white text-md font-bold leading-7">
-        Partner Pembayaran
-      </div>
-      <div className="flex justify-between1 gap-1 mt-2">
-        <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
-        <Image
-          src={LogoBCA}
-          alt="fromsvg"
-          width={60}
-          height={40}
-        />
+    <>
+      <div className="footer bg-[#292332] md:h-[250px] w-full flex flex-col sm:flex-wrap justify-between gap-1 md:px-52 px-5">
+        <div className="w-full sm:w-1/4">
+          <Image
+            src={Logo}
+            className="mt-6 ml-4"
+            alt="fromsvg"
+            width={130}
+            height={50}
+          />
+          <div className="ml-4 mt-8">
+            <div className="text-white text-md font-bold leading-7">
+              Partner Pembayaran
+            </div>
+            <div className="flex justify-between1 gap-1 mt-2">
+              <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
+                <Image
+                  src={LogoBCA}
+                  alt="fromsvg"
+                  width={60}
+                  height={40}
+                />
+              </div>
+
+              <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
+                <Image
+                  src={LogoBNI}
+                  alt="fromsvg"
+                  width={60}
+                  height={40}
+                />
+              </div>
+
+              <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
+                <Image
+                  src={LogoBRI}
+                  alt="fromsvg"
+                  width={60}
+                  height={40}
+                />
+              </div>
+
+              <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
+                <Image
+                  src={LogoMandiri}
+                  alt="fromsvg"
+                  width={60}
+                  height={40}
+                />
+              </div>
+
+
+            </div>
+          </div>
+
         </div>
 
-        <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
-        <Image
-          src={LogoBNI}
-          alt="fromsvg"
-          width={60}
-          height={40}
-        />
+        <div className="w-full sm:w-1/4 mt-8 ml-4">
+          <div className="text-white text-md font-bold leading-7">
+            Tentang TicketGo
+          </div>
+
+          <div>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Tentang Kami</a>
+          </div>
+          <div>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Hubungi Kami</a>
+          </div>
+          <div>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Pusat Bantuan</a>
+          </div>
+          <div>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Kebijakan Privasi</a>
+          </div>
+          <div>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Syarat & Ketentuan</a></div>
         </div>
 
-        <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
-        <Image
-          src={LogoBRI}
-          alt="fromsvg"
-          width={60}
-          height={40}
-        />
+        <div className="w-full sm:w-1/4 mt-8 ml-4">
+          <div className="text-white text-md font-bold leading-7">
+            Follow kami di
+          </div>
+          <div className="flex">
+            <Image
+              src={Facebook}
+              alt="fromsvg"
+              className="mr-4"
+            />
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Facebook</a>
+          </div>
+
+          <div className="flex">
+            <Image
+              src={Instagram}
+              alt="fromsvg"
+              className="mr-4"
+            />
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Instagram</a>
+          </div>
+
+          <div className="flex">
+            <Image
+              src={Twitter}
+              alt="fromsvg"
+              className="mr-4"
+            />
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Twitter</a>
+          </div>
+
+          <div className="flex">
+            <Image
+              src={Tiktok}
+              alt="fromsvg"
+              className="mr-4"
+            />
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Tiktok</a>
+          </div>
+
+          <div className="flex">
+            <Image
+              src={Youtube}
+              alt="fromsvg"
+              className="mr-4"
+            />
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Youtube</a>
+          </div>
         </div>
-
-        <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
-        <Image
-          src={LogoMandiri}
-          alt="fromsvg"
-          width={60}
-          height={40}
-        />
-        </div>
-
-
       </div>
-    </div>
+    </>
 
-  </div>
-
-  <div className="w-full sm:w-1/4 mt-8 ml-4">
-    <div className="text-white text-md font-bold leading-7">
-      Tentang TicketGo
-    </div>
-
-    <div>
-    <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Tentang Kami</a>
-    </div>
-    <div>
-    <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Hubungi Kami</a>
-    </div>
-    <div>
-    <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Pusat Bantuan</a>
-    </div>
-    <div>
-    <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Kebijakan Privasi</a>
-    </div>
-    <div>
-    <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Syarat & Ketentuan</a></div>
-  </div>
-
-  <div className="w-full sm:w-1/4 mt-8 ml-4">
-    <div className="text-white text-md font-bold leading-7">
-      Follow kami di
-      </div>
-      <div className="flex">
-      <Image
-        src={Facebook}
-        alt="fromsvg"
-        className="mr-4"
-      />
-        <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Facebook</a>
-      </div>
-
-      <div className="flex">
-      <Image
-        src={Instagram}
-        alt="fromsvg"
-        className="mr-4"
-      />
-        <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Instagram</a>
-      </div>
-
-      <div className="flex">
-      <Image
-        src={Twitter}
-        alt="fromsvg"
-        className="mr-4"
-      />
-        <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Twitter</a>
-      </div>
-
-      <div className="flex">
-      <Image
-        src={Tiktok}
-        alt="fromsvg"
-        className="mr-4"
-      />
-        <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Tiktok</a>
-      </div>
-
-      <div className="flex">
-      <Image
-        src={Youtube}
-        alt="fromsvg"
-        className="mr-4"
-      />
-        <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Youtube</a>
-      </div>
-  </div>
-
-  <div className="w-full sm:w-1/4 mt-8 ml-4">
-    <div className="text-white text-md font-bold leading-7">
-      Download TicketGo App
-    </div>
-
-    <div className="flex">
-    <Image
-      src={PlayStore}
-      alt="fromsvg"
-      className="mt-2"
-    />
-    </div>
-
-    <div className="flex">
-    <Image
-      src={AppStore}
-      alt="fromsvg"
-      className="mt-2"
-    />
-    </div>
-
-  </div>
-
-</div>
-</>
-
-);
+  );
 };
 
 export default Footer;

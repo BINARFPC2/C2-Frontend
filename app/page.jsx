@@ -43,7 +43,7 @@ export default function Home() {
           <FormTicket />
         </div>
         <div className="container flex flex-col w-full min-h-fit">
-          <h3 className="px-5 mb-4 font-bold text-left md:mx-40">Destinasi Favorit</h3>
+          <h3 className="px-44 mb-4 font-bold text-left md:mx-40">Destinasi Favorit</h3>
 
           <div className="pb-10 md:w-full">
             <div className="flex flex-wrap justify-center gap-4">
@@ -74,7 +74,7 @@ export default function Home() {
 
 
         </div>
-        <Footer/>
+        <Footer />
 
       </div>
     </>

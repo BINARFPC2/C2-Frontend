@@ -54,43 +54,44 @@ const FormTicket = () => {
   console.log("showreturn", showReturn);
 
 
-// Kota
-const [isSearchable, setIsSearchable] = useState(true);
-// kota asal
-const [selectFrom, setSelectFrom] = useState(null);
-const [inputFrom, setInputFrom] = useState("");
-// kota tujuan
-const [selectTo, setSelectTo] = useState(null);
-const [inputTo, setInputTo] = useState("");
-// city options
-const city = [
+  // Kota
+  const [isSearchable, setIsSearchable] = useState(true);
+  // kota asal
+  const [selectFrom, setSelectFrom] = useState(null);
+  const [inputFrom, setInputFrom] = useState("");
+  // kota tujuan
+  const [selectTo, setSelectTo] = useState(null);
+  const [inputTo, setInputTo] = useState("");
+  // city options
+  const city = [
     { value: "Jakarta", label: "Jakarta" },
     { value: "Yogyakarta", label: "Yogyakarta" },
     { value: "Surabaya", label: "Surabaya" },
     { value: "Tokyo", label: "Tokyo" },
     { value: "Medan", label: "Medan" },
+    { value: "Singapore", label: "Singapore" },
   ];
 
 
-const handleChangeCityFrom = (selectFromCityFrom, actionMeta) => {
+  const handleChangeCityFrom = (selectFromCityFrom, actionMeta) => {
     setSelectFrom(selectFromCityFrom);
     handleChange({ target: { name: "city_from", value: selectFromCityFrom.value } });
   };
 
-const handleChangeCityTo = (selectToCityTo, actionMeta) => {
+  const handleChangeCityTo = (selectToCityTo, actionMeta) => {
     setSelectTo(selectToCityTo);
     handleChange({ target: { name: "city_to", value: selectToCityTo.value } });
   };
 
-const handleInputFrom = (inputFrom) => {
-      setInputFrom(inputFrom);
-    };
+  const handleInputFrom = (inputFrom) => {
+    setInputFrom(inputFrom);
+  };
 
-const handleInputTo = (inputTo) => {
+  const handleInputTo = (inputTo) => {
     setInputTo(inputTo);
   };
 
-const handleSwapInputs = (event) => {
+  const handleSwapInputs = (event) => {
     event.preventDefault();
 
     // Swap the values of inputFrom and inputTo
@@ -106,11 +107,11 @@ const handleSwapInputs = (event) => {
       setSelectFrom(selectTo);
       setSelectTo(selectFrom);
     }
-};
+  };
 
 
-// Seat
-const options = [
+  // Seat
+  const options = [
     { value: "economy", label: "Economy" },
     { value: "premium economy", label: "Premium Economy" },
     { value: "business", label: "Business" },
@@ -119,16 +120,16 @@ const options = [
   const [selected, setSelected] = useState(null);
 
   const handleSelect = (selectedOption, { name }) => {
-   setSelected(selectedOption);
-   handleChange({ target: { name, value: selectedOption.value } });
- };
+    setSelected(selectedOption);
+    handleChange({ target: { name, value: selectedOption.value } });
+  };
 
- const customStyles = {
+  const customStyles = {
     option: (defaultStyles, state) => ({
       ...defaultStyles,
       color: state.isSelected ? "#fff" : state.isFocused ? "white" : "black",
       backgroundColor: state.isSelected ? "#7400b8" : state.isFocused ? "#9d4edd" : "#fff",
-      fontSize:  "16px"
+      fontSize: "16px"
     }),
 
     control: (defaultStyles) => ({
@@ -178,9 +179,9 @@ const options = [
 
                     <div className="relative inline-flex items-center cursor-pointer btn-swap">
                       <div className="p-2 my-2 text-white bg-black cursor-pointer rounded-xl">
-                      <button type="button" onClick={handleSwapInputs}>
-                        <FiRepeat  />
-                      </button>
+                        <button type="button" onClick={handleSwapInputs}>
+                          <FiRepeat />
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -211,29 +212,29 @@ const options = [
                     <div className="departure border-b-2">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Departure</label>
                       <div className="mt-2">
-                      <input
-                        type="date"
-                        placeholder="Input Tanggal"
-                        className="md:w-[160px] w-[100px] py-3 border-b-2 outline-none border-b-bnr-secondary"
-                        name="dateDeparture"
-                        onChange={handleChange}
-                      />
-                      </div>
-                    </div>
-
-                    <div className="return ml-4 return w-full">
-                        <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
-                        {showReturn && (
-                        <div className="mt-2">
                         <input
                           type="date"
                           placeholder="Input Tanggal"
                           className="md:w-[160px] w-[100px] py-3 border-b-2 outline-none border-b-bnr-secondary"
-                          name="dateReturn"
+                          name="dateDeparture"
                           onChange={handleChange}
                         />
+                      </div>
+                    </div>
+
+                    <div className="return ml-4 return w-full">
+                      <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
+                      {showReturn && (
+                        <div className="mt-2">
+                          <input
+                            type="date"
+                            placeholder="Input Tanggal"
+                            className="md:w-[160px] w-[100px] py-3 border-b-2 outline-none border-b-bnr-secondary"
+                            name="dateReturn"
+                            onChange={handleChange}
+                          />
                         </div>
-                        )}
+                      )}
                     </div>
 
 
@@ -258,12 +259,12 @@ const options = [
                     <div className="w-1/2 ml-4 seat-class border-b-2 border-b-bnr-secondary">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
                       <div>
-                      <div className="select">
-                        <div className="m-auto w-50 ">
-                          <Select options={options} onChange={(selectedOption) => handleSelect(selectedOption, { name: "type_seat" })} value={selected} autoFocus={true} styles={customStyles} placeholder={'Input Class'}  />
+                        <div className="select">
+                          <div className="m-auto w-50 ">
+                            <Select options={options} onChange={(selectedOption) => handleSelect(selectedOption, { name: "type_seat" })} value={selected} autoFocus={true} styles={customStyles} placeholder={'Input Class'} />
 
+                          </div>
                         </div>
-                      </div>
                       </div>
                     </div>
                   </div>

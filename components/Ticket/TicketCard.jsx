@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Image from "next/image";
@@ -42,11 +43,11 @@ const TicketCard = ({ data, handleChoose }) => {
                 onClick={() => toggleCollapse(item.id)}
               >
                 <div className="flex items-center">
-                  <Image
+                  <img
                     className="items-center mr-2"
-                    src={LogoMaskapai}
-                    width={24}
-                    height={24}
+                    src={item.logo}
+                    width={50}
+                    height={50}
                     alt=""
                   />
                   <span className="text-xs font-medium leading-5 text-center">

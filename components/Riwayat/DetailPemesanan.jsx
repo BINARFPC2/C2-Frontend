@@ -1,10 +1,40 @@
 import Image from "next/image";
 import LogoMaskapai from "@/assets/logo-maskapai.svg";
-import { getDateFormat, getMoneyFormat } from "@/utils/helper";
+import { getDateFormat, getMoneyFormat, getToken } from "@/utils/helper";
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
+const getTicket = async (token, id) => {
+  const response = await fetch("https://c2-backend.up.railway.app/api/v1/eticket", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      checkoutId: id
+    })
+  })
+  return await response.json()
+}
 
 const DetailPemesanan = ({ key, data, idTicket }) => {
-  console.log("dataDetail", data);
-  console.log("idTicket", idTicket);
+  const token = getToken();
+
+  const handlePrintTiket = (e) => {
+    e.preventDefault();
+    getTicket(token, data?.id);
+    toast.success(`Berhasil cetak ticket, cek email anda`, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
   return (
     <>
       {idTicket === data.id ? (
@@ -12,6 +42,20 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
           className="content mx-3 duration-500 transition-all ease-in-out"
           key={key}
         >
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          {/* Same as */}
+          <ToastContainer />
           <div className="detail">
             <div className="detail-pesanan flex justify-between">
               <div className="font-bold text-lg leading-7">Detail Ticket</div>
@@ -221,12 +265,13 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
               </div>
             </div>
           </div>
-
-          <div className="button mt-8">
-            <button className="w-full h-[62px] text-xl leading-7 text-white bg-[#7126B5] rounded-xl">
-              Cetak Tiket
-            </button>
-          </div>
+          <form onSubmit={handlePrintTiket}>
+            <div className="button mt-8">
+              <button type="submit" className="w-full h-[62px] text-xl leading-7 text-white bg-[#7126B5] rounded-xl">
+                Cetak Tiket
+              </button>
+            </div>
+          </form>
         </div>
       ) : null}
     </>

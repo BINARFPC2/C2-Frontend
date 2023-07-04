@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Navbar from "@/components/Navbar";
@@ -7,6 +8,7 @@ import Maskapai from "@/assets/logo-maskapai.svg";
 import Image from "next/image";
 import {
   getBookingId,
+  getDateFormat,
   getModal,
   getMoneyFormat,
   getToken,
@@ -451,11 +453,11 @@ const CheckoutPage = () => {
                         Keberangkatan
                       </p>
                     </div>
-                    <p className="text-sm">3 Maret 2023</p>
+                    <p className="text-sm">{getDateFormat(item?.data?.dateDeparture)}</p>
                     <p className="text-sm">{item?.data?.airport_from}</p>
                   </div>
                   <div className="inline-flex items-center w-full gap-2 py-2 border-b border-bnr-secondary">
-                    <Image src={Maskapai} alt="maskapai" />
+                    <img src={item?.data?.logo} alt="maskapai" width={50} height={50} />
                     <div className="text-sm">
                       <h5 className="font-bold">{item?.data?.airlines}</h5>
                       {/* <h5 className="font-bold">JT - 203</h5> */}
@@ -474,24 +476,14 @@ const CheckoutPage = () => {
                         Kedatangan
                       </p>
                     </div>
-                    <p className="text-sm">3 Maret 2023</p>
+                    <p className="text-sm">{getDateFormat(item?.data?.dateEnd)}</p>
                     <p className="text-sm">{item?.data?.airlines_to}</p>
                   </div>
                   <div className="py-2 border-b border-bnr-secondary">
                     <h1 className="text-base font-bold">Rincian</h1>
                     <div className="inline-flex justify-between w-full">
                       <p>{resultPassangers?.total} Passangers</p>
-
-                      {/* <p>Rp. {getMoneyFormat(resultPassangers.total * (data.length > 1 ? item.data.price + item.data.price : item.data.price))}</p> */}
                     </div>
-                    {/* <div className="inline-flex justify-between w-full">
-                                    <p>1 Baby</p>
-                                    <p>IDR 0</p>
-                                </div>
-                                <div className="inline-flex justify-between w-full">
-                                    <p>Tax</p>
-                                    <p>IDR 300.000</p>
-                                </div> */}
                   </div>
                 </div>
               ))}

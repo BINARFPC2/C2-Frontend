@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Navbar from "@/components/Navbar";
@@ -381,7 +382,7 @@ const PaymentPage = () => {
                     <p className="text-sm">{detail?.data?.airport_from}</p>
                   </div>
                   <div className="inline-flex items-center w-full gap-2 py-2 border-b border-bnr-secondary">
-                    <Image src={Maskapai} alt="maskapai" />
+                    <img src={detail?.data?.logo} alt="maskapai" width={50} height={50} />
                     <div className="text-sm">
                       <h5 className="font-bold">
                         {detail?.data?.airlines} - {detail?.data?.type_seat}

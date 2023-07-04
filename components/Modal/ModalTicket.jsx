@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { FiX } from "react-icons/fi";
@@ -32,10 +33,8 @@ async function getTicketId(...flights) {
 }
 
 const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
-  const [selectedTickets, setSelectedTickets] = useState([]);
   const [dataTes, setDataTes] = useState();
   const passengers = useSelector((state) => state.modal.modalInput);
-  const totalPrice = useSelector((state) => state.modal.totalPrice);
   const index = passengers?.length - 1;
   const resultPassangers = passengers[index];
   const totalPassangers = resultPassangers?.total;
@@ -43,8 +42,6 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { showReturn } = useComponentContext();
-
-  console.log("total", totalPrice);
 
   const fetchDataTicket = async () => {
     try {
@@ -55,7 +52,6 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
     }
   };
 
-  // console.log("cekk", dataTes[0].data.price);
   useEffect(() => {
     fetchDataTicket();
   }, []);
@@ -88,66 +84,6 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
     }
   };
 
-  const handleMoney = (t) => {
-    const money = getMoneyFormat(t);
-    console.log("tess money");
-    dispatch(addTotal(money));
-    console.log("moeny", money);
-  };
-
-  console.log("showwwww", showReturn);
-
-  // useEffect(() => {
-  //     if (flightOne.id && !flightTwo.id) {
-  //         const selectedTicket = data.data.find(item => item.id === flightOne.id);
-  //         setSelectedTickets([selectedTicket]);
-  //     }
-
-  //     if (flightOne.id && flightTwo.id && showReturn) {
-  //         const selectedTickets = data.data.filter(item => flightOne.id === item.id || flightTwo.id === item.id);
-  //         setSelectedTickets(selectedTickets);
-  //     }
-  // }, [data, flightOne.id, flightTwo.id, showReturn]);
-
-  // console.log("detalll", dataTes.length);
-  console.log("flightone", flightOne);
-  console.log("flighttow", flightTwo);
-
-  // const takeoffTime = detailFlight?.dateTakeoff;
-  // const landingTime = detailFlight?.dateLanding;
-
-  // // Get current date
-  // const currentDate = new Date();
-
-  // // Extract hour and minute from the takeoff time
-  // const [takeoffHour, takeoffMinute] = takeoffTime.split(":").map(Number);
-
-  // // Create new date object for takeoff time
-  // const takeoffDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), takeoffHour, takeoffMinute, 0);
-
-  // // Format the takeoff date string as "YYYY-MM-DDTHH:MM:SS"
-  // const formattedTakeoffDateTime = takeoffDate.toISOString();
-
-  // // Extract hour and minute from the landing time
-  // const [landingHour, landingMinute] = landingTime.split(":").map(Number);
-
-  // // Create new date object for landing time
-  // const landingDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), landingHour, landingMinute, 0);
-
-  // // Format the landing date string as "YYYY-MM-DDTHH:MM:SS"
-  // const formattedLandingDateTime = landingDate.toISOString();
-
-  // const takingOffConvert = new Date(formattedTakeoffDateTime);
-  // const landingConvert = new Date(formattedLandingDateTime);
-
-  // const durationInMilliseconds = landingConvert - takingOffConvert;
-  // const durationInMinutes = Math.floor(durationInMilliseconds / 60000);
-  // const hours = Math.floor(durationInMinutes / 60);
-  // const minutes = durationInMinutes % 60;
-
-  // const duration = `${hours} jam ${minutes} menit`;
-
-  // console.log(duration);
   return (
     <div className="relative z-50">
       <div
@@ -174,11 +110,11 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
               >
                 <div className="w-full h-[127px] bg-white drop-shadow-md border border-bnr-secondary rounded-lg p-5 mx-auto space-y-2">
                   <div className="flex items-center">
-                    <Image
+                    <img
                       className="items-center mr-2"
-                      src={LogoMaskapai}
-                      width={24}
-                      height={24}
+                      src={detail?.data?.logo}
+                      width={50}
+                      height={50}
                       alt=""
                     />
                     <span className="text-xs font-medium leading-5 text-center">

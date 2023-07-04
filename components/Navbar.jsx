@@ -48,7 +48,6 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState("");
   const [notif, setNotif] = useState([])
-  const [showNotif, setShowNotif] = useState(false);
   const userSelect = useSelector((state) => state.auth.data);
   const dispatch = useDispatch();
   const token = getToken();
@@ -60,16 +59,6 @@ const Navbar = () => {
   const fetchNotification = async () => {
     const dataNotification = await getNotification(token);
     setNotif(dataNotification.data);
-  };
-
-  console.log("notif lenght", notif.length);
-
-  const handleOpenNotif = () => {
-    setShowNotif(true);
-  };
-
-  const handleCloseNotif = () => {
-    setShowNotif(false);
   };
 
   const handleLogout = () => {

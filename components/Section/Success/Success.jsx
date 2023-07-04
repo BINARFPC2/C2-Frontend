@@ -5,8 +5,24 @@ import BreadCrumb from "../common/Breadcumb";
 import Image from "next/image";
 import Link from "next/link";
 import Success from "@/assets/images/success.png"
+import { getToken } from "@/utils/helper";
+
+const getTicket = async (token) => {
+    const response = await fetch("https://c2-backend.up.railway.app/api/v1/eticket", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return await response.json()
+}
 
 const SuccessSection = () => {
+    const token = getToken();
+
+    const handlePrintTiket = (e) => {
+        e.preventDefault();
+        getTicket(token)
+    }
     return (
         <>
             <div className="h-full max-w-full">
@@ -22,11 +38,9 @@ const SuccessSection = () => {
                         <p className=" font-medium text-bnr-primary">Selamat!</p>
                         <h3 className="font-medium">Transaksi Pembayaran Tiket sukses!</h3>
 
-                        <div>
-                            <Link href={"payment/cetak"}>
-                                <button className="bg-bnr-primary w-full text-white rounded-lg py-2 mt-5">Cetak Tiket</button>
-                            </Link>
-                        </div>
+                        <form onSubmit={handlePrintTiket}>
+                            <button className="bg-bnr-primary w-full text-white rounded-lg py-2 mt-5" type="submit">Cetak Tiket</button>
+                        </form>
 
                         <div>
                             <Link href={"/"}>

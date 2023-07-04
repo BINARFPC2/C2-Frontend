@@ -14,6 +14,7 @@ const ResetPage = () => {
     const dispatch = useDispatch()
     const router = useRouter()
     const users = useSelector((state) => state.auth);
+    const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
 
     const handleReset = (values) => {
         dispatch(asyncResetPassword(values));

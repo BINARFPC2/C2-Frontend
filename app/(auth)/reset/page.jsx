@@ -8,7 +8,7 @@ import { ResetPasswordSchema } from "@/utils/validation"
 import { asyncResetPassword } from "@/store/auth/slice"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const ResetPage = () => {
     const dispatch = useDispatch()

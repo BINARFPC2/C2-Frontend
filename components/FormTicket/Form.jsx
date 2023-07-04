@@ -55,12 +55,14 @@ const FormTicket = () => {
 
 
 // Kota
+const [isSearchable, setIsSearchable] = useState(true);
+// kota asal
 const [selectFrom, setSelectFrom] = useState(null);
 const [inputFrom, setInputFrom] = useState("");
-
+// kota tujuan
 const [selectTo, setSelectTo] = useState(null);
 const [inputTo, setInputTo] = useState("");
-
+// city options
 const city = [
     { value: "Jakarta", label: "Jakarta" },
     { value: "Yogyakarta", label: "Yogyakarta" },
@@ -75,31 +77,35 @@ const handleChangeCityFrom = (selectFromCityFrom, actionMeta) => {
     handleChange({ target: { name: "city_from", value: selectFromCityFrom.value } });
   };
 
-const handleInputFrom = (inputFrom) => {
-    setInputFrom(inputFrom);
-  };
-
 const handleChangeCityTo = (selectToCityTo, actionMeta) => {
     setSelectTo(selectToCityTo);
     handleChange({ target: { name: "city_to", value: selectToCityTo.value } });
   };
 
+const handleInputFrom = (inputFrom) => {
+      setInputFrom(inputFrom);
+    };
+
 const handleInputTo = (inputTo) => {
     setInputTo(inputTo);
   };
 
-
 const handleSwapInputs = (event) => {
-  event.preventDefault();
-  // Swap the values of inputFrom and inputTo
-  const tempInputFrom = inputFrom;
-  setInputFrom(inputTo);
-  setInputTo(tempInputFrom);
+    event.preventDefault();
 
-  // Swap the selected options of selectFrom and selectTo (if needed)
-  const tempSelectFrom = selectFrom;
-  setSelectFrom(selectTo);
-  setSelectTo(tempSelectFrom);
+    // Swap the values of inputFrom and inputTo
+    setInputFrom(inputTo);
+    setInputTo(inputFrom);
+
+    handleChange({ target: { name: "city_to", value: selectFrom.value } });
+    handleChange({ target: { name: "city_from", value: selectTo.value } });
+
+    // Swap the selected options of selectFrom and selectTo (if needed)
+    if (selectFrom && selectTo) {
+      // Swap the values directly without using the 'value' property
+      setSelectFrom(selectTo);
+      setSelectTo(selectFrom);
+    }
 };
 
 
@@ -161,7 +167,7 @@ const options = [
                         onInputChange={handleInputFrom}
                         inputValue={inputFrom}
                         value={selectFrom}
-                        isSearchable
+                        isSearchable={isSearchable}
                         autoFocus={true}
                         styles={customStyles}
                         menuIsOpen={inputFrom.trim().length > 0}
@@ -172,8 +178,8 @@ const options = [
 
                     <div className="relative inline-flex items-center cursor-pointer btn-swap">
                       <div className="p-2 my-2 text-white bg-black cursor-pointer rounded-xl">
-                      <button type="button">
-                        <FiRepeat onClick={handleSwapInputs} />
+                      <button type="button" onClick={handleSwapInputs}>
+                        <FiRepeat  />
                       </button>
                       </div>
                     </div>

@@ -81,7 +81,7 @@ const HistoryPage = () => {
         <div className="pb-4 mx-2 border-b-2 ticket-section drop-shadow-md">
           <div className="text-heading">
             <h1 className="mt-12 text-xl font-bold leading-8">
-              Riwayat Pemesanan
+              Booking History
             </h1>
           </div>
           <div className="z-0 flex flex-col gap-4 mt-4 search sm:flex-row">
@@ -95,16 +95,14 @@ const HistoryPage = () => {
                     height={24}
                     alt=""
                   />
-                  <span>Beranda</span>
+                  <span>Homepage</span>
                 </div>
               </Link>
             </div>
             <div className="flex justify-between gap-x-4">
               <div className="items-center my-auto">
                 <button
-                  className="flex items-center rounded-2xl w-[90px] font-normal text-base leading-6 border-2 border-[#A06ECE]"
-                  onClick={() => setShowModal(true)}
-                >
+                  className="flex items-center rounded-2xl w-[90px] font-normal text-base leading-6 border-2 border-[#A06ECE]">
                   <div className="flex h-8 mx-auto ">
                     <Image
                       className="items-center mr-2.5"

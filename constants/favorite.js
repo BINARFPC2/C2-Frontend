@@ -4,7 +4,7 @@ const Favorite = [
         from: "Jakarta",
         to: "Bangkok",
         airline: "AirAsia",
-        availableDate: "20 - 30 Maret 2023",
+        availableDate: "2 - 30 July 2023",
         price: 950000
     },
     {
@@ -12,7 +12,7 @@ const Favorite = [
         from: "Jakarta",
         to: "Bangkok",
         airline: "AirAsia",
-        availableDate: "20 - 30 Maret 2023",
+        availableDate: "2 - 30 July 2023",
         price: 950000
     },
     {
@@ -20,7 +20,7 @@ const Favorite = [
         from: "Jakarta",
         to: "Bangkok",
         airline: "AirAsia",
-        availableDate: "20 - 30 Maret 2023",
+        availableDate: "2 - 30 July 2023",
         price: 950000
     },
     {
@@ -28,7 +28,7 @@ const Favorite = [
         from: "Jakarta",
         to: "Bangkok",
         airline: "AirAsia",
-        availableDate: "20 - 30 Maret 2023",
+        availableDate: "2 - 30 July 2023",
         price: 950000
     },
     {
@@ -36,7 +36,7 @@ const Favorite = [
         from: "Jakarta",
         to: "Bangkok",
         airline: "AirAsia",
-        availableDate: "20 - 30 Maret 2023",
+        availableDate: "2 - 30 July 2023",
         price: 950000
     },
 ]

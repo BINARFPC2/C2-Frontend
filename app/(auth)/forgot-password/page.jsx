@@ -29,7 +29,7 @@ const ForgotPage = () => {
 
     useEffect(() => {
         if (submitButtonClicked && users.status === "Success") {
-            toast.success(`Silahkan check email anda`, {
+            toast.success(`Please check your email`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -44,7 +44,7 @@ const ForgotPage = () => {
             }, 1000);
         }
         if (submitButtonClicked && users.status === "error") {
-            toast.error(`Email tidak tersedia`, {
+            toast.error(`The email is not available`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -80,7 +80,7 @@ const ForgotPage = () => {
                         <Image src={SideBackground} alt="sidebackground" className="object-cover w-full h-screen" />
                     </div>
                     <div className="flex flex-col items-center justify-center w-full h-screen px-4 md:px-32 md:w-1/2">
-                        <h1 className="w-full pb-6 text-2xl font-bold text-start">Lupa Sandi</h1>
+                        <h1 className="w-full pb-6 text-2xl font-bold text-start">Forgot Password</h1>
                         <Formik
                             initialValues={{
                                 email: "",
@@ -104,7 +104,7 @@ const ForgotPage = () => {
                                         <InputAuth
                                             name="email"
                                             type="text"
-                                            placeholder="Masukkan Email"
+                                            placeholder="Enter Email"
                                             value={values.email}
                                             handleChange={handleChange}
                                             handleBlur={handleBlur}

@@ -8,7 +8,7 @@ const TransactionSuccess = () => {
       <div className="absolute flex justify-center w-full mx-auto data-save -mt-14">
         <div className="flex justify-center items-center w-[936px] h-[50px] rounded-lg bg-[#73CA5C] mx-2">
           <div className="flex items-center justify-center w-full p-2 font-medium text-white md:text-lg leading 7">
-            Terimakasih atas pembayaran transaksi
+            Thank you for the payment transaction
           </div>
         </div>
 

@@ -10,7 +10,7 @@ export const getDateFormat = (originalDate) => {
     const dateString = originalDate;
     const date = new Date(dateString);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = date.toLocaleDateString('id-ID', options);
+    const formattedDate = date.toLocaleDateString('en-US', options);
     return formattedDate
 }
 
@@ -125,5 +125,5 @@ export const getFlightDuration = (dateTakeoff, dateLanding) => {
     const hours = Math.floor(durationInMinutes / 60);
     const minutes = durationInMinutes % 60;
 
-    return `${hours} jam ${minutes} menit`;
+    return `${hours} h ${minutes} m`;
 };

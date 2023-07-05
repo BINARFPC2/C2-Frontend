@@ -6,6 +6,7 @@ import { FiSearch } from "react-icons/fi";
 import { Categories, Favorite, Favorites } from "@/constants";
 import CardFavorite from "@/components/Card/CardFavorite";
 import Logo from "@/assets/images/logo-tiketku.svg";
+import Banner from "@/assets/images/banner.svg";
 
 import LogoBRI from "@/assets/Logo_BRI.svg";
 import LogoMandiri from "@/assets/Logo_Mandiri.svg";
@@ -34,7 +35,7 @@ export default function Home() {
           </div>
           <div className="hidden absolute z-20 w-[80%] min-h-56 justify-end md:block ">
             <Image
-              src={HeroImage}
+              src={Banner}
               alt="hero-image"
               className="z-0 w-full h-full" />
           </div>
@@ -42,8 +43,8 @@ export default function Home() {
         <div className="relative z-30 flex justify-center mb-10 sm:-mt-28">
           <FormTicket />
         </div>
-        <div className="container flex flex-col w-full min-h-fit">
-          <h3 className="px-44 mb-4 font-bold text-left md:mx-40">Destinasi Favorit</h3>
+        <div className="container flex flex-col w-full min-h-fit mx-auto">
+          <h3 className="mb-4 font-bold text-left mx-2 md:mx-32">Favorite Destinations</h3>
 
           <div className="pb-10 md:w-full">
             <div className="flex flex-wrap justify-center gap-4">

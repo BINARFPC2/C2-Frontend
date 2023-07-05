@@ -177,7 +177,7 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
                   <div>
                     <h3 className="text-base font-medium">Total</h3>
                     <h3 className="text-2xl font-semibold text-bnr-primary">
-                      Rp.
+                      IDR 
                       {getMoneyFormat(
                         totalPassangers *
                         (dataTes.length > 1
@@ -197,7 +197,7 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
                       )
                     }
                   >
-                    Lanjut Booking
+                    Proceed to Booking
                   </button>
                 </div>
               );

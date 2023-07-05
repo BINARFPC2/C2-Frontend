@@ -151,7 +151,7 @@ const FormTicket = () => {
             <div className="w-full md:w-[968px] mx-2">
               <div className="p-4 content">
                 <h1 className="text-xl font-bold leading-7">
-                  Pilih Jadwal Penerbangan special di <span className="text-[#7126B5]">TiketGo!</span>
+                  Choose Special Flight Schedule on <span className="text-[#7126B5]">TiketGo!</span>
                 </h1>
 
                 <div className="flex flex-col items-center justify-between w-full gap-2 py-2 pilih-kota md:flex-row">
@@ -173,7 +173,7 @@ const FormTicket = () => {
                         styles={customStyles}
                         menuIsOpen={inputFrom.trim().length > 0}
                         className="w-full border-b-2"
-                        placeholder={'City From'}
+                        placeholder={'City'}
                       />
                     </div>
 
@@ -200,7 +200,7 @@ const FormTicket = () => {
                       styles={customStyles}
                       menuIsOpen={inputTo.trim().length > 0}
                       className="w-full border-b-2"
-                      placeholder={'City To'}
+                      placeholder={'City'}
                     />
                   </div>
                 </div>
@@ -273,7 +273,7 @@ const FormTicket = () => {
               </div>
             </div>
             <button type="submit" className="w-full py-3 font-semibold text-white bg-bnr-primary rounded-bl-xl rounded-br-xl">
-              Cari Penerbangan
+              Search Flights
             </button>
           </form>
         </div>

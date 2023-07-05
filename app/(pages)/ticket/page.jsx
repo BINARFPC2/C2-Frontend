@@ -153,13 +153,13 @@ const TicketPage = () => {
 
   function getDayName(dayIndex) {
     const dayNames = [
-      "Minggu",
-      "Senin",
-      "Selasa",
-      "Rabu",
-      "Kamis",
-      "Jumat",
-      "Sabtu",
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
     ];
     return dayNames[dayIndex];
   }
@@ -359,7 +359,7 @@ const TicketPage = () => {
         <div className="mx-2 ticket-section">
           <div className="text-heading">
             <h1 className="mt-10 text-xl font-bold leading-8">
-              Pilih Penerbangan
+              Choose a Flight
             </h1>
           </div>
 
@@ -384,7 +384,7 @@ const TicketPage = () => {
                     <span className="text-sm md:text-base">
                       {totalPassangers}
                     </span>
-                    <span> Penumpang</span>
+                    <span> Passangers</span>
                   </div>
                   <div className="text-sm md:text-base">-</div>
                   <div className="text-sm md:text-base capitalize">
@@ -400,7 +400,7 @@ const TicketPage = () => {
                   className="w-[220px] bg-[#73CA5C] hover:bg-[#67b552] h-[50px] rounded-xl text-white text-base font-bold leading-8"
                   onClick={() => setShowForm(true)}
                 >
-                  Ubah Pencarian
+                  Change Search
                 </button>{" "}
               </a>
             </div>
@@ -480,9 +480,9 @@ const TicketPage = () => {
                     <div className="flex flex-col items-center justify-center">
                       <Image width={300} height={300} src={NoTicket} alt="sd" />
                       <div className="pt-10 text-center">
-                        <p>Maaf, Tiket Terjual Habis</p>
+                        <p>Sorry, Tickets are Sold Out</p>
                         <p className="text-bnr-primary">
-                          Coba cari perjalanan lainnya!
+                          Please Try Searching for Another Journey!
                         </p>
                       </div>
                     </div>

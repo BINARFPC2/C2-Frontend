@@ -203,9 +203,9 @@ const CheckoutPage = () => {
           <section className="max-w-full space-y-10 md:w-[600px] ">
             <form onSubmit={formik.handleSubmit}>
               <div className="w-full px-4 border border-[#8A8A8A] rounded-md mb-6">
-                <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
+                <h1 className="py-5 text-xl font-bold">Provide Booking Details</h1>
                 <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl">
-                  Data Diri Pemesan
+                  Booker's Personal Details
                 </div>
                 <div className="p-6 space-y-3">
                   <div>
@@ -213,7 +213,7 @@ const CheckoutPage = () => {
                       htmlFor="fullName"
                       className="font-bold text-[#4B1979]"
                     >
-                      Nama Lengkap
+                      Full Name
                     </label>
                     <input
                       type="text"
@@ -234,7 +234,7 @@ const CheckoutPage = () => {
                       htmlFor="familyName"
                       className="font-bold text-[#4B1979]"
                     >
-                      Nama Keluarga
+                      Family Name
                     </label>
                     <input
                       type="text"
@@ -255,7 +255,7 @@ const CheckoutPage = () => {
                       htmlFor="phoneNumber"
                       className="font-bold text-[#4B1979]"
                     >
-                      Nomor Telepon
+                      Phone Number
                     </label>
                     <input
                       type="text"
@@ -297,7 +297,7 @@ const CheckoutPage = () => {
               </div>
 
               <div className="w-full px-4 border border-[#8A8A8A] rounded-md ">
-                <h1 className="py-5 text-xl font-bold">Isi data pemesan </h1>
+                <h1 className="py-5 text-xl font-bold">Provide Booking Details</h1>
                 {dataPassangers?.map((passanger, index) => (
                   <div key={index}>
                     <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl flex justify-between items-center">
@@ -317,7 +317,7 @@ const CheckoutPage = () => {
                           htmlFor={`fullName${index}`}
                           className="font-bold text-[#4B1979]"
                         >
-                          Nama Lengkap
+                          Full Name
                         </label>
                         <input
                           type="text"
@@ -364,7 +364,7 @@ const CheckoutPage = () => {
                           htmlFor={`familyName${index}`}
                           className="font-bold text-[#4B1979]"
                         >
-                          Nama Keluarga
+                          Family Name
                         </label>
                         <input
                           type="text"
@@ -386,7 +386,7 @@ const CheckoutPage = () => {
                           htmlFor={`phoneNumber`}
                           className="font-bold text-[#4B1979]"
                         >
-                          Nomor Telepon
+                          Phone Number
                         </label>
                         <input
                           type="text"
@@ -435,7 +435,7 @@ const CheckoutPage = () => {
                   } drop-shadow-lg`}
                 disabled={isSubmitting}
               >
-                Simpan
+                Submit
               </button>
             </form>
           </section>
@@ -444,13 +444,13 @@ const CheckoutPage = () => {
               {data?.map((item, index) => (
                 <div key={index} className="w-full min-h-full">
                   <div className="pt-10 border-b border-bnr-secondary">
-                    <h1 className="text-xl font-bold">Detail Penerbangan</h1>
+                    <h1 className="text-xl font-bold">Flight Details</h1>
                     <div className="inline-flex justify-between w-full">
                       <p className="text-base font-bold">
                         {item?.data?.dateTakeoff}
                       </p>
                       <p className="text-xs font-bold text-bnr-primary">
-                        Keberangkatan
+                        Departure
                       </p>
                     </div>
                     <p className="text-sm">{getDateFormat(item?.data?.dateDeparture)}</p>
@@ -462,7 +462,7 @@ const CheckoutPage = () => {
                       <h5 className="font-bold">{item?.data?.airlines}</h5>
                       {/* <h5 className="font-bold">JT - 203</h5> */}
                       <div className="mt-5">
-                        <h5 className="font-bold">Informasi</h5>
+                        <h5 className="font-bold">Information</h5>
                         <p className="w-36">{item?.data?.information}</p>
                       </div>
                     </div>
@@ -473,14 +473,14 @@ const CheckoutPage = () => {
                         {item?.data?.dateLanding}
                       </p>
                       <p className="text-xs font-bold text-bnr-primary">
-                        Kedatangan
+                        Arrival
                       </p>
                     </div>
                     <p className="text-sm">{getDateFormat(item?.data?.dateEnd)}</p>
                     <p className="text-sm">{item?.data?.airlines_to}</p>
                   </div>
                   <div className="py-2 border-b border-bnr-secondary">
-                    <h1 className="text-base font-bold">Rincian</h1>
+                    <h1 className="text-base font-bold">Details</h1>
                     <div className="inline-flex justify-between w-full">
                       <p>{resultPassangers?.total} Passangers</p>
                     </div>
@@ -500,7 +500,7 @@ const CheckoutPage = () => {
                   type="submit"
                   className="w-full py-3 text-white bg-red-600 rounded-lg drop-shadow-lg"
                 >
-                  Lanjut Bayar
+                  Proceed to Payment
                 </button>
               ) : null}
             </form>

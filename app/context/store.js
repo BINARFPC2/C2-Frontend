@@ -33,7 +33,7 @@ export const CompContextProvider = ({ children }) => {
             setIsDoubleClick(true);
             setTimeout(() => {
                 setIsDoubleClick(false);
-            }, 300); // 
+            }, 300); //
         }
     }
 

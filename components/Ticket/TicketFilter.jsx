@@ -21,12 +21,12 @@ const TicketFilter = () => {
   const [selectedOptions, setSelectedOptions] = useState("");
 
   const [options, setOptions] = useState([
-    { id: 1, isChecked: false, filter: "Harga", label: "Termurah" },
-    { id: 2, isChecked: false, filter: "Durasi", label: "Terpendek" },
-    { id: 3, isChecked: false, filter: "Keberangkatan", label: "Paling Awal" },
-    { id: 4, isChecked: false, filter: "Keberangkatan", label: "Paling Akhir" },
-    { id: 5, isChecked: false, filter: "Kedatangan", label: "Paling Awal" },
-    { id: 6, isChecked: false, filter: "Kedatangan", label: "Paling Akhir" },
+    { id: 1, isChecked: false, filter: "Price", label: "Cheapest" },
+    { id: 2, isChecked: false, filter: "Duration", label: "Shortest " },
+    { id: 3, isChecked: false, filter: "Departure", label: "Earliest" },
+    { id: 4, isChecked: false, filter: "Departure", label: "Latest" },
+    { id: 5, isChecked: false, filter: "Arrival", label: "Earliest" },
+    { id: 6, isChecked: false, filter: "Arrival", label: "Latest" },
   ]);
 
   const handleCheckboxChange = (id) => {
@@ -121,7 +121,7 @@ const TicketFilter = () => {
                         height={24}
                         alt=""
                       />
-                      <h2 className="text-base font-normal leading-6">Fasilitas</h2>
+                      <h2 className="text-base font-normal leading-6">Facilities</h2>
                     </div>
                     <Image
                       className="items-center ml-4"
@@ -141,7 +141,7 @@ const TicketFilter = () => {
                         height={24}
                         alt=""
                       />
-                      <h2 className="text-base font-normal leading-6">Harga</h2>
+                      <h2 className="text-base font-normal leading-6">Price</h2>
                     </div>
                     <Image
                       className="items-center ml-4"
@@ -249,7 +249,7 @@ const TicketFilter = () => {
                   type="button"
                   onClick={handleSelectOptions}
                 >
-                  Pilih
+                  Choose
                 </button>
               </div>
             </div>

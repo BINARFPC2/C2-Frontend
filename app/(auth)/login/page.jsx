@@ -35,7 +35,7 @@ const LoginPage = () => {
         }
         if (submitButtonClicked && users.authenticated) {
             localStorage.setItem("token", users.token);
-            toast.success(`Welcome Brooo`, {
+            toast.success(`You have successfully logged in!`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -50,7 +50,7 @@ const LoginPage = () => {
             }, 1000);
         }
         if (submitButtonClicked && users.status === "error") {
-            toast.error(`Error Brooo`, {
+            toast.error(`Login error, please check your email and password!`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -88,7 +88,7 @@ const LoginPage = () => {
                         <Image src={SideBackground} alt="sidebackground" className="object-cover w-full h-screen" />
                     </div>
                     <div className="flex flex-col items-center justify-center w-full h-screen px-4 md:px-32 md:w-1/2">
-                        <h1 className="w-full pb-6 text-2xl font-bold text-start">Masuk</h1>
+                        <h1 className="w-full pb-6 text-2xl font-bold text-start">Login</h1>
                         {showAlert && <p>{alertMessage}</p>}
                         <Formik
                             initialValues={{
@@ -114,7 +114,7 @@ const LoginPage = () => {
                                         <InputAuth
                                             name="email"
                                             type="text"
-                                            placeholder="Masukkan Email"
+                                            placeholder="Enter Email"
                                             value={values.email}
                                             handleChange={handleChange}
                                             handleBlur={handleBlur}
@@ -126,7 +126,7 @@ const LoginPage = () => {
                                         <InputAuth
                                             name="password"
                                             type="password"
-                                            placeholder="Masukkan Password"
+                                            placeholder="Enter Password"
                                             value={values.password}
                                             handleChange={handleChange}
                                             handleBlur={handleBlur}
@@ -136,13 +136,13 @@ const LoginPage = () => {
                                             Password
                                         </InputAuth>
                                         <button type="submit" className={!showAlert ? "px-6 py-3 text-sm text-white rounded-2xl bg-bnr-primary" : "px-6 py-3 text-sm text-slate-400 rounded-2xl bg-slate-300"} disabled={showAlert && false}>
-                                            Masuk
+                                            Login
                                         </button>
                                     </Form>
                                 )
                             }}
                         </Formik>
-                        <p className="pt-12 text-sm">Belum punya akun? <Link href="/register" className="font-bold text-bnr-primary hover:underline hover:transition-all hover:duration-700">Daftar di sini</Link></p>
+                        <p className="pt-12 text-sm">Don't have an account yet? <Link href="/register" className="font-bold text-bnr-primary hover:underline hover:transition-all hover:duration-700">Register here</Link></p>
                     </div>
                 </div>
             </section>

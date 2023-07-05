@@ -31,7 +31,7 @@ const InputAuth = ({
         </label>
         {pathName !== "/login" ? null : type !== "password" ? null : (
           <Link href="/forgot-password" className="text-xs text-bnr-primary">
-            Lupa kata sandi
+            Forgot password
           </Link>
         )}
       </div>

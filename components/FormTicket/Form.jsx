@@ -15,6 +15,7 @@ import { addSearchFlight } from "@/store/auth/slice";
 import { handleClientScriptLoad } from "next/script";
 import ModalPassenger from "../Modal/ModalPassenger";
 import { useComponentContext } from "@/app/context/store";
+import { Switch } from "@headlessui/react";
 
 
 import Select from "react-select";
@@ -209,7 +210,7 @@ const FormTicket = () => {
                   <div className="flex w-full pilih-tanggal">
                     <Image src={DateSvg} className="mt-6 mr-4" alt="fromsvg" />
 
-                    <div className="departure border-b-2">
+                    <div className="border-b-2 departure">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Departure</label>
                       <div className="mt-2">
                         <input
@@ -222,7 +223,7 @@ const FormTicket = () => {
                       </div>
                     </div>
 
-                    <div className="return ml-4 return w-full">
+                    <div className="w-full ml-4 return">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="">Return</label>
                       {showReturn && (
                         <div className="mt-2">
@@ -236,27 +237,27 @@ const FormTicket = () => {
                         </div>
                       )}
                     </div>
-
-
-                    <div className="flex button justify-self-end">
-                      <div className="btn-slider">
-                        <label className="relative inline-flex items-center cursor-pointer" onClick={handleToggle} >
-                          <input type="checkbox" value="" className="sr-only peer" />
-                          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-bnr-primary"></div>
-                        </label>
-                      </div>
-
-                    </div>
+                    <Switch
+                      checked={showReturn}
+                      onChange={handleToggle}
+                      className={`${showReturn ? 'bg-bnr-primary' : 'bg-bnr-secondary'}
+          relative inline-flex h-[28px] w-[50px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+                    >
+                      <span className="sr-only">Use setting</span>
+                      <span
+                        aria-hidden="true"
+                        className={`${showReturn ? 'translate-x-5' : 'translate-x-0.5'}
+            pointer-events-none inline-block h-[24px] w-[24px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+                      />
+                    </Switch>
                   </div>
-
-
                   <div className="flex items-center w-full">
                     <Image src={ToTwo} className="mt-6 mr-2" alt="fromsvg" />
                     <div className="relative w-1/2 ml-6 passengers">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
                       <ModalPassenger name={"passengers"} handleChange={handleChange} />
                     </div>
-                    <div className="w-1/2 ml-4 seat-class border-b-2 border-b-bnr-secondary">
+                    <div className="w-1/2 ml-4 border-b-2 seat-class border-b-bnr-secondary">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>
                       <div>
                         <div className="select">

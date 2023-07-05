@@ -6,7 +6,7 @@ const ComponentContext = createContext({})
 
 export const CompContextProvider = ({ children }) => {
     const [showReturn, setShowReturn] = useState(false)
-    const [isDoubleClick, setIsDoubleClick] = useState(false);
+    // const [isDoubleClick, setIsDoubleClick] = useState(false);
 
     // useEffect(() => {
     //     // Load persisted data from local storage
@@ -26,15 +26,16 @@ export const CompContextProvider = ({ children }) => {
     // }, [showReturn]);
 
     const handleToggle = () => {
-        if (isDoubleClick) {
-            setShowReturn(!showReturn);
-            setIsDoubleClick(false);
-        } else {
-            setIsDoubleClick(true);
-            setTimeout(() => {
-                setIsDoubleClick(false);
-            }, 300); //
-        }
+        // if (isDoubleClick) {
+        //     setShowReturn(!showReturn);
+        //     setIsDoubleClick(false);
+        // } else {
+        //     setIsDoubleClick(true);
+        //     setTimeout(() => {
+        //         setIsDoubleClick(false);
+        //     }, 300); //
+        // }
+        setShowReturn(!showReturn);
     }
 
     return (

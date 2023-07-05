@@ -255,7 +255,7 @@ const FormTicket = () => {
                     <Image src={ToTwo} className="mt-6 mr-2" alt="fromsvg" />
                     <div className="relative w-1/2 ml-6 passengers">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Passengers</label>
-                      <ModalPassenger name={"passengers"} handleChange={handleChange} />
+                      <ModalPassenger className="z-10" name={"passengers"} handleChange={handleChange} />
                     </div>
                     <div className="w-1/2 ml-4 border-b-2 seat-class border-b-bnr-secondary">
                       <label className="text-base leading-6 font-normal text-[#8A8A8A]" htmlFor="tes">Seat Class</label>

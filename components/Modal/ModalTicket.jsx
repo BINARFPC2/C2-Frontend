@@ -5,7 +5,7 @@ import { FiX } from "react-icons/fi";
 import TicketDetailCard from "../Ticket/TicketDetailCard";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getMoneyFormat } from "@/utils/helper";
+import { getMoneyFormat, getFlightDuration } from "@/utils/helper";
 import Image from "next/image";
 
 import LogoMaskapai from "@/assets/logo-maskapai.svg";
@@ -138,7 +138,7 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
 
                     <div className="my-auto text-center w-60">
                       <div className="font-medium text-xs leading-5 text-[#8A8A8A]">
-                        4h 0m
+                        {getFlightDuration(detail.data?.dateTakeoff, detail.data?.dateLanding)}
                       </div>
                       <div>
                         <Image
@@ -177,7 +177,7 @@ const ModalTicket = ({ modal, closeModal, data, flightOne, flightTwo }) => {
                   <div>
                     <h3 className="text-base font-medium">Total</h3>
                     <h3 className="text-2xl font-semibold text-bnr-primary">
-                      IDR 
+                      IDR
                       {getMoneyFormat(
                         totalPassangers *
                         (dataTes.length > 1

@@ -53,8 +53,8 @@ export default function Home() {
         <div className="relative z-30 flex justify-center mb-10 sm:-mt-28">
           <FormTicket />
         </div>
-        <div className="container flex flex-col w-full min-h-fit mx-auto">
-          <h3 className="mb-4 font-bold text-left mx-2 md:mx-32">Favorite Destinations</h3>
+        <div className="container flex flex-col w-full mx-auto min-h-fit">
+          <h3 className="mx-2 mb-4 font-bold text-left md:px-64">Favorite Destinations</h3>
 
           <div className="pb-10 md:w-full">
             <div className="flex flex-wrap justify-center gap-4">
@@ -83,193 +83,193 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="pb-10 w-full">
+          <div className="w-full pb-10">
             <div className="flex flex-wrap justify-center gap-6">
-              <div className="airline-partners mx-2">
-                <div className="text-xl font-bold leading-7 flex justify-center">
+              <div className="mx-2 airline-partners">
+                <div className="flex justify-center text-xl font-bold leading-7">
                   Airline Partners
                 </div>
-                <div className="text-lg font-normal leading-5 flex justify-center text-center mt-4">
+                <div className="flex justify-center mt-4 text-lg font-normal leading-5 text-center">
                   We collaborate with various airlines worldwide to fly you wherever you want to go!
                 </div>
 
-                <div className="airlines-1 flex justify-between mt-8 gap-8">
+                <div className="flex justify-between gap-8 mt-8 airlines-1">
                   <div>
-                  <Image
-                    src={Dubai}
-                    alt="Dubai Airline"
-                    width={150}
-                    height={40}
+                    <Image
+                      src={Dubai}
+                      alt="Dubai Airline"
+                      width={150}
+                      height={40}
                     />
-                    </div>
+                  </div>
 
-                    <div>
+                  <div>
                     <Image
                       src={Emirates}
                       alt="Emirates Airline"
                       width={150}
                       height={40}
-                      />
-                    </div>
+                    />
+                  </div>
 
-                    <div>
+                  <div>
                     <Image
                       src={Etihad}
                       alt="Etihad Airline"
                       width={150}
                       height={40}
-                      />
-                    </div>
+                    />
+                  </div>
 
-                    <div>
+                  <div>
                     <Image
                       src={RoyalJordan}
                       alt="RoyalJordan Airline"
                       width={100}
                       height={40}
-                      />
-                    </div>
+                    />
+                  </div>
 
-                    <div>
+                  <div>
                     <Image
                       src={Klm}
                       alt="KLM Airline"
                       width={100}
                       height={40}
-                      />
-                    </div>
+                    />
+                  </div>
 
-                    <div>
+                  <div>
                     <Image
                       src={Brunei}
                       alt="Brunei Airline"
                       width={100}
                       height={40}
-                      />
-                    </div>
-
-
-                </div>
-                <div className="airlines-2 flex justify-between mt-4 gap-10">
-
-                  <div>
-                  <Image
-                    src={Garuda}
-                    alt="Garuda Indonesia Airline"
-                    width={100}
-                    height={30}
-                    />
-                  </div>
-
-                  <div>
-                  <Image
-                    src={SuperAir}
-                    alt="Super Air Jet Airline"
-                    width={100}
-                    height={40}
-                    />
-                  </div>
-
-                  <div>
-                  <Image
-                    src={LionAir}
-                    alt="Lion Air Airline"
-                    width={100}
-                    height={40}
-                    />
-                  </div>
-
-                  <div>
-                  <Image
-                    src={BatikAir}
-                    alt="Batik Air Airline"
-                    width={100}
-                    height={40}
-                    />
-                  </div>
-
-                  <div>
-                  <Image
-                    src={Copa}
-                    alt="Copa Air Airline"
-                    width={100}
-                    height={40}
-                    />
-                  </div>
-
-                  <div>
-                  <Image
-                    src={Vistara}
-                    alt="Vistara Airline"
-                    width={100}
-                    height={40}
-                    />
-                  </div>
-
-                  <div>
-                  <Image
-                    src={AirAsia}
-                    alt="Air Asia Airline"
-                    width={100}
-                    height={40}
                     />
                   </div>
 
 
                 </div>
-                <div className="airlines-3 flex justify-between mt-4">
+                <div className="flex justify-between gap-10 mt-4 airlines-2">
 
                   <div>
-                  <Image
-                    src={Sriwijaya}
-                    alt="Sriwijaya Airline"
-                    width={100}
-                    height={40}
+                    <Image
+                      src={Garuda}
+                      alt="Garuda Indonesia Airline"
+                      width={100}
+                      height={30}
                     />
                   </div>
 
                   <div>
-                  <Image
-                    src={Apg}
-                    alt="APG Airline"
-                    width={100}
-                    height={40}
+                    <Image
+                      src={SuperAir}
+                      alt="Super Air Jet Airline"
+                      width={100}
+                      height={40}
                     />
                   </div>
 
                   <div>
-                  <Image
-                    src={Citylink}
-                    alt="Citylink Airline"
-                    width={100}
-                    height={40}
+                    <Image
+                      src={LionAir}
+                      alt="Lion Air Airline"
+                      width={100}
+                      height={40}
                     />
                   </div>
 
                   <div>
-                  <Image
-                    src={Vietnam}
-                    alt="Vietnam Airline"
-                    width={100}
-                    height={40}
+                    <Image
+                      src={BatikAir}
+                      alt="Batik Air Airline"
+                      width={100}
+                      height={40}
                     />
                   </div>
 
                   <div>
-                  <Image
-                    src={Alaska}
-                    alt="Alaska Airline"
-                    width={100}
-                    height={40}
+                    <Image
+                      src={Copa}
+                      alt="Copa Air Airline"
+                      width={100}
+                      height={40}
                     />
                   </div>
 
                   <div>
-                  <Image
-                    src={Wings}
-                    alt="Wings Airline"
-                    width={100}
-                    height={40}
+                    <Image
+                      src={Vistara}
+                      alt="Vistara Airline"
+                      width={100}
+                      height={40}
+                    />
+                  </div>
+
+                  <div>
+                    <Image
+                      src={AirAsia}
+                      alt="Air Asia Airline"
+                      width={100}
+                      height={40}
+                    />
+                  </div>
+
+
+                </div>
+                <div className="flex justify-between mt-4 airlines-3">
+
+                  <div>
+                    <Image
+                      src={Sriwijaya}
+                      alt="Sriwijaya Airline"
+                      width={100}
+                      height={40}
+                    />
+                  </div>
+
+                  <div>
+                    <Image
+                      src={Apg}
+                      alt="APG Airline"
+                      width={100}
+                      height={40}
+                    />
+                  </div>
+
+                  <div>
+                    <Image
+                      src={Citylink}
+                      alt="Citylink Airline"
+                      width={100}
+                      height={40}
+                    />
+                  </div>
+
+                  <div>
+                    <Image
+                      src={Vietnam}
+                      alt="Vietnam Airline"
+                      width={100}
+                      height={40}
+                    />
+                  </div>
+
+                  <div>
+                    <Image
+                      src={Alaska}
+                      alt="Alaska Airline"
+                      width={100}
+                      height={40}
+                    />
+                  </div>
+
+                  <div>
+                    <Image
+                      src={Wings}
+                      alt="Wings Airline"
+                      width={100}
+                      height={40}
                     />
                   </div>
 

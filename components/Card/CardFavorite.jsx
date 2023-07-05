@@ -8,8 +8,8 @@ const getFavorite = async () => {
 }
 
 const CardFavorite = async ({ from, to, airline, availableDate, price }) => {
-    const favorites = await getFavorite()
-    // console.log("favorite", favorites);
+    const { data } = await getFavorite()
+    console.log("favorite", data);
     return (
         <div className="w-[167px] h-[194px] p-3 bg-white border border-gray-200 rounded-md shadow">
             <Image className="w-full rounded-t-lg" src={FavoriteImage} alt="cardFavorite" />

@@ -25,7 +25,7 @@ const ResetPage = () => {
 
     useEffect(() => {
         if (submitButtonClicked && users.status === "Success") {
-            toast.success(`Berhasil reset password`, {
+            toast.success(`Password reset successful`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -40,7 +40,7 @@ const ResetPage = () => {
             }, 1000);
         }
         if (submitButtonClicked && users.status === "error") {
-            toast.error(`Gagal Reset Password`, {
+            toast.error(`Failed to reset password`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,

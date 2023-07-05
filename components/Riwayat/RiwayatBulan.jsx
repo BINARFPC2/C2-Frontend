@@ -1,7 +1,7 @@
 import Image from "next/image";
 import IconLocation from "@/assets/icon-location.svg";
 import ArrowLong from "@/assets/long-arrow.svg";
-import { getDateFormat, getMoneyFormat } from "@/utils/helper";
+import { getDateFormat, getMoneyFormat, getFlightDuration } from "@/utils/helper";
 
 const RiwayatBulan = ({ data, handleChooseTicket }) => {
   return (
@@ -47,7 +47,7 @@ const RiwayatBulan = ({ data, handleChooseTicket }) => {
               </div>
               <div className="time justify-center items-center my-auto">
                 <div className="font-medium text-xs text-[#3C3C3C] my-auto text-center">
-                  4h 0m
+                  {getFlightDuration(data?.departureTicket?.dateTakeoff, data?.departureTicket?.dateLanding)}
                 </div>
                 <div>
                   <Image
@@ -113,7 +113,7 @@ const RiwayatBulan = ({ data, handleChooseTicket }) => {
                   </div>
                   <div className="time justify-center items-center my-auto">
                     <div className="font-medium text-xs text-[#3C3C3C] my-auto text-center">
-                      4h 0m
+                      {getFlightDuration(data?.returnTicket?.dateTakeoff, data?.returnTicket?.dateLanding)}
                     </div>
                     <div>
                       <Image

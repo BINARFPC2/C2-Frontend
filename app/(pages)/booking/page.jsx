@@ -127,20 +127,20 @@ const CheckoutPage = () => {
       return {
         ...acc,
 
-        [`fullName${index}`]: Yup.string().required("Nama Lengkap harus diisi"),
-        [`title${index}`]: Yup.string().required("Title harus diisi"),
+        [`fullName${index}`]: Yup.string().required("Full name must be filled in"),
+        [`title${index}`]: Yup.string().required("Title must be filled in"),
         [`familyName${index}`]: Yup.string().required(
-          "Nama Keluarga harus diisi"
+          "Family name must be filled in"
         ),
         [`phoneNumber${index}`]: Yup.string()
-          .required("Phone Number harus diisi")
+          .required("Phone number must be filled in")
           .matches(
             /^(\+62|62|0)8[1-9][0-9]{6,9}$/,
-            "Phone number belum sesuai"
+            "The phone number is not correct"
           ),
         [`email${index}`]: Yup.string()
-          .email("Format Email belum sesuai")
-          .required("Email harus diisi"),
+          .email("The email format is not correct")
+          .required("Email must be filled in"),
       };
     }, {})
   );
@@ -297,11 +297,11 @@ const CheckoutPage = () => {
               </div>
 
               <div className="w-full px-4 border border-[#8A8A8A] rounded-md ">
-                <h1 className="py-5 text-xl font-bold">Provide Booking Details</h1>
+                <h1 className="py-5 text-xl font-bold">Provide Passenger Details</h1>
                 {dataPassangers?.map((passanger, index) => (
                   <div key={index}>
                     <div className="bg-[#3C3C3C] text-base text-white py-2 px-4 rounded-t-xl flex justify-between items-center">
-                      <span>Data Diri Pemesan - {index + 1}</span>
+                      <span>Passenger's Personal Details - {index + 1}</span>
                       {isSubmitting
                         ? (
                           <div className="bg-[#73CA5C] text-xl rounded-full text-[#3C3C3C] font-bold">
@@ -331,7 +331,7 @@ const CheckoutPage = () => {
                         />
                         {formik.errors[`fullName${index}`] &&
                           formik.touched[`fullName${index}`] ? (
-                          <span>{formik.errors[`fullName${index}`]}</span>
+                          <span className="text-sm text-red-500">{formik.errors[`fullName${index}`]}</span>
                         ) : null}
                       </div>
                       <div>
@@ -355,7 +355,7 @@ const CheckoutPage = () => {
                         </select>
                         {formik.errors[`title${index}`] &&
                           formik.touched[`title${index}`] ? (
-                          <span>{formik.errors[`title${index}`]}</span>
+                          <span className="text-sm text-red-500">{formik.errors[`title${index}`]}</span>
                         ) : null}
                       </div>
 
@@ -378,7 +378,7 @@ const CheckoutPage = () => {
                         />
                         {formik.errors[`familyName${index}`] &&
                           formik.touched[`familyName${index}`] ? (
-                          <span>{formik.errors[`familyName${index}`]}</span>
+                          <span className="text-sm text-red-500">{formik.errors[`familyName${index}`]}</span>
                         ) : null}
                       </div>
                       <div>
@@ -400,7 +400,7 @@ const CheckoutPage = () => {
                         />
                         {formik.errors[`phoneNumber${index}`] &&
                           formik.touched[`phoneNumber${index}`] ? (
-                          <span>{formik.errors[`phoneNumber${index}`]}</span>
+                          <span className="text-sm text-red-500">{formik.errors[`phoneNumber${index}`]}</span>
                         ) : null}
                       </div>
                       <div>
@@ -422,7 +422,7 @@ const CheckoutPage = () => {
                         />
                         {formik.errors[`email${index}`] &&
                           formik.touched[`email${index}`] ? (
-                          <span>{formik.errors[`email${index}`]}</span>
+                          <span className="text-sm text-red-500">{formik.errors[`email${index}`]}</span>
                         ) : null}
                       </div>
                     </div>

@@ -1,7 +1,7 @@
 const Categories = [
     {
         id: 1,
-        name: "Semua"
+        name: "All"
     },
     {
         id: 2,
@@ -9,7 +9,7 @@ const Categories = [
     },
     {
         id: 3,
-        name: "Amerika"
+        name: "America"
     },
     {
         id: 4,
@@ -17,11 +17,11 @@ const Categories = [
     },
     {
         id: 5,
-        name: "Eropa"
+        name: "Europe"
     },
     {
         id: 6,
-        name: "Afrika"
+        name: "Africa"
     },
 ]
 

@@ -6,7 +6,7 @@ const BreadCrumb = () => {
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
           <a href="#" className="inline-flex items-center text-xl font-medium ">
-            Isi Data Diri
+            Personal Information
           </a>
         </li>
         <li>
@@ -25,7 +25,7 @@ const BreadCrumb = () => {
               ></path>
             </svg>
             <span className="ml-1 text-xl font-medium md:ml-2 text-bnr-primary">
-              Bayar
+              Payment
             </span>
           </div>
         </li>
@@ -44,7 +44,7 @@ const BreadCrumb = () => {
                 clipRule="evenodd"
               ></path>
             </svg>
-            <span className="ml-1 text-xl font-medium md:ml-2">Selesai</span>
+            <span className="ml-1 text-xl font-medium md:ml-2">Completed</span>
           </div>
         </li>
       </ol>

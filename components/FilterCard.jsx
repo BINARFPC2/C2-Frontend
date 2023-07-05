@@ -44,7 +44,7 @@ const FilterCard = () => {
                   height={24}
                   alt=""
                 />
-                <h2 className="font-normal text-base leading-6">Fasilitas</h2>
+                <h2 className="font-normal text-base leading-6">Facilities</h2>
               </div>
               <Image
                 className="items-center ml-4"
@@ -64,7 +64,7 @@ const FilterCard = () => {
                   height={24}
                   alt=""
                 />
-                <h2 className="font-normal text-base leading-6">Harga</h2>
+                <h2 className="font-normal text-base leading-6">Price</h2>
               </div>
               <Image
                 className="items-center ml-4"

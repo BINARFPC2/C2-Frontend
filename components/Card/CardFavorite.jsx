@@ -17,7 +17,7 @@ const CardFavorite = async ({ from, to, airline, availableDate, price }) => {
                 <h5 className="text-xs font-bold tracking-tight text-gray-900">{from} {"->"} {to}</h5>
                 <p className="text-[10px] text-bnr-primary font-bold">{airline}</p>
                 <p className="text-[10px]">{availableDate}</p>
-                <p className="text-xs">Mulai dari <span className="text-[#FF0000] font-bold">IDR {getMoneyFormat(price)}</span></p>
+                <p className="text-xs">Start from <span className="text-[#FF0000] font-bold">IDR {getMoneyFormat(price)}</span></p>
             </div>
         </div>
     )

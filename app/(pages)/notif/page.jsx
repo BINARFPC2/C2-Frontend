@@ -45,7 +45,7 @@ const NotifPage = () => {
       <div className="container mx-auto max-w-[968px]">
         <div className="ticket-section pb-4 border-b-2 drop-shadow-md mx-2">
           <div className="text-heading">
-            <h1 className="text-xl font-bold leading-8 mt-12">Notifikasi</h1>
+            <h1 className="text-xl font-bold leading-8 mt-12">Notification</h1>
           </div>
           <div className="search flex flex-col sm:flex-row gap-4 mt-4">
             <div className="sm:w-[800px] flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium text-base leading-6 gap-1">
@@ -58,7 +58,7 @@ const NotifPage = () => {
                     height={24}
                     alt=""
                   />
-                  <span>Beranda</span>
+                  <span>Homepage</span>
                 </div>
               </Link>
             </div>

@@ -131,7 +131,7 @@ const TicketCard = ({ data, handleChoose }) => {
                         handleChoose(item.id, item.city_from, item.city_to)
                       }
                     >
-                      Pilih
+                      Choose
                     </button>
                   </div>
                 </div>
@@ -141,7 +141,7 @@ const TicketCard = ({ data, handleChoose }) => {
               <div className="mx-4 my-5 ticket-detail">
                 <div className="pb-1 detail-headings">
                   <h1 className="font-bold text-sm leading-5 text-[#4B1979]">
-                    Detail Penerbangan
+                    Flight Details
                   </h1>
                 </div>
 
@@ -158,7 +158,7 @@ const TicketCard = ({ data, handleChoose }) => {
                     </div>
                   </div>
                   <div className="text-xs font-bold leading-5 text-[#A06ECE]">
-                    Keberangkatan
+                    Departure
                   </div>
                 </div>
 
@@ -184,7 +184,7 @@ const TicketCard = ({ data, handleChoose }) => {
                       </div>
                     </div>
 
-                    <div className="text-sm font-bold leading-5">Informasi</div>
+                    <div className="text-sm font-bold leading-5">Information</div>
                     <div className="text-sm font-normal leading-5 baggage">
                       Baggage 20 kg
                     </div>
@@ -212,7 +212,7 @@ const TicketCard = ({ data, handleChoose }) => {
                     </div>
                   </div>
                   <div className="text-xs font-bold leading-5 text-[#A06ECE]">
-                    Kedatangan
+                    Arrival
                   </div>
                 </div>
               </div>

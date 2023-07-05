@@ -35,16 +35,16 @@ const SuccessSection = () => {
                 <section className="flex flex-col justify-center space-y-10 items-center mt-20">
                     <Image src={Success} alt="succes" />
                     <div className="text-center">
-                        <p className=" font-medium text-bnr-primary">Selamat!</p>
-                        <h3 className="font-medium">Transaksi Pembayaran Tiket sukses!</h3>
+                        <p className=" font-medium text-bnr-primary">Congratulations!</p>
+                        <h3 className="font-medium">Ticket Payment Transaction Successful!</h3>
 
                         <form onSubmit={handlePrintTiket}>
-                            <button className="bg-bnr-primary w-full text-white rounded-lg py-2 mt-5" type="submit">Cetak Tiket</button>
+                            <button className="bg-bnr-primary w-full text-white rounded-lg py-2 mt-5" type="submit">Print Boarding Pass</button>
                         </form>
 
                         <div>
                             <Link href={"/"}>
-                                <button className="bg-[#D0B7E6] w-full text-white rounded-lg py-2 mt-2">Cari penerbangan lain</button>
+                                <button className="bg-[#D0B7E6] w-full text-white rounded-lg py-2 mt-2">Search for another flight</button>
                             </Link>
                         </div>
                     </div>

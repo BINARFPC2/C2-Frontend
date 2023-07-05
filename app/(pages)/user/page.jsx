@@ -115,7 +115,7 @@ const UserPage = () => {
       <div className="container mx-auto max-w-[968px]">
         <div className="ticket-section pb-4 border-b-2 drop-shadow-md mx-2">
           <div className="text-heading">
-            <h1 className="text-xl font-bold leading-8 mt-12">Akun</h1>
+            <h1 className="text-xl font-bold leading-8 mt-12">Account</h1>
           </div>
           <div className="search flex flex-col sm:flex-row gap-4 mt-4">
             <div className="sm:w-full flex bg-[#A06ECE] h-[50px] rounded-xl items-center text-white font-medium text-base leading-6 gap-1">
@@ -128,7 +128,7 @@ const UserPage = () => {
                     height={24}
                     alt=""
                   />
-                  <span>Beranda</span>
+                  <span>Homepage</span>
                 </div>
               </Link>
             </div>
@@ -146,7 +146,7 @@ const UserPage = () => {
                     height={24}
                     alt=""
                   />
-                  Ubah Profil
+                  Edit Profile
                 </div>
                 <div className="flex font-medium text-base leading-6 border-b-2 pb-4 mb-4">
                   <Image
@@ -156,7 +156,7 @@ const UserPage = () => {
                     height={24}
                     alt=""
                   />
-                  Pengaturan Akun
+                  Account Settings
                 </div>
                 <div className="flex font-medium text-base leading-6 border-b-2 pb-4 cursor-pointer" onClick={handleLogout}>
                   <Image
@@ -166,7 +166,7 @@ const UserPage = () => {
                     height={24}
                     alt=""
                   />
-                  Keluar
+                  Logout
                 </div>
                 <div className="version font-normal text-xs leading-4 text-[#8A8A8A] mt-4 text-center">Version 1.1.0</div>
               </div>
@@ -174,9 +174,9 @@ const UserPage = () => {
             <div className="sm:w-[550px] mx-2">
               <div className="card-ubah mx-4 border-2 shadow rounded">
                 <div className="wrapper mx-4 mt-10">
-                  <div className="font-bold text-xl leading-8 my-4">Ubah Data Profil</div>
+                  <div className="font-bold text-xl leading-8 my-4">Edit Profile Data</div>
                   <div className="content">
-                    <div className="rounded-t-lg bg-[#A06ECE] h-[40px] text-justify font-medium text-base text-white leading-6 px-4 py-2 ">Data Diri</div>
+                    <div className="rounded-t-lg bg-[#A06ECE] h-[40px] text-justify font-medium text-base text-white leading-6 px-4 py-2 ">Personal Information</div>
                     <div className="form">
                       <Formik
                         initialValues={initialValues}
@@ -185,13 +185,13 @@ const UserPage = () => {
                       >
                         <Form className="bg-white rounded px-8 py-6">
                           <div className="mb-4">
-                            <label className="block text-sm text-[#4B1979] font-bold mb-2" htmlFor="fullName">Nama Lengkap</label>
+                            <label className="block text-sm text-[#4B1979] font-bold mb-2" htmlFor="fullName">Full Name</label>
                             <Field
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="fullName"
                               type="text"
                               name="fullName"
-                              placeholder="Masukkan Nama Lengkap"
+                              placeholder="Enter Full Name"
                               value={isEdit ? formValues.fullName : data.name}
                             />
                             {/* <ErrorMessage
@@ -201,13 +201,13 @@ const UserPage = () => {
                             /> */}
                           </div>
                           <div className="mb-4">
-                            <label className="block text-[#4B1979] text-sm font-bold mb-2" htmlFor="phoneNumber">No Telepon</label>
+                            <label className="block text-[#4B1979] text-sm font-bold mb-2" htmlFor="phoneNumber">Phone Number</label>
                             <Field
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="phoneNumber"
                               type="text"
                               name="phoneNumber"
-                              placeholder="Masukkan No Telepon"
+                              placeholder="Enter Phone Number"
                               value={isEdit ? formValues.phoneNumber : data.phone}
                             />
                             {/* <ErrorMessage
@@ -223,7 +223,7 @@ const UserPage = () => {
                               id="email"
                               type="email"
                               name="email"
-                              placeholder="Masukkan Email"
+                              placeholder="Enter Email"
                               value={data.email}
                               disabled
                             />
@@ -238,7 +238,7 @@ const UserPage = () => {
                               className="w-[150px] h-[48px] bg-[#4B1979] rounded-xl text-white text-base leading-6"
                               type="simpan"
                             >
-                              Simpan
+                              Submit
                             </button>)
                             }
                           </div>

@@ -19,7 +19,7 @@ const ModalPassenger = ({ name, handleChange }) => {
     }
     return (
         <>
-            <input name={name} onClick={openModal} value={resultPassangers?.total === undefined ? "0 Penumpang" : `${resultPassangers?.total} Penumpang`} className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary" onChange={handleChange} autoComplete="off" />
+            <input name={name} onClick={openModal} value={resultPassangers?.total === undefined ? "0 Passangers" : `${resultPassangers?.total} Passangers`} className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary" onChange={handleChange} autoComplete="off" />
             {showModal ?
                 <InputPassangers onClose={closeModal} name={name} /> : null
             }

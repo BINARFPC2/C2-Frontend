@@ -103,28 +103,28 @@ const ResetPage = () => {
                                         <InputAuth
                                             name="password"
                                             type="password"
-                                            placeholder="Password Baru"
+                                            placeholder="New Password"
                                             value={values.password}
                                             handleChange={handleChange}
                                             handleBlur={handleBlur}
                                             touched={touched.password}
                                             errors={errors.password}
                                         >
-                                            Masukkan Password Baru
+                                            Enter New Password
                                         </InputAuth>
                                         <InputAuth
                                             name="confirmPassword"
                                             type="password"
-                                            placeholder="Ulangi Password"
+                                            placeholder="Retype Password"
                                             value={values.confirmPassword}
                                             handleChange={handleChange}
                                             handleBlur={handleBlur}
                                             touched={touched.passwordConfirmation}
                                             errors={errors.passwordConfirmation}
                                         >
-                                            Ulangi Password Baru
+                                            Retype New Password
                                         </InputAuth>
-                                        <button type="submit" className="px-6 py-3 text-sm text-white rounded-2xl bg-bnr-primary" disabled={isSubmitting}>Simpan</button>
+                                        <button type="submit" className="px-6 py-3 text-sm text-white rounded-2xl bg-bnr-primary" disabled={isSubmitting}>Submit</button>
                                     </Form>
                                 )
                             }}

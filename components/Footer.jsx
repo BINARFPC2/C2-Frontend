@@ -30,7 +30,7 @@ const Footer = () => {
           />
           <div className="ml-4 mt-8">
             <div className="text-white text-md font-bold leading-7">
-              Partner Pembayaran
+              Payment Partners
             </div>
             <div className="flex justify-between1 gap-1 mt-2">
               <div className="bg-white w-[70px] h-[40px] flex items-center p-2 rounded-md">
@@ -77,28 +77,28 @@ const Footer = () => {
 
         <div className="w-full sm:w-1/4 mt-8 ml-4">
           <div className="text-white text-md font-bold leading-7">
-            Tentang TicketGo
+            About TicketGo
           </div>
 
           <div>
-            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Tentang Kami</a>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">About Us</a>
           </div>
           <div>
-            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Hubungi Kami</a>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Contact Us</a>
           </div>
           <div>
-            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Pusat Bantuan</a>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Help Center</a>
           </div>
           <div>
-            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Kebijakan Privasi</a>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Privacy Policy</a>
           </div>
           <div>
-            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Syarat & Ketentuan</a></div>
+            <a href="#" className="text-[#69656f] tex-xs font-semibold leading-8 hover:text-white">Terms and conditions</a></div>
         </div>
 
         <div className="w-full sm:w-1/4 mt-8 ml-4">
           <div className="text-white text-md font-bold leading-7">
-            Follow kami di
+            Follow Us on
           </div>
           <div className="flex">
             <Image

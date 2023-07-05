@@ -90,6 +90,7 @@ const Navbar = () => {
   return (
     <div className="relative z-40 h-full md:max-w-full">
       <div className="flex items-center justify-between h-20 bg-white md:px-36 md:w-full drop-shadow-md">
+      <Link href={"/"}>
         <Image
           src={Logo}
           className="ml-4"
@@ -97,6 +98,7 @@ const Navbar = () => {
           height={250}
           alt="Picture of the author"
         />
+        </Link>
         {mounted && token ? (
           <div className="flex mr-5 text-2xl md:ml-96">
             <Link href={"/riwayat"}>
@@ -117,7 +119,7 @@ const Navbar = () => {
               <button className="md:w-full h-full rounded-xl text-[#FFFFFF] bg-[#7126B5]">
                 <div className="inline-flex items-center px-4 py-3">
                   <FiLogIn className="mr-2" />
-                  Masuk
+                  Login
                 </div>
               </button>
             </Link>
@@ -129,14 +131,14 @@ const Navbar = () => {
           <div className="absolute z-50 w-32 -mt-5 transition-all duration-300 ease-in-out bg-white border-2 rounded-lg shadow-lg select-none right-20 drop-shadow-md">
 
             <Link href="/user">
-              <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer p-2 border-b-2 hover:bg-[#9d4edd] hover:text-white">
+              <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-lg cursor-pointer p-2 border-b-2 hover:bg-[#9d4edd] hover:text-white">
                 <FiUser className="mr-2" />
-                Profil
+                Profile
               </button>
             </Link>
-            <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-xl cursor-pointer hover:bg-[#9d4edd] hover:text-white" onClick={handleLogout} >
+            <button type="button" className="z-40 inline-flex items-center w-full px-3 py-1 text-lg cursor-pointer hover:bg-[#9d4edd] hover:text-white" onClick={handleLogout} >
               <FiLogOut className="mr-2" />
-              Keluar
+              Logout
             </button>
           </div>
         ) : null

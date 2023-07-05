@@ -30,7 +30,7 @@ const OtpPage = () => {
 
     useEffect(() => {
         if (submit && users.status === "Success") {
-            toast.success(`Registrasi Berhasil`, {
+            toast.success(`Registration Successful`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -47,7 +47,7 @@ const OtpPage = () => {
             return;
         }
         if (submit && users.status === "error") {
-            toast.error(`Maaf, Kode OTP Salah`, {
+            toast.error(`Sorry, the OTP code is incorrect`, {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -81,8 +81,8 @@ const OtpPage = () => {
             <section>
                 <div className="flex h-full max-w-full">
                     <div className="flex flex-col items-center justify-center w-full h-screen px-4 md:px-32 space-y-10">
-                        <h1 className="w-full pb-6 text-2xl font-bold text-center">Masukkan OTP</h1>
-                        <p className="text-center">Ketik 6 digit kode yang dikirimkan ke <span className="font-bold">{formatEmail(email)}</span></p>
+                        <h1 className="w-full pb-6 text-2xl font-bold text-center">Enter the OTP</h1>
+                        <p className="text-center">Type the 6-digit code that was sent to <span className="font-bold">{formatEmail(email)}</span></p>
                         <Formik
                             initialValues={{
                                 otp: ""
@@ -112,7 +112,7 @@ const OtpPage = () => {
                                             onBlur={handleBlur('otp')}
 
                                         />
-                                        <button className="w-full bg-bnr-primary text-white py-2 rounded-lg mt-20" type="submit">Simpan</button>
+                                        <button className="w-full bg-bnr-primary text-white py-2 rounded-lg mt-20" type="submit">Submit</button>
                                     </form>
                                 )
                             }

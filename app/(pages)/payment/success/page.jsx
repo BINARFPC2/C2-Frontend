@@ -32,18 +32,18 @@ const SuccessPage = () => {
                 <section className="flex flex-col justify-center space-y-10 items-center mt-20">
                     <Image src={Success} alt="succes" />
                     <div className="text-center">
-                        <p className=" font-medium text-bnr-primary">Selamat!</p>
-                        <h3 className="font-medium">Transaksi Pembayaran Tiket sukses!</h3>
+                        <p className=" font-medium text-bnr-primary">Congratulations!</p>
+                        <h3 className="font-medium">Ticket Payment Transaction Successful!</h3>
 
                         <div>
                         <Link href={"payment/cetak"}>
-                            <button className="bg-bnr-primary w-full text-white rounded-lg py-2 mt-5">Cetak Tiket</button>
+                            <button className="bg-bnr-primary w-full text-white rounded-lg py-2 mt-5">Print Boarding Pass</button>
                         </Link>
                         </div>
 
                         <div>
                         <Link href={"/"}>
-                            <button className="bg-[#D0B7E6] w-full text-white rounded-lg py-2 mt-2">Cari penerbangan lain</button>
+                            <button className="bg-[#D0B7E6] w-full text-white rounded-lg py-2 mt-2">Search for another flight</button>
                         </Link>
                         </div>
 

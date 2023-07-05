@@ -133,7 +133,7 @@ const PaymentPage = () => {
           <main className="flex flex-col w-full gap-5 px-5 py-3 mt-8 md:flex-row md:px-80">
             <section className="max-w-full space-y-10 md:w-1/2">
               <div className="w-full px-2 rounded-md">
-                <h1 className="py-2 text-xl font-bold">Isi Data Pembayaran </h1>
+                <h1 className="py-2 text-xl font-bold">Provide Payment Details</h1>
                 <div className="w-full pt-2">
                   <div className="w-full p-2 mx-auto bg-white rounded-2xl">
                     <Disclosure>
@@ -152,7 +152,7 @@ const PaymentPage = () => {
                                 className="text-xm leading-6 font-medium text-[#151515]"
                                 htmlFor=""
                               >
-                                Masukkan Nomor Gopay Anda
+                                Enter your Gopay number
                               </label>
                               <input
                                 type="text"
@@ -348,7 +348,7 @@ const PaymentPage = () => {
                         type="submit"
                         className="w-full rounded-xl text-white bg-[#7126B5] mt-4 py-2"
                       >
-                        Bayar
+                        Proceed to Payment
                       </button>
                     </form>
                   </div>
@@ -373,7 +373,7 @@ const PaymentPage = () => {
                         {detail?.data.dateTakeoff}
                       </p>
                       <p className="text-xs font-bold text-bnr-primary">
-                        Keberangkatan
+                        Departure
                       </p>
                     </div>
                     <p className="text-sm">
@@ -389,7 +389,7 @@ const PaymentPage = () => {
                       </h5>
                       <h5 className="font-bold">{detail?.data?.code}</h5>
                       <div className="mt-5">
-                        <h5 className="font-bold">Informasi</h5>
+                        <h5 className="font-bold">Information</h5>
                         <div className="w-32">{detail?.data?.information}</div>
                       </div>
                     </div>
@@ -400,7 +400,7 @@ const PaymentPage = () => {
                         {detail?.data?.dateLanding}
                       </p>
                       <p className="text-xs font-bold text-bnr-primary">
-                        Kedatangan
+                        Arrival
                       </p>
                     </div>
                     <p className="text-sm">
@@ -409,7 +409,7 @@ const PaymentPage = () => {
                     <p className="text-sm">{detail?.data?.airport_to}</p>
                   </div>
                   <div className="py-2 border-b border-bnr-secondary">
-                    <h1 className="text-base font-bold">Rincian</h1>
+                    <h1 className="text-base font-bold">Details</h1>
                     <div className="inline-flex justify-between w-full">
                       <p>
                         {resultPassangers}{" "}

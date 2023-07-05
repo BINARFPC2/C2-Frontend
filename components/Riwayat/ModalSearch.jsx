@@ -77,14 +77,14 @@ const ModalSearch = () => {
               <Field
                 type="text"
                 name="searchTerm"
-                placeholder="Masukkan Nomor Penerbangan"
+                placeholder="Enter Booking Code"
                 value={searchTerm}
                 onChange={handleSearchChange}
                 className="ml-2.5 w-[280px] h-[20px]"
               />
             </Form>
           </Formik>
-            
+
             </div>
 
             <button>
@@ -98,10 +98,10 @@ const ModalSearch = () => {
               </button>
 
           </div>
-          
 
 
-          
+
+
 
           {showSuggestions && (
             <div className="mt-4">
@@ -122,15 +122,15 @@ const ModalSearch = () => {
 
           <div className="mt-4">
             <div className="flex justify-between">
-              <h3 className="font-medium text-base leading-6">Pencarian Terkini</h3>
+              <h3 className="font-medium text-base leading-6">Recent Search</h3>
               <button
                 className="text-[#FF0000] font-medium"
                 onClick={handleClearHistory}
               >
-                Hapus
+                delete
               </button>
             </div>
-            
+
           <ul>
             {searchHistory.map((term, index) => (
               <li key={index} onClick={() => handleResultClick(term)} className="mt-4 cursor-pointer flex justify-between w-full h-[40px] my-auto border-b-2">
@@ -150,7 +150,7 @@ const ModalSearch = () => {
               </li>
             ))}
           </ul>
-          
+
 
           </div>
 

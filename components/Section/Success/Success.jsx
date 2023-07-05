@@ -32,14 +32,14 @@ const SuccessSection = () => {
                         <BreadCrumb />
                     </div>
                 </section>
-                <section className="flex flex-col justify-center space-y-10 items-center mt-20">
+                <section className="flex flex-col items-center justify-center mt-20 space-y-10">
                     <Image src={Success} alt="succes" />
                     <div className="text-center">
-                        <p className=" font-medium text-bnr-primary">Congratulations!</p>
+                        <p className="font-medium text-bnr-primary">Congratulations!</p>
                         <h3 className="font-medium">Ticket Payment Transaction Successful!</h3>
 
                         <form onSubmit={handlePrintTiket}>
-                            <button className="bg-bnr-primary w-full text-white rounded-lg py-2 mt-5" type="submit">Print Boarding Pass</button>
+                            <button className="w-full py-2 mt-5 text-white rounded-lg bg-bnr-primary" type="submit">Generate E-Ticket</button>
                         </form>
 
                         <div>

@@ -34,8 +34,8 @@ const TicketCard = ({ data, handleChoose }) => {
 
   const renderFlightData = (data) => {
     return data?.map((item, index) => (
-      <div key={item.id} className="ticket-card md:w-full ticket-search mx-2">
-        <div className=" pb-4">
+      <div key={item.id} className="mx-2 ticket-card md:w-full ticket-search">
+        <div className="pb-4 ">
           <div className="main border-[1px] rounded-lg border-[#D0D0D0] shadow bg-white select-none">
             <div className="md:w-full h-[127px] border-b-[#D0D0D0] mx-auto">
               <div
@@ -120,7 +120,7 @@ const TicketCard = ({ data, handleChoose }) => {
                   />
                 </div>
 
-                <div className="my-auto w-48">
+                <div className="w-48 my-auto">
                   <div className="flex justify-end font-bold text-base leading-6 text-[#7126B5] pb-1.5">
                     IDR {getMoneyFormat(item.price)}
                   </div>
@@ -128,7 +128,7 @@ const TicketCard = ({ data, handleChoose }) => {
                     <button
                       className="w-[100px] h-[32px] bg-[#4B1979] hover:bg-[#5d2f86] rounded-xl text-white font-medium text-base leading-6"
                       onClick={() =>
-                        handleChoose(item.id, item.city_from, item.city_to)
+                        handleChoose(item.id, item.city_from, item.city_to, item.dateDeparture, item.dateReturn)
                       }
                     >
                       Choose

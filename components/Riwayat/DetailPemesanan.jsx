@@ -39,7 +39,7 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
     <>
       {idTicket === data.id ? (
         <div
-          className="content mx-3 duration-500 transition-all ease-in-out"
+          className="mx-3 transition-all duration-500 ease-in-out content"
           key={key}
         >
           <ToastContainer
@@ -57,18 +57,18 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
           {/* Same as */}
           <ToastContainer />
           <div className="detail">
-            <div className="detail-pesanan flex justify-between">
-              <div className="font-bold text-lg leading-7">Ticket Details</div>
+            <div className="flex justify-between detail-pesanan">
+              <div className="text-lg font-bold leading-7">Ticket Details</div>
               <div className="label w-[70px] h-[28px] bg-[#73CA5C] rounded-xl flex justify-center items-center">
                 {" "}
-                <span className="ticket-status flex text-white text-sm leading-5">
+                <span className="flex text-sm leading-5 text-white ticket-status">
                   Issued
                 </span>{" "}
               </div>
             </div>
 
-            <div className="code font-normal text-lg leading-7">
-              <div className="my-5 p-2 bg-bnr-primary text-white rounded-lg">
+            <div className="text-lg font-normal leading-7 code">
+              <div className="p-2 my-5 text-white rounded-lg bg-bnr-primary">
                 Departure Ticket
               </div>
               Booking Code:{" "}
@@ -78,10 +78,10 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
             </div>
           </div>
 
-          <div className="info-keberangkatan mt-3 border-b-2 pb-4">
+          <div className="pb-4 mt-3 border-b-2 info-keberangkatan">
             <div className="departure ">
               <div className="flex justify-between">
-                <div className="time font-bold text-base leading-6">
+                <div className="text-base font-bold leading-6 time">
                   {data?.departureTicket?.dateTakeoff}
                 </div>
                 <div className="text-xs font-bold leading-5 text-[#A06ECE]">
@@ -89,37 +89,37 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                 </div>
               </div>
 
-              <div className="date font-normal text-sm leading-5">
+              <div className="text-sm font-normal leading-5 date">
                 {getDateFormat(data?.departureTicket?.dateDeparture)}
               </div>
-              <div className="airport font-medium text-sm leading-5">
+              <div className="text-sm font-medium leading-5 airport">
                 {data?.departureTicket?.airport_from}
               </div>
             </div>
           </div>
 
-          <div className="info-airline mb-4 border-b-2 pb-4">
-            <div className="detail-airline flex mt-2">
-              <div className="logo my-auto">
-                <Image
+          <div className="pb-4 mb-4 border-b-2 info-airline">
+            <div className="flex mt-2 detail-airline">
+              <div className="my-auto logo">
+                <img
                   className="items-center mr-2"
-                  src={LogoMaskapai}
+                  src={data.departureTicket.logo}
                   width={24}
                   height={24}
                   alt=""
                 />
               </div>
               <div className="info">
-                <div className="airline mb-4">
-                  <div className="name font-bold text-sm leading-5">
+                <div className="mb-4 airline">
+                  <div className="text-sm font-bold leading-5 name">
                     {data?.departureTicket?.airlines} -{" "}
                     {data?.departureTicket?.type_seat}
                   </div>
-                  <div className="type font-bold text-sm leading-5">
+                  <div className="text-sm font-bold leading-5 type">
                     {data?.departureTicket?.code}
                   </div>
                 </div>
-                <div className="font-bold text-sm leading-5">Information</div>
+                <div className="text-sm font-bold leading-5">Information</div>
                 {data?.passengers.map((item, index) => (
                   <>
                     <div className="penumpang">
@@ -127,7 +127,7 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                         <span>Passangers {index + 1}:</span>
                         <span> {item.name}</span>
                       </div>
-                      <div className="id text-sm">
+                      <div className="text-sm id">
                         <span>ID :</span>
                         <span>{item.id}</span>
                       </div>
@@ -138,27 +138,27 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
             </div>
           </div>
 
-          <div className="info-kedatangan border-b-2 pb-4">
+          <div className="pb-4 border-b-2 info-kedatangan">
             <div className="arrive">
               <div className="flex justify-between">
-                <div className="time font-bold text-base leading-6">21:10</div>
+                <div className="text-base font-bold leading-6 time">{data?.departureTicket?.dateLanding}</div>
                 <div className="text-xs font-bold leading-5 text-[#A06ECE]">
                   Arrival
                 </div>
               </div>
 
-              <div className="date font-normal text-sm leading-5">
-                {data?.departureTicket?.dateLanding}
+              <div className="text-sm font-normal leading-5 date">
+                {getDateFormat(data?.departureTicket?.dateDeparture)}
               </div>
-              <div className="airport font-medium text-sm leading-5">
+              <div className="text-sm font-medium leading-5 airport">
                 {data?.departureTicket?.airport_to}
               </div>
             </div>
           </div>
           {data?.returnTicket ? (
             <div className="detail">
-              <div className="code font-normal text-lg leading-7">
-                <div className="my-5 p-2 bg-bnr-primary text-white rounded-lg">
+              <div className="text-lg font-normal leading-7 code">
+                <div className="p-2 my-5 text-white rounded-lg bg-bnr-primary">
                   Return Ticket
                 </div>
                 Booking Code:{" "}
@@ -166,10 +166,10 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                   {data?.returnTicket?.booking_code}
                 </span>{" "}
               </div>
-              <div className="info-keberangkatan mt-3 border-b-2 pb-4">
+              <div className="pb-4 mt-3 border-b-2 info-keberangkatan">
                 <div className="departure ">
                   <div className="flex justify-between">
-                    <div className="time font-bold text-base leading-6">
+                    <div className="text-base font-bold leading-6 time">
                       {data?.returnTicket?.dateTakeoff}
                     </div>
                     <div className="text-xs font-bold leading-5 text-[#A06ECE]">
@@ -177,36 +177,36 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                     </div>
                   </div>
 
-                  <div className="date font-normal text-sm leading-5">
-                    {getDateFormat(data?.departureTicket?.dateDeparture)}
+                  <div className="text-sm font-normal leading-5 date">
+                    {getDateFormat(data?.returnTicket?.dateReturn)}
                   </div>
-                  <div className="airport font-medium text-sm leading-5">
-                    {data?.returnTicket?.airport_from}
+                  <div className="text-sm font-medium leading-5 airport">
+                    {data?.returnTicket?.airport_to}
                   </div>
                 </div>
               </div>
-              <div className="info-airline mb-4 border-b-2 pb-4">
-                <div className="detail-airline flex mt-2">
-                  <div className="logo my-auto">
-                    <Image
+              <div className="pb-4 mb-4 border-b-2 info-airline">
+                <div className="flex mt-2 detail-airline">
+                  <div className="my-auto logo">
+                    <img
                       className="items-center mr-2"
-                      src={LogoMaskapai}
+                      src={data?.returnTicket?.logo}
                       width={24}
                       height={24}
                       alt=""
                     />
                   </div>
                   <div className="info">
-                    <div className="airline mb-4">
-                      <div className="name font-bold text-sm leading-5">
+                    <div className="mb-4 airline">
+                      <div className="text-sm font-bold leading-5 name">
                         {data?.returnTicket?.airlines} -{" "}
                         {data?.returnTicket?.type_seat}
                       </div>
-                      <div className="type font-bold text-sm leading-5">
+                      <div className="text-sm font-bold leading-5 type">
                         {data?.returnTicket?.code}
                       </div>
                     </div>
-                    <div className="font-bold text-sm leading-5">Informasi</div>
+                    <div className="text-sm font-bold leading-5">Informasi</div>
                     {data?.passengers.map((item, index) => (
                       <>
                         <div className="penumpang">
@@ -214,7 +214,7 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                             <span>Penumpang {index + 1}:</span>
                             <span> {item.name}</span>
                           </div>
-                          <div className="id text-sm">
+                          <div className="text-sm id">
                             <span>ID :</span>
                             <span>{item.id}</span>
                           </div>
@@ -224,31 +224,31 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                   </div>
                 </div>
               </div>
-              <div className="info-kedatangan border-b-2 pb-4">
+              <div className="pb-4 border-b-2 info-kedatangan">
                 <div className="arrive">
                   <div className="flex justify-between">
-                    <div className="time font-bold text-base leading-6">
-                      21:10
+                    <div className="text-base font-bold leading-6 time">
+                      {data?.returnTicket?.dateLanding}
                     </div>
                     <div className="text-xs font-bold leading-5 text-[#A06ECE]">
                       Arrival
                     </div>
                   </div>
 
-                  <div className="date font-normal text-sm leading-5">
-                    {data?.returnTicket?.dateLanding}
+                  <div className="text-sm font-normal leading-5 date">
+                    {getDateFormat(data?.returnTicket?.dateReturn)}
                   </div>
-                  <div className="airport font-medium text-sm leading-5">
-                    {data?.returnTicket?.airport_to}
+                  <div className="text-sm font-medium leading-5 airport">
+                    {data?.returnTicket?.airport_from}
                   </div>
                 </div>
               </div>
             </div>
           ) : null}
-          <div className="info-harga mt-2">
-            <div className="rincian border-b-2 pb-2">
-              <div className="font-bold text-sm leading-5">Price Details</div>
-              <div className="ticket-adults flex justify-between text-sm leading-5">
+          <div className="mt-2 info-harga">
+            <div className="pb-2 border-b-2 rincian">
+              <div className="text-sm font-bold leading-5">Price Details</div>
+              <div className="flex justify-between text-sm leading-5 ticket-adults">
                 <div>
                   <span>
                     {data?.total_passenger}
@@ -258,17 +258,17 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                 <div>IDR {getMoneyFormat(data?.total_price)}</div>
               </div>
             </div>
-            <div className="total-harga flex justify-between mt-4">
-              <div className="font-bold text-base leading-6">Total</div>
+            <div className="flex justify-between mt-4 total-harga">
+              <div className="text-base font-bold leading-6">Total</div>
               <div className="font-bold text-lg leading-7 text-[#7126B5]">
                 IDR {getMoneyFormat(data?.total_price)}
               </div>
             </div>
           </div>
           <form onSubmit={handlePrintTiket}>
-            <div className="button mt-8">
+            <div className="mt-8 button">
               <button type="submit" className="w-full h-[62px] text-xl leading-7 text-white bg-[#7126B5] rounded-xl">
-                Print Boarding Pass
+                Generate E-Ticket
               </button>
             </div>
           </form>

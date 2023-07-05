@@ -177,13 +177,15 @@ const TicketPage = () => {
 
   const { showReturn } = useComponentContext();
 
-  const handleChoose = (id, city_from, city_to) => {
+  const handleChoose = (id, city_from, city_to, departureDate, returnDate) => {
     if (flightOne.id === "" && showReturn) {
       // console.log("id", flightTwo.id);
       setFlightOne({
         id: id,
         city_from: city_from,
         city_to: city_to,
+        departureDate: departureDate,
+        returnDate: returnDate
       }); //fligth 1
       // fetchData(dateReturn, city_to, city_from, type_seat);
       setIsFetchFlight(true);
@@ -198,6 +200,8 @@ const TicketPage = () => {
         id: id,
         city_from: city_to,
         city_to: city_from,
+        departureDate: departureDate,
+        returnDate: returnDate
       });
       setModalTicket(true);
       return;
@@ -374,11 +378,11 @@ const TicketPage = () => {
                   alt=""
                 />
                 <div className="flex w-full gap-1">
-                  <div className="text-sm md:text-base uppercase">
+                  <div className="text-sm uppercase md:text-base">
                     {getCode(city_from)}
                   </div>
                   <div className="text-sm md:text-base">&gt;</div>
-                  <div className="text-sm md:text-base uppercase">{getCode(city_to)}</div>
+                  <div className="text-sm uppercase md:text-base">{getCode(city_to)}</div>
                   <div className="text-sm md:text-base">-</div>
                   <div className="text-sm md:text-base">
                     <span className="text-sm md:text-base">
@@ -387,7 +391,7 @@ const TicketPage = () => {
                     <span> Passangers</span>
                   </div>
                   <div className="text-sm md:text-base">-</div>
-                  <div className="text-sm md:text-base capitalize">
+                  <div className="text-sm capitalize md:text-base">
                     {type_seat}
                   </div>
                 </div>
@@ -421,10 +425,10 @@ const TicketPage = () => {
                       className="content w-28 h-[55px] rounded-lg text-center hover:bg-[#A06ECE] active:bg-[#7126B5] hover:text-white active:text-white px-auto py-2 self-center"
                       onClick={() => handleDateSelect(filter.date)}
                     >
-                      <div className="font-bold leading-5 text-sm">
+                      <div className="text-sm font-bold leading-5">
                         {filter.day}
                       </div>
-                      <div className="w-full font-medium text-xs leading-5">
+                      <div className="w-full text-xs font-medium leading-5">
                         {filter.date}
                       </div>
                     </div>
@@ -439,10 +443,10 @@ const TicketPage = () => {
 
           {showForm && (
             <div
-              className="modal-background fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-lg"
+              className="fixed inset-0 flex items-center justify-center bg-black modal-background bg-opacity-80 backdrop-blur-lg"
               onClick={handleModalClick}
             >
-              <div className="bg-white p-2 rounded-md relative">
+              <div className="relative p-2 bg-white rounded-md">
                 <FormTicket
                   handleChange={handleChange}
                   handleSearch={handleSearch}

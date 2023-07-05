@@ -376,10 +376,10 @@ const PaymentPage = () => {
                         Departure
                       </p>
                     </div>
-                    <p className="text-sm">
-                      {getDateFormat(detail?.data?.dateDeparture)}
-                    </p>
-                    <p className="text-sm">{detail?.data?.airport_from}</p>
+                    <p className="text-sm">{bookingId[0].id === detail?.data?.id ? getDateFormat(detail?.data?.dateDeparture) : null}</p>
+                    <p className="text-sm">{bookingId[1].id === detail?.data?.id ? getDateFormat(detail?.data?.dateReturn) : null}</p>
+                    <p className="text-sm">{bookingId[0].id === detail?.data?.id ? detail?.data?.airport_from : null}</p>
+                    <p className="text-sm">{bookingId[1].id === detail?.data?.id ? detail?.data?.airport_to : null}</p>
                   </div>
                   <div className="inline-flex items-center w-full gap-2 py-2 border-b border-bnr-secondary">
                     <img src={detail?.data?.logo} alt="maskapai" width={50} height={50} />
@@ -403,10 +403,10 @@ const PaymentPage = () => {
                         Arrival
                       </p>
                     </div>
-                    <p className="text-sm">
-                      {getDateFormat(detail?.data?.dateEnd)}
-                    </p>
-                    <p className="text-sm">{detail?.data?.airport_to}</p>
+                    <p className="text-sm">{bookingId[0].id === detail?.data?.id ? getDateFormat(detail?.data?.dateEnd) : null}</p>
+                    <p className="text-sm">{bookingId[1].id === detail?.data?.id ? getDateFormat(detail?.data?.dateReturn) : null}</p>
+                    <p className="text-sm">{bookingId[0].id === detail?.data?.id ? detail?.data?.airport_to : null}</p>
+                    <p className="text-sm">{bookingId[1].id === detail?.data?.id ? detail?.data?.airport_from : null}</p>
                   </div>
                   <div className="py-2 border-b border-bnr-secondary">
                     <h1 className="text-base font-bold">Details</h1>

@@ -3,8 +3,10 @@ import Image from "next/image";
 import Box from "@/assets/fi_box.svg";
 import ArrowRight from "@/assets/arrow_right.svg";
 import { MdFlight } from "react-icons/md"
+import { getDateFormat } from "@/utils/helper";
 
 const TicketTrip = ({ flightOne, flightTwo }) => {
+    console.log(flightOne);
     return (
         <>
             <div className="card-filter w-[268px] rounded-2xl mt-8 shadow-lg border-2 bg-white max-h-full">
@@ -17,21 +19,21 @@ const TicketTrip = ({ flightOne, flightTwo }) => {
                         <div className="inline px-3 py-1 text-white rounded-md bg-bnr-primary">1</div>
                         <div>
                             <p className="text-xs">
-                                Mon, 26 Jun 2023
+                                {flightOne.id ? getDateFormat(flightOne.departureDate) : null}
                             </p>
                             <p className="text-xs font-semibold">
-                                {flightOne.city_from} → {flightOne.city_to}
+                                {flightOne.city_from} {flightOne.id ? "→" : null} {flightOne.city_to}
                             </p>
                         </div>
                     </div>
                     <div className="flex items-center p-5 space-x-2 border rounded-md border-bnr-primary">
-                        <div className="inline px-3 py-1 text-white rounded-md bg-bnr-primary">1</div>
+                        <div className="inline px-3 py-1 text-white rounded-md bg-bnr-primary">2</div>
                         <div>
                             <p className="text-xs">
-                                Mon, 26 Jun 2023
+                                {flightTwo.id ? getDateFormat(flightTwo.returnDate) : null}
                             </p>
                             <p className="text-xs font-semibold">
-                                {flightTwo.city_from} → {flightTwo.city_to}
+                                {flightTwo.city_to} {flightTwo.id ? "→" : null} {flightTwo.city_from}
                             </p>
                         </div>
                     </div>

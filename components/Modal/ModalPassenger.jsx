@@ -20,9 +20,13 @@ const ModalPassenger = ({ name, handleChange }) => {
     return (
         <>
             <input name={name} onClick={openModal} value={resultPassangers?.total === undefined ? "0 Passangers" : `${resultPassangers?.total} Passangers`} className="w-full py-3 border-b-2 outline-none border-b-bnr-secondary" onChange={handleChange} autoComplete="off" />
+            <div className="absolute z-10 md:ml-0 md:-mt-[80px] -ml-[70px]">
             {showModal ?
+
                 <InputPassangers onClose={closeModal} name={name} /> : null
             }
+            </div>
+
         </>
 
     )

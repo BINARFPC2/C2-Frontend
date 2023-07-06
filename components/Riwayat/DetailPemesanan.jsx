@@ -211,7 +211,7 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                       <>
                         <div className="penumpang">
                           <div className="nama text-sm font-medium text-[#4B1979]">
-                            <span>Penumpang {index + 1}:</span>
+                            <span>Passangers {index + 1}:</span>
                             <span> {item.name}</span>
                           </div>
                           <div className="text-sm id">

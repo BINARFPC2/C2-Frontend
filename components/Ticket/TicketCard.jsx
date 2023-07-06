@@ -166,11 +166,11 @@ const TicketCard = ({ data, handleChoose }) => {
 
                 <div className="flex mt-2 detail-airline">
                   <div className="my-auto logo">
-                    <Image
+                    <img
                       className="items-center mr-2"
-                      src={LogoMaskapai}
-                      width={24}
-                      height={24}
+                      src={item.logo}
+                      width={50}
+                      height={50}
                       alt=""
                     />
                   </div>

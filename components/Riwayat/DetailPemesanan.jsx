@@ -181,7 +181,7 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                     {getDateFormat(data?.returnTicket?.dateReturn)}
                   </div>
                   <div className="text-sm font-medium leading-5 airport">
-                    {data?.returnTicket?.airport_to}
+                    {data?.returnTicket?.airport_from}
                   </div>
                 </div>
               </div>
@@ -239,7 +239,7 @@ const DetailPemesanan = ({ key, data, idTicket }) => {
                     {getDateFormat(data?.returnTicket?.dateReturn)}
                   </div>
                   <div className="text-sm font-medium leading-5 airport">
-                    {data?.returnTicket?.airport_from}
+                    {data?.returnTicket?.airport_to}
                   </div>
                 </div>
               </div>

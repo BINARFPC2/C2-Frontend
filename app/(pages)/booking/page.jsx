@@ -452,10 +452,8 @@ const CheckoutPage = () => {
                         Departure
                       </p>
                     </div>
-                    <p className="text-sm">{bookingId[0]?.id === item?.data?.id ? getDateFormat(item?.data?.dateDeparture) : null}</p>
-                    <p className="text-sm">{bookingId[1]?.id === item?.data?.id ? getDateFormat(item?.data?.dateReturn) : null}</p>
-                    <p className="text-sm">{bookingId[0]?.id === item?.data?.id ? item?.data?.airport_from : null}</p>
-                    <p className="text-sm">{bookingId[1]?.id === item?.data?.id ? item?.data?.airport_to : null}</p>
+                    <p className="text-sm">{getDateFormat(item?.data?.dateDeparture)}</p>
+                    <p className="text-sm">{item?.data?.airport_from}</p>
                   </div>
                   <div className="inline-flex items-center w-full gap-2 py-2 border-b border-bnr-secondary">
                     <img src={item?.data?.logo} alt="maskapai" width={50} height={50} />
@@ -477,12 +475,8 @@ const CheckoutPage = () => {
                         Arrival
                       </p>
                     </div>
-                    {/* <p className="text-sm">{getDateFormat(item?.data?.dateEnd)}</p>
-                    <p className="text-sm">{item?.data?.airport_to}</p> */}
-                    <p className="text-sm">{bookingId[0]?.id === item?.data?.id ? getDateFormat(item?.data?.dateEnd) : null}</p>
-                    <p className="text-sm">{bookingId[1]?.id === item?.data?.id ? getDateFormat(item?.data?.dateReturn) : null}</p>
-                    <p className="text-sm">{bookingId[0]?.id === item?.data?.id ? item?.data?.airport_to : null}</p>
-                    <p className="text-sm">{bookingId[1]?.id === item?.data?.id ? item?.data?.airport_from : null}</p>
+                    <p className="text-sm">{getDateFormat(item?.data?.dateEnd)}</p>
+                    <p className="text-sm">{item?.data?.airport_to}</p>
                   </div>
                   <div className="py-2 border-b border-bnr-secondary">
                     <h1 className="text-base font-bold">Details</h1>
